@@ -41,4 +41,7 @@ dependencies {
 
     compile 'com.kymjs.rxvolley:rxvolley:1.1.0'
     compile 'com.kymjs.rxvolley:okhttp:1.1.0'
+    //ui
+    compile 'com.roughike:bottom-bar:2.0.2'
+
 }

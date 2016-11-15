@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">gdou_chb</string>
+    <string name="tab_home">首页</string>
+    <string name="tab_discover">发现</string>
+    <string name="tab_order">订单</string>
+    <string name="tab_my">我的</string>
+    <string name="tab_home2">首页</string>
 </resources>

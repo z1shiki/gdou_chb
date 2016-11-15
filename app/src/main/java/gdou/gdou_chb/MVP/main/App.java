@@ -1,4 +1,4 @@
-package gdou.gdou_chb.main;
+package gdou.gdou_chb.MVP.main;
 
 import android.app.Application;
 import android.content.Context;

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+<tabs>
+    <tab
+        android:id="@+id/tab_home"
+        android:icon="@drawable/ic_home"
+        android:title="@string/tab_home"/>
+    <tab
+        android:id="@+id/tab_order"
+        android:icon="@drawable/ic_order"
+        android:title="@string/tab_order"/>
+    <tab
+        android:id="@+id/tab_discover"
+        android:icon="@drawable/ic_discover"
+        android:title="@string/tab_discover"/>
+    <tab
+        android:id="@+id/tab_my"
+        android:icon="@drawable/ic_my"
+        android:title="@string/tab_my"/>
+</tabs>
+</selector>
