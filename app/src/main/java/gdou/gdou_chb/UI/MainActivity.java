@@ -2,19 +2,16 @@ package gdou.gdou_chb.UI;
 
 import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabSelectListener;
 
 import butterknife.BindView;
-import gdou.gdou_chb.MVP.MainView;
-import gdou.gdou_chb.MVP.main.MainPresenter;
 import gdou.gdou_chb.MVP.other.BaseActivity;
 import gdou.gdou_chb.R;
 
-public class MainActivity extends BaseActivity<MainPresenter> implements MainView{
+public class MainActivity extends BaseActivity{
     @BindView(R.id.user_bottombar)BottomBar bottomBar;
 
     @Override
@@ -28,20 +25,5 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainVie
 
             }
         });
-    }
-
-    @Override
-    protected MainPresenter createPresenter() {
-        return new MainPresenter(this);
-    }
-
-    @Override
-    public void onTabSelect(int tabId) {
-
-    }
-
-    @Override
-    public void onTabReSelect(int tabId) {
-
     }
 }
