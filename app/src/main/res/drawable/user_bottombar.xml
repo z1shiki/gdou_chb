@@ -10,10 +10,6 @@
         android:icon="@drawable/ic_order"
         android:title="@string/tab_order"/>
     <tab
-        android:id="@+id/tab_discover"
-        android:icon="@drawable/ic_discover"
-        android:title="@string/tab_discover"/>
-    <tab
         android:id="@+id/tab_my"
         android:icon="@drawable/ic_my"
         android:title="@string/tab_my"/>
