@@ -1,3 +1,21 @@
 <resources>
     <string name="app_name">gdou_chb</string>
+    <string name="tab_home">首页</string>
+    <string name="tab_discover">发现</string>
+    <string name="tab_order">订单</string>
+    <string name="tab_my">我的</string>
+    <string name="tab_home2">首页</string>
+    <string name="title_activity_login">Sign in</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">帐号</string>
+    <string name="prompt_password">密码</string>
+    <string name="action_register">注册</string>
+    <string name="action_sign_in">登录</string>
+    <string name="action_sign_in_short">登录</string>
+    <string name="error_invalid_email">邮箱地址不合法</string>
+    <string name="error_invalid_password">密码太短</string>
+    <string name="error_incorrect_password">密码不争气</string>
+    <string name="error_field_required">不能为空</string>
+    <string name="permission_rationale">需要联系人权限</string>
 </resources>
