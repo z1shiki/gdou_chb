@@ -5,10 +5,12 @@ import android.support.annotation.Nullable;
 
 import butterknife.ButterKnife;
 import gdou.gdou_chb.R;
+import gdou.gdou_chb.data.user.User;
 import gdou.gdou_chb.features.user.login.LoginFragment;
 import gdou.gdou_chb.presenter.LoginPresenter;
 import gdou.gdou_chb.util.ActivityUtils;
 import gdou.gdou_chb.util.BaseActivity;
+import gdou.gdou_chb.util.Injection;
 
 /**
  * Created by Z1shiki on 2016/11/21.
@@ -22,7 +24,7 @@ public class LoginActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_act);
         ButterKnife.bind(this);
-//        User mUser =null;
+        User mUser =null;
 
         LoginFragment mLoginFragment =
                 (LoginFragment) getFragmentManager().findFragmentById(R.id.contentFrame);
@@ -32,11 +34,11 @@ public class LoginActivity extends BaseActivity {
                     getFragmentManager(), mLoginFragment, R.id.contentFrame);
         }
 
-        //Create the presenter TODO：此处需要实现创建Model实例
-//        mLoginPresenter = new LoginPresenter(
-//                mUser,
-//                Injection.provideUsersRepository(this),
-//                mLoginFragment);
+//        Create the presenter TODO：此处需要实现创建Model实例
+        mLoginPresenter = new LoginPresenter(
+                mUser,
+                Injection.provideUsersRepository(this),
+                mLoginFragment);
     }
 
 

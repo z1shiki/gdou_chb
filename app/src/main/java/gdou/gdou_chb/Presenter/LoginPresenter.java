@@ -6,7 +6,6 @@ import android.support.annotation.Nullable;
 import gdou.gdou_chb.data.user.User;
 import gdou.gdou_chb.data.user.UsersRepository;
 import gdou.gdou_chb.features.user.login.LoginContract;
-import rx.Observable;
 import rx.Observer;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
@@ -49,7 +48,7 @@ public class LoginPresenter implements LoginContract.Presenter {
 
     @Override
     public void subscribe() {
-        login(mUser);
+//        login(mUser);
     }
 
     @Override
@@ -61,16 +60,15 @@ public class LoginPresenter implements LoginContract.Presenter {
     public void login(User user) {
         mLoginView.loginprogress(true);
         Subscription subscription =
-//                mUsersRepository
-//                .login(mUser)
-                (new Observable<User>=Observable.just(user))
+                mUsersRepository
+               .login(mUser)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(new Observer<User>() {
                     @Override
                     public void onCompleted() {
                         //TODO:跳转到下一个Activity
-                        mLoginView.showloginstate();
+//                        mLoginView.showloginstate();
                     }
 
                     @Override

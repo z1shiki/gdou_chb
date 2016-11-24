@@ -24,6 +24,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import gdou.gdou_chb.R;
 import gdou.gdou_chb.UI.MainActivity;
+import gdou.gdou_chb.data.user.User;
 import gdou.gdou_chb.util.MVP.BaseFragment;
 
 /**
@@ -59,13 +60,18 @@ public class LoginFragment extends BaseFragment implements LoginContract.View {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mActivity=getActivity();
     }
 
     @Override
     public void onResume() {
         super.onResume();
-//        mPresenter.subscribe();
+        mPresenter.subscribe();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        mPresenter.unsubscribe();
     }
 
     @Override
@@ -93,8 +99,8 @@ public class LoginFragment extends BaseFragment implements LoginContract.View {
 
     @OnClick(R.id.sign_in_btn)
     public void onClick() {
-//        mPresenter.login(new User(mAc count.getText().toString(),mPassword.getText().toString()));
-        ;startActivity(new Intent(getActivity(),MainActivity.class));
+        mPresenter.login(new User(mAccount.getText().toString(),mPassword.getText().toString()));
+//        ;startActivity(new Intent(getActivity(),MainActivity.class));
     }
 
     //登陆的动画
