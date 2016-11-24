@@ -1,4 +1,4 @@
-package gdou.gdou_chb.features.user.login;
+package gdou.gdou_chb.contract;
 
 import gdou.gdou_chb.data.user.User;
 import gdou.gdou_chb.util.MVP.BasePresenter;
