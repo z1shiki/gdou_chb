@@ -1,4 +1,4 @@
-package gdou.gdou_chb.util;
+package gdou.gdou_chb.util.Java;
 
 import android.app.Fragment;
 import android.app.FragmentManager;

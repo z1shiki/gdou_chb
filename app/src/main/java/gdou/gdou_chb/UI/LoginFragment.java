@@ -1,4 +1,4 @@
-package gdou.gdou_chb.features.user.login;
+package gdou.gdou_chb.UI;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -31,7 +31,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import gdou.gdou_chb.R;
-import gdou.gdou_chb.UI.MainActivity;
+import gdou.gdou_chb.Activity.HomeActivity;
+import gdou.gdou_chb.contract.LoginContract;
 import gdou.gdou_chb.data.user.User;
 import gdou.gdou_chb.util.MVP.BaseFragment;
 
@@ -148,7 +149,7 @@ public class LoginFragment extends BaseFragment implements LoginContract.View {
     @Override
     public void showloginstate() {
         //登录成功
-        this.getActivity().startActivity(new Intent(this.getActivity(), MainActivity.class));
+        this.getActivity().startActivity(new Intent(this.getActivity(), HomeActivity.class));
 
     }
 
