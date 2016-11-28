@@ -6,16 +6,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
-    tools:context=".UI.LoginActivity">
+    tools:context=".UI.SignUpActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-            <FrameLayout
-                android:id="@+id/contentFrame"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+        <FrameLayout
+            android:id="@+id/contentFrame"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
     </LinearLayout>
 
 </LinearLayout>
