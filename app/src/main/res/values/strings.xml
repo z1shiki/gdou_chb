@@ -18,4 +18,54 @@
     <string name="error_incorrect_password">密码不争气</string>
     <string name="error_field_required">不能为空</string>
     <string name="permission_rationale">需要联系人权限</string>
+
+    <!-- Strings related to register -->
+    <string name="register">注册</string>
+    <string name="account">帐号</string>
+    <string name="new_password">密码</string>
+    <string name="phone_number">手机号</string>
+    <string name="check_number">验证码</string>
+    <string name="hint_account">请输入你的账户，8-15位，首位是英文字母</string>
+    <string name="hint_password">请输入你的密码，6-15位</string>
+    <string name="hint_phone_number">请输入你的手机号</string>
+    <string name="hint_check_number">请输入你的验证码</string>
+
+    <!-- Strings related to my -->
+    <string name="safe_center">安全中心</string>
+    <string name="address">收货地址</string>
+    <string name="question_request">问题反馈</string>
+    <string name="about">关于吃货宝</string>
+
+    <string name="search_title">搜索</string>
+
+    <!-- Strings related to about -->
+    <string name="normal_question">常见问题</string>
+    <string name="question">1
+    ..............................................................
+    ..............................................
+    ..............................................................</string>
+    <string name="team">制作团队</string>
+    <string name="team_name">陈
+    陈
+    陈
+    陈</string>
+    <string name="serve_phone">服务电话：12345678</string>
+
+    <!-- Strings related to change_phone -->
+    <string name="first_phone">请输入你原先的手机号</string>
+    <string name="verification_code">请输入你的验证码</string>
+    <string name="second_phone">请输入你新的手机号</string>
+    <string name="send_code">发送验证码</string>
+    <string name="confirm">确认修改</string>\
+
+    <string name="hint_new_password">请输入你的新密码，6-15位</string>
+    <string name="hint_confirm_password">请再次输入你的新密码，6-15位</string>
+
+    <string name="report">填写你的问题:</string>
+    <string name="report_btn">提交</string>
+
+    <string name="con_phone">电话</string>
+    <string name="con_address">地址</string>
+    <string name="con_name">联系人：</string>
+
 </resources>
