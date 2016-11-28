@@ -11,6 +11,8 @@ import gdou.gdou_chb.presenter.LoginPresenter;
 import gdou.gdou_chb.util.ActivityUtils;
 import gdou.gdou_chb.util.BaseActivity;
 import gdou.gdou_chb.util.Injection;
+import android.support.v7.widget.Toolbar;
+
 
 /**
  * Created by Z1shiki on 2016/11/21.
