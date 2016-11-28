@@ -1,4 +1,4 @@
-package gdou.gdou_chb.features.user.login;
+package gdou.gdou_chb.UI;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;

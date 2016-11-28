@@ -5,13 +5,12 @@ import android.support.annotation.Nullable;
 
 import butterknife.ButterKnife;
 import gdou.gdou_chb.R;
+import gdou.gdou_chb.UI.LoginFragment;
 import gdou.gdou_chb.data.user.User;
-import gdou.gdou_chb.features.user.login.LoginFragment;
 import gdou.gdou_chb.presenter.LoginPresenter;
-import gdou.gdou_chb.util.ActivityUtils;
-import gdou.gdou_chb.util.BaseActivity;
 import gdou.gdou_chb.util.Injection;
-import android.support.v7.widget.Toolbar;
+import gdou.gdou_chb.util.Java.ActivityUtils;
+import gdou.gdou_chb.util.Java.BaseActivity;
 
 
 /**
