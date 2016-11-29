@@ -36,20 +36,10 @@ import gdou.gdou_chb.util.MVP.BaseFragment;
 
 public class LoginFragment extends BaseFragment implements LoginContract.View {
 
-    @BindView(R.id.toolbar)
-    Toolbar mToolBar;
-    @BindView(R.id.login_progress)
-    ProgressBar mLoginProgress;
-    @BindView(R.id.login_form)
-    ScrollView mLoginForm;
-    @BindView(R.id.account)
-    AutoCompleteTextView mAccount;
-    @BindView(R.id.password)
-    EditText mPassword;
-    @BindView(R.id.sign_in_btn)
-    Button mSignInBtn;
-    @BindView(R.id.sign_up_link)
-    TextView mSignUp;
+    @BindView(R.id.report_view)
+    TextView mReportView;
+    @BindView(R.id.about_view)
+    TextView mAboutView;
     @BindView(R.id.forget_link)
     TextView mForget;
 
@@ -106,50 +96,10 @@ public class LoginFragment extends BaseFragment implements LoginContract.View {
         });
 
         return root;
-        }
+    }
 
     @OnClick(R.id.sign_in_btn)
     public void onClick() {
         mPresenter.login(new User(mAccount.getText().toString(),mPassword.getText().toString()));
 //        ;startActivity(new Intent(getActivity(),MainActivity.class));
     }
-
-    //登陆的动画
-    @Override
-    public void loginprogress(final boolean show) {
-
-        int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
-
-        mLoginForm.setVisibility(show ? View.GONE:View.VISIBLE);
-        mLoginForm.animate().setDuration(shortAnimTime).alpha(show ? 0:1).setListener(new AnimatorListenerAdapter() {
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                mLoginForm.setVisibility(show?View.GONE:View.VISIBLE);
-            }
-        });
-
-        mLoginProgress.setVisibility(show?View.VISIBLE:View.GONE);
-        mLoginProgress.animate().setDuration(shortAnimTime).alpha(show?1:0).setListener(new AnimatorListenerAdapter() {
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                mLoginForm.setVisibility(show?View.VISIBLE:View.GONE);
-
-            }
-        });
-
-    }
-
-    @Override
-    public void showloginstate() {
-        //登录成功
-        this.getActivity().startActivity(new Intent(this.getActivity(), HomeActivity.class));
-
-    }
-
-    @Override
-    public void populateAutoComplete() {
-        //TODO 自动完成
-
-    }
-
-}

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/good"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#fff"
+    android:descendantFocusability="blocksDescendants">
+
+    <ImageView
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="8dp"
+        android:src="@mipmap/type_one_sunny"
+        android:id="@+id/good_icon"
+        android:layout_width="80dp"
+        android:layout_height="80dp"/>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/good_icon">
+    <TextView
+        android:id="@+id/item_good_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:layout_margin="10dp"
+        android:text="麻辣香锅"
+        android:textColor="#000" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="10dp">
+
+    <ImageButton
+        android:id="@+id/item_btn_delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#0000"
+        android:src="@android:drawable/ic_delete"
+        android:layout_marginStart="10dp" />
+
+    <TextView
+        android:id="@+id/item_good_num"
+        android:text="99"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="25sp"
+        android:textColor="#000"
+        android:layout_margin="5dp" />
+
+    <ImageButton
+        android:id="@+id/item_btn_sub"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#0000"
+        android:src="@android:drawable/ic_input_add" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/item_product_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:layout_margin="10dp"
+        android:text="￥999.9"
+        android:textColor="#000"
+        android:layout_below="@+id/item_good_name" />
+    </RelativeLayout>
+</RelativeLayout>
