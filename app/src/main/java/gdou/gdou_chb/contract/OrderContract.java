@@ -7,12 +7,11 @@ import gdou.gdou_chb.util.MVP.BaseView;
  * Created by Z1shiki on 2016/11/29.
  */
 
-public interface ChangePasswordContract {
+public interface OrderContract {
 
-    interface View extends BaseView<Presenter>{
+    interface View extends BaseView<Presenter> {
     }
 
-    interface Presenter extends BasePresenter{
+    interface Presenter extends BasePresenter {
     }
-
 }

@@ -4,7 +4,7 @@ import gdou.gdou_chb.util.MVP.BasePresenter;
 import gdou.gdou_chb.util.MVP.BaseView;
 
 /**
- * Created by Administrator on 2016/11/28/0028.
+ * Created by Z1shiki on 2016/11/29.
  */
 
 public interface ReportContract {
