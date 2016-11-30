@@ -6,7 +6,7 @@ import android.support.annotation.Nullable;
 import butterknife.ButterKnife;
 import gdou.gdou_chb.R;
 import gdou.gdou_chb.UI.LoginFragment;
-import gdou.gdou_chb.data.user.User;
+import gdou.gdou_chb.data.bean.User;
 import gdou.gdou_chb.presenter.LoginPresenter;
 import gdou.gdou_chb.util.Injection;
 import gdou.gdou_chb.util.Java.ActivityUtils;
@@ -18,7 +18,6 @@ import gdou.gdou_chb.util.Java.BaseActivity;
  */
 
 public class LoginActivity extends BaseActivity {
-    private LoginPresenter mLoginPresenter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -36,7 +35,7 @@ public class LoginActivity extends BaseActivity {
         }
 
 //        Create the presenter TODO：此处需要实现创建Model实例
-        mLoginPresenter = new LoginPresenter(
+        new LoginPresenter(
                 mUser,
                 Injection.provideUsersRepository(this),
                 mLoginFragment);

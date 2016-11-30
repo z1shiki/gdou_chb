@@ -3,9 +3,9 @@ package gdou.gdou_chb.presenter;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
-import gdou.gdou_chb.data.user.User;
-import gdou.gdou_chb.data.user.UsersRepository;
 import gdou.gdou_chb.contract.LoginContract;
+import gdou.gdou_chb.data.bean.User;
+import gdou.gdou_chb.data.user.UsersRepository;
 import rx.Observer;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;

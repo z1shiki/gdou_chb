@@ -12,7 +12,7 @@ import gdou.gdou_chb.util.Java.BaseActivity;
  */
 
 public class AboutActivity extends BaseActivity {
-    private gdou.gdou_chb.presenter.AboutPresenter mAboutPresenter;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

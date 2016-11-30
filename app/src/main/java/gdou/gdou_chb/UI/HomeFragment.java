@@ -65,4 +65,18 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
     }
 
 
+    @Override
+    public void setLocation() {
+
+    }
+
+    @Override
+    public void changeShoplist() {
+
+    }
+
+    @Override
+    public void choiceShop() {
+
+    }
 }

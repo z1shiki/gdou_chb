@@ -12,6 +12,6 @@
     <tab
         android:id="@+id/tab_my"
         android:icon="@drawable/ic_my"
-        android:title="@string/tab_my"/>
+        android:title="@string/tab_usercenter"/>
 </tabs>
 </selector>
