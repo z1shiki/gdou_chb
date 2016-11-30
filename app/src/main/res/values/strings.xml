@@ -2,7 +2,7 @@
     <string name="app_name">gdou_chb</string>
     <string name="tab_home">首页</string>
     <string name="tab_order">订单</string>
-    <string name="tab_usercenter">我的</string>
+    <string name="tab_usercenter">个人中心</string>
     <string name="title_activity_login">Sign in</string>
 
     <!-- Strings related to login -->
@@ -35,10 +35,11 @@
     <string name="address">收货地址</string>
     <string name="question_request">问题反馈</string>
     <string name="about">关于吃货宝</string>
+    <string name="sign_out">退出登录</string>
 
     <!-- Strings related to home_page -->
     <string name="gps">定位</string>
-    <string name="search_title">搜索</string>
+    <string name="search">搜索</string>
     <string name="shop_name">这里是商家名</string>
     <string name="shop_introduce">这里是商家介绍</string>
     <string name="starting_price">起送价</string>
@@ -86,9 +87,23 @@
     <string name="report_btn">提交</string>
 
     <!-- Strings related to change_address -->
-    <string name="con_phone">电话</string>
-    <string name="con_address">地址</string>
+    <string name="con_phone">电话：</string>
+    <string name="con_address">地址：</string>
     <string name="con_name">联系人：</string>
+
+    <!-- Strings related to order -->
+    <string name="order_mun">订单号：</string>
+    <string name="data">日期：</string>
+    <string name="time">时间：</string>
+    <string name="wait_time">已等待时间：</string>
+    <string name="remarks">备注</string>
+    <string name="confirm_receipt">确认收货</string>
+    <string name="fee">配送费</string>
+    <string name="charge_back">退单</string>
+    <string name="receive_order">接单</string>
+    
+    <string name="ok">确定</string>
+    <string name="cancel">取消</string>
     
 
 </resources>

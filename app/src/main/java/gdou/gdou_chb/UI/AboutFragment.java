@@ -1,21 +1,19 @@
 package gdou.gdou_chb.UI;
 
+import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import gdou.gdou_chb.R;
 import gdou.gdou_chb.contract.AboutContract;
 import gdou.gdou_chb.util.MVP.BaseFragment;
-
-import android.support.v7.app.AppCompatActivity;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.os.Bundle;
-import android.support.v7.widget.RecyclerView;
-import android.widget.TextView;
-import android.support.v7.widget.Toolbar;
 
 /**
  * Created by Administrator on 2016/11/28/0028.
@@ -23,8 +21,6 @@ import android.support.v7.widget.Toolbar;
 
 public class AboutFragment extends BaseFragment implements AboutContract.View{
 
-    @BindView(R.id.about_toolbar)
-    Toolbar mAboutToolBar;
     @BindView(R.id.about_question)
     RecyclerView mAboutQuestion;
     @BindView(R.id.about_team)
@@ -71,8 +67,8 @@ public class AboutFragment extends BaseFragment implements AboutContract.View{
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.about_frag, container, false);
         setHasOptionsMenu(true);
-        mAboutToolBar.setTitle("");
-        ((AppCompatActivity) getActivity()).setSupportActionBar(mAboutToolBar);
+//        mAboutToolBar.setTitle("");
+//        ((AppCompatActivity) getActivity()).setSupportActionBar(mAboutToolBar);
         //setup
         ButterKnife.bind(this, root);
         return root;

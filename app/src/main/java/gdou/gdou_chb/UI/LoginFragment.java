@@ -2,12 +2,10 @@ package gdou.gdou_chb.UI;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -27,6 +25,7 @@ import gdou.gdou_chb.Activity.HomeActivity;
 import gdou.gdou_chb.R;
 import gdou.gdou_chb.contract.LoginContract;
 import gdou.gdou_chb.data.bean.User;
+import gdou.gdou_chb.util.Java.BaseActivity;
 import gdou.gdou_chb.util.MVP.BaseFragment;
 
 /**
@@ -35,8 +34,6 @@ import gdou.gdou_chb.util.MVP.BaseFragment;
 
 public class LoginFragment extends BaseFragment implements LoginContract.View {
 
-    @BindView(R.id.toolbar)
-    Toolbar mToolBar;
     @BindView(R.id.login_progress)
     ProgressBar mLoginProgress;
     @BindView(R.id.login_form)
@@ -52,8 +49,6 @@ public class LoginFragment extends BaseFragment implements LoginContract.View {
     @BindView(R.id.forget_link)
     TextView mForget;
 
-
-    Activity mActivity;
 
     private LoginContract.Presenter mPresenter;
 
@@ -92,10 +87,16 @@ public class LoginFragment extends BaseFragment implements LoginContract.View {
         View root = inflater.inflate(R.layout.login_frag, container, false);
 
         setHasOptionsMenu(true);
-        mToolBar.setTitle("");
-        ((AppCompatActivity) getActivity()).setSupportActionBar(mToolBar);
+//        mToolBar.setTitle("");
+//        ((AppCompatActivity) getActivity()).setSupportActionBar(mToolBar);
+
         //setup
         ButterKnife.bind(this, root);
+
+        Toolbar mToolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
+        mToolbar.setTitle("");
+        ((BaseActivity)getActivity()).setSupportActionBar(mToolbar);
+
         populateAutoComplete();
         mPassword.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override

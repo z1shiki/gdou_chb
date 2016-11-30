@@ -34,6 +34,8 @@ public class HomePresenter implements HomeContract.Presenter {
     public HomePresenter(Context context,HomeContract.View homeView) {
         mHomeView = homeView;
         mContext = context;
+        mSubscription = new CompositeSubscription();
+        mHomeView.setPresenter(this);
     }
 
 

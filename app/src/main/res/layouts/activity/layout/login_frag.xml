@@ -5,8 +5,6 @@
     android:orientation="vertical"
     android:id="@+id/login">
 
-    <include layout="@xml/toolbar" />
-
     <!-- Login progress -->
     <ProgressBar
         android:id="@+id/login_progress"
