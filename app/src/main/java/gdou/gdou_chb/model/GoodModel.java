@@ -1,6 +1,5 @@
 package gdou.gdou_chb.model;
 
-import com.kymjs.rxvolley.client.HttpCallback;
 
 import gdou.gdou_chb.data.bean.Goods;
 
@@ -15,6 +14,6 @@ public interface GoodModel {
      * @param goodsId 商品ID
      * @return
      */
-    void findByGoodsId(Long goodsId, HttpCallback callback);
+    Goods findByGoodsId(Long goodsId);
 }
 

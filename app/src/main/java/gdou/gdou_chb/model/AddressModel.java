@@ -19,34 +19,34 @@ public interface AddressModel {
      * @param addressId
      * @return
      */
-    Address changeUserDefaultAddress(long addressId);
+    Address changeDefault(long addressId);
 
     /**
      * 删除收货地址
      * @param addressId
      * @return
      */
-    Address deleteUserAddress(long addressId);
+    Address delete(long addressId);
 
     /**
      * 查找指定用户的所有地址
      * @param userId
      * @return
      */
-    Address findUserAllAddress(long userId);
+    Address all(long userId);
 
     /**
      * 查找指定用户的默认地址
      * @param userId
      * @return
      */
-    Address findUserDefaultAddress(long userId);
+    Address defalut(long userId);
 
     /**
      * 修改收货地址
      * @param address
      * @return
      */
-    Address updateAddress(Address address);
+    Address update(Address address);
 
 }

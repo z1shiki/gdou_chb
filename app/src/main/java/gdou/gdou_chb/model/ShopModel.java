@@ -19,5 +19,5 @@ public interface ShopModel {
      * @param userId
      * @return
      */
-    Shop shopOffLine(long userId);
+    Shop OffLine(long userId);
 }

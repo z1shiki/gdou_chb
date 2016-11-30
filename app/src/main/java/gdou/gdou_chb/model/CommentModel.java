@@ -12,12 +12,19 @@ public interface CommentModel {
      * @param comment
      * @return
      */
-    Comment commentOrder(Comment comment);
+    Comment commentOrders(Comment comment);
 
     /**
      * 查找指定订单评论
      * @param orderId
      * @return
      */
-    Comment findByOrder(long orderId);
+    Comment findByOrderId(long orderId);
+
+    /**
+     * 得到商家回复
+     * @param orderId
+     * @return
+     */
+    Comment getRevent(long orderId);
 }

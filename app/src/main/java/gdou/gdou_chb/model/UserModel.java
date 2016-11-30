@@ -9,13 +9,13 @@ import gdou.gdou_chb.data.bean.User;
 public interface UserModel {
 
     /**
-     * 更改密码
-     * @param oldPassword
-     * @param id
-     * @param newPassword
+     * 用户注册
+     * @param account
+     * @param password
+     * @param verifyCode
      * @return
      */
-    User changePassword(String oldPassword, Long id, String newPassword) ;
+    User register(String account,String password,String verifyCode);
 
     /**
      * 登录
@@ -26,20 +26,32 @@ public interface UserModel {
     User doLogin(String accout,String password);
 
     /**
+     * 忘记密码
+     * @param account
+     * @param password
+     * @param verifyCode
+     * @return
+     */
+    User resetPassword(String account,String password,String verifyCode);
+
+    /**
+     * 更改密码
+     * @param oldPassword
+     * @param id
+     * @param newPassword
+     * @return
+     */
+    User changePassword(String oldPassword, Long id, String newPassword) ;
+
+
+    /**
      * 查找指定用户信息
      * @param userId
      * @return
      */
     User findUserInfo(Long userId);
 
-    /**
-     * 用户注册
-     * @param account
-     * @param password
-     * @param verifyCode
-     * @return
-     */
-    User register(String account,String password,String verifyCode);
+
 
     /**
      * 更新信息
@@ -52,4 +64,5 @@ public interface UserModel {
      * @return
      */
     User update(String username,String realName,Long phone,Long loginId,Long userImg,Long safePassword);
+
 }
