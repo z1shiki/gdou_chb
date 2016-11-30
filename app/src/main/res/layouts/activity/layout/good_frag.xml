@@ -10,7 +10,7 @@
     <include layout="@xml/toolbar"
         app:layout_scrollFlags="scroll|enterAlways"/>
 
-   <include layout="@layout/shop_cardview"/>
+   <include layout="@xml/item_shop"/>
 
     <FrameLayout
         android:layout_width="match_parent"

@@ -16,7 +16,7 @@
         android:layout_height="400dp"
         android:paddingStart="8dp"
         android:paddingEnd="8dp"
-        android:hint="@string/report"
+        android:hint="@string/hint_report"
         android:gravity="left|top"
         android:maxLength="120"/>
     </android.support.design.widget.TextInputLayout>

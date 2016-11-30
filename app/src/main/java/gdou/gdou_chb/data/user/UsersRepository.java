@@ -3,6 +3,7 @@ package gdou.gdou_chb.data.user;
 
 import android.support.annotation.NonNull;
 
+import gdou.gdou_chb.data.bean.User;
 import rx.Observable;
 
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -27,9 +28,19 @@ public class UsersRepository implements UsersDataSource{
         mUserslocalDataSource = checkNotNull(userslocalDataSource);
     }
 
+    @Override
     public Observable<User> login(@NonNull User mUser){
             //发送User到网络请求，等待返回值
         return Observable.just(mUser);
     }
 
+    @Override
+    public void mRememberUser(String username) {
+
+    }
+
+    @Override
+    public String getReUsername() {
+        return null;
+    }
 }

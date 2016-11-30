@@ -10,9 +10,9 @@
         android:layout_height="?attr/actionBarSize"
         android:layout_width="match_parent"
         android:id="@+id/about_toolbar"
+        android:text="@string/about"
         android:background="?attr/colorPrimary"
-        app:navigationIcon="?attr/homeAsUpIndicator"
-        >
+        app:navigationIcon="?attr/homeAsUpIndicator">
     </android.support.v7.widget.Toolbar>
 
     <LinearLayout
@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"
             android:drawablePadding="4dp"
             android:gravity="center"
-            android:text="常见问题"
+            android:text="@string/normal_question"
             android:textColor="@color/black"
             android:textSize="15sp"/>
 
@@ -41,30 +41,18 @@
             android:layout_marginTop="4dp"
             android:background="@color/black"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="6dp"
-            android:lineSpacingExtra="3dp"
-            android:text="@string/question" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="6dp"
-            android:lineSpacingExtra="3dp"
-            android:text="@string/question" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="6dp"
-            android:lineSpacingExtra="3dp"
-            android:text="@string/question" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="6dp"
-            android:lineSpacingExtra="3dp"
-            android:text="@string/question" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/about_question"
+                android:divider="#ffff0000"
+                android:dividerHeight="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </RelativeLayout>
 
         <View
             android:layout_width="match_parent"
@@ -100,18 +88,18 @@
             android:layout_marginTop="4dp"
             android:background="@color/black"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="6dp"
-            android:lineSpacingExtra="3dp"
-            android:text="@string/team_name" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="6dp"
-            android:lineSpacingExtra="3dp"
-            android:text="@string/team_name" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/about_team"
+                android:divider="#ffff0000"
+                android:dividerHeight="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </RelativeLayout>
 
         <View
             android:layout_width="match_parent"
@@ -131,6 +119,7 @@
             android:paddingStart="24dp">
 
         <TextView
+            android:id="@+id/about_phone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:drawablePadding="4dp"

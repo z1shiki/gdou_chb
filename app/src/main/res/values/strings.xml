@@ -1,10 +1,8 @@
 <resources>
     <string name="app_name">gdou_chb</string>
     <string name="tab_home">首页</string>
-    <string name="tab_discover">发现</string>
     <string name="tab_order">订单</string>
-    <string name="tab_my">我的</string>
-    <string name="tab_home2">首页</string>
+    <string name="tab_usercenter">我的</string>
     <string name="title_activity_login">Sign in</string>
 
     <!-- Strings related to login -->
@@ -22,50 +20,75 @@
     <!-- Strings related to register -->
     <string name="register">注册</string>
     <string name="account">帐号</string>
-    <string name="new_password">密码</string>
+    <string name="password">密码</string>
     <string name="phone_number">手机号</string>
     <string name="check_number">验证码</string>
     <string name="hint_account">请输入你的账户，8-15位，首位是英文字母</string>
     <string name="hint_password">请输入你的密码，6-15位</string>
     <string name="hint_phone_number">请输入你的手机号</string>
     <string name="hint_check_number">请输入你的验证码</string>
+    <string name="user_name">用户名</string>
 
-    <!-- Strings related to my -->
+    <!-- Strings related to user_center -->
+    <string name="setting">设置</string>
     <string name="safe_center">安全中心</string>
     <string name="address">收货地址</string>
     <string name="question_request">问题反馈</string>
     <string name="about">关于吃货宝</string>
 
+    <!-- Strings related to home_page -->
+    <string name="gps">定位</string>
     <string name="search_title">搜索</string>
+    <string name="shop_name">这里是商家名</string>
+    <string name="shop_introduce">这里是商家介绍</string>
+    <string name="starting_price">起送价</string>
+
+    <!-- Strings related to trolley -->
+    <string name="total">总价</string>
+    <string name="place_order">立即下单</string>
+
+    <!-- Strings related to goods -->
+    <string name="good_mane">商品名</string>
+    <string name="price">单价</string>
+
+    <!-- Strings related to rate -->
+    <string name="rate">评价</string>
+    <string name="hint_rate">请输入你的评价</string>
+
 
     <!-- Strings related to about -->
     <string name="normal_question">常见问题</string>
-    <string name="question">1
+    <string name="question">问题1：
     ..............................................................
     ..............................................
     ..............................................................</string>
     <string name="team">制作团队</string>
-    <string name="team_name">陈
-    陈
-    陈
-    陈</string>
+    <string name="team_name">Mr陈</string>
     <string name="serve_phone">服务电话：12345678</string>
 
     <!-- Strings related to change_phone -->
+    <string name="change_phone">修改手机号</string>
     <string name="first_phone">请输入你原先的手机号</string>
     <string name="verification_code">请输入你的验证码</string>
     <string name="second_phone">请输入你新的手机号</string>
     <string name="send_code">发送验证码</string>
     <string name="confirm">确认修改</string>\
 
+    <!-- Strings related to change_password -->
+    <string name="change_password">修改密码</string>
+    <string name="first_password">请输入你的原密码</string>
     <string name="hint_new_password">请输入你的新密码，6-15位</string>
     <string name="hint_confirm_password">请再次输入你的新密码，6-15位</string>
 
-    <string name="report">填写你的问题:</string>
+    <!-- Strings related to report -->
+    <string name="report">问题反馈</string>
+    <string name="hint_report">填写你的问题:</string>
     <string name="report_btn">提交</string>
 
+    <!-- Strings related to change_address -->
     <string name="con_phone">电话</string>
     <string name="con_address">地址</string>
     <string name="con_name">联系人：</string>
+    
 
 </resources>
