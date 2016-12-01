@@ -3,7 +3,8 @@ package gdou.gdou_chb.util;
 import android.content.Context;
 import android.support.annotation.NonNull;
 
-import gdou.gdou_chb.data.user.UsersRepository;
+
+import gdou.gdou_chb.model.impl.UserModelImpl;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -13,8 +14,8 @@ import static com.google.common.base.Preconditions.checkNotNull;
  */
 
 public class Injection {
-    public static UsersRepository provideUsersRepository(@NonNull Context context){
+    public static UserModelImpl provideUsersModel(@NonNull Context context){
         checkNotNull(context);
-        return new UsersRepository();
+        return new UserModelImpl();
     }
 }

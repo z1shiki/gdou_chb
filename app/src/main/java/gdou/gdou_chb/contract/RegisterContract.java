@@ -13,6 +13,7 @@ public interface RegisterContract {
     }
 
     interface Presenter extends BasePresenter{
+        void register();
     }
 
 }

@@ -9,7 +9,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import gdou.gdou_chb.R;
 import gdou.gdou_chb.UI.LoginFragment;
-import gdou.gdou_chb.data.bean.User;
+import gdou.gdou_chb.model.impl.UserModelImpl;
 import gdou.gdou_chb.presenter.LoginPresenter;
 import gdou.gdou_chb.util.Java.ActivityUtils;
 import gdou.gdou_chb.util.Java.BaseActivity;
@@ -32,7 +32,6 @@ public class LoginActivity extends BaseActivity {
        ButterKnife.bind(this);
         mToolbarText.setText("登录");
 
-        String mUsername = null;
         LoginFragment mLoginFragment =
                 (LoginFragment) getFragmentManager().findFragmentById(R.id.contentFrame);
         if (mLoginFragment == null) {
@@ -43,8 +42,7 @@ public class LoginActivity extends BaseActivity {
 
 //        Create the presenter TODO：此处需要实现创建Model实例
         new LoginPresenter(
-                mUsername,
-                new User(),//usermodel
+                new UserModelImpl(),//usermodel
                 mLoginFragment);
     }
 

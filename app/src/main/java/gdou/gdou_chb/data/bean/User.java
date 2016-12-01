@@ -1,6 +1,5 @@
 package gdou.gdou_chb.data.bean;
 
-import io.realm.RealmObject;
 import java.io.Serializable;
 
 /**
@@ -26,6 +25,11 @@ public class User extends BaseBean implements Serializable {
      * 加密盐
      */
     private String salt;
+
+    public User(String account, String password) {
+        this.account = account;
+        this.password = password;
+    }
 
     public String getAccount() {
         return account;

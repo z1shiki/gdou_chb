@@ -2,7 +2,6 @@ package gdou.gdou_chb.UI;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -110,7 +109,7 @@ public class LoginFragment extends BaseFragment implements LoginContract.View {
 
     @OnClick(R.id.sign_in_btn)
     public void onClick() {
-        mPresenter.login(new User());
+        mPresenter.login(new User(mAccount.getText().toString(),mPassword.getText().toString()));
 //        ;startActivity(new Intent(getActivity(),MainActivity.class));
     }
 
@@ -142,8 +141,8 @@ public class LoginFragment extends BaseFragment implements LoginContract.View {
     @Override
     public void showloginstate() {
         //登录成功
-        this.getActivity().startActivity(new Intent(this.getActivity(), HomeActivity.class));
-
+        showToast();
+        jump2Activity(HomeActivity.class);
     }
 
     @Override
