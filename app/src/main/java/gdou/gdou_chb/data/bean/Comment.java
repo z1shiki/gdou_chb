@@ -9,7 +9,7 @@ import java.io.Serializable;
  * @updated 22-十一月-2016 20:37:06
  */
 
-public class Comment  implements Serializable {
+public class Comment extends BaseBean implements Serializable {
 	
 	/**
 	 * 内容

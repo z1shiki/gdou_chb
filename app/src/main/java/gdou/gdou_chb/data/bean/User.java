@@ -7,7 +7,7 @@ import java.io.Serializable;
  * Created by WT on 2016/11/29.
  */
 
-public class User extends RealmObject implements Serializable {
+public class User extends BaseBean implements Serializable {
 
     /**
      * 登录账号

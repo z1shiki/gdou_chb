@@ -1,5 +1,7 @@
 package gdou.gdou_chb.model;
 
+import com.kymjs.rxvolley.client.HttpCallback;
+
 import gdou.gdou_chb.data.bean.Comment;
 
 /**
@@ -12,19 +14,19 @@ public interface CommentModel {
      * @param comment
      * @return
      */
-    Comment commentOrders(Comment comment);
+    void commentOrders(Comment comment);
 
     /**
      * 查找指定订单评论
      * @param orderId
      * @return
      */
-    Comment findByOrderId(long orderId);
+    void findByOrderId(long orderId);
 
     /**
      * 得到商家回复
      * @param orderId
      * @return
      */
-    Comment getRevent(long orderId);
+    void getRevent(long orderId );
 }

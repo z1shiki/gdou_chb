@@ -9,7 +9,7 @@ import java.io.Serializable;
  * @updated 22-十一月-2016 20:16:40
  */
 
-public class Shopper implements Serializable{
+public class Shopper extends BaseBean implements Serializable{
 	/**
 	 * 商家简介
 	 */

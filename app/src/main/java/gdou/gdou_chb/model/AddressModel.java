@@ -1,5 +1,7 @@
 package gdou.gdou_chb.model;
 
+import com.kymjs.rxvolley.client.HttpCallback;
+
 import gdou.gdou_chb.data.bean.Address;
 
 /**
@@ -12,41 +14,41 @@ public interface AddressModel {
      * @param address
      * @return
      */
-    Address addAddress(Address address);
+    void addAddress(Address address);
 
     /**
      * 改变用户默认收货地址
      * @param addressId
      * @return
      */
-    Address changeDefault(long addressId);
+    void changeDefault(long addressId);
 
     /**
      * 删除收货地址
      * @param addressId
      * @return
      */
-    Address delete(long addressId);
+    void delete(long addressId);
 
     /**
      * 查找指定用户的所有地址
      * @param userId
      * @return
      */
-    Address all(long userId);
+    void all(long userId,HttpCallback callback);
 
     /**
      * 查找指定用户的默认地址
      * @param userId
      * @return
      */
-    Address defalut(long userId);
+    void defalut(long userId,HttpCallback callback);
 
     /**
      * 修改收货地址
      * @param address
      * @return
      */
-    Address update(Address address);
+    void update(Address address,HttpCallback callback);
 
 }

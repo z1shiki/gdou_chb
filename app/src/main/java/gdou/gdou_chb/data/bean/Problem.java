@@ -9,7 +9,7 @@ import java.io.Serializable;
  * @updated 22-十一月-2016 20:21:24
  */
 
-public class Problem implements Serializable {
+public class Problem extends BaseBean implements Serializable {
 	
 	/**
 	 * 内容

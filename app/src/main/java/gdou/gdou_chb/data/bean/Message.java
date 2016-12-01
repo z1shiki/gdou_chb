@@ -9,7 +9,7 @@ import java.io.Serializable;
  * @updated 22-十一月-2016 20:16:37
  */
 
-public class Message  implements Serializable{
+public class Message extends BaseBean implements Serializable{
 
 	/**
 	 * 消息内容

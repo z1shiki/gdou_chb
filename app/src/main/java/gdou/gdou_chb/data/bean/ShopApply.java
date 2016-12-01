@@ -10,7 +10,7 @@ import java.io.Serializable;
  * @updated 22-十一月-2016 20:16:40
  */
 
-public class ShopApply implements Serializable {
+public class ShopApply extends BaseBean implements Serializable {
 
 	/**
 	 * 身份证背面照

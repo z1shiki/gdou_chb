@@ -9,7 +9,7 @@ import java.io.Serializable;
  * @updated 22-十一月-2016 20:16:38
  */
 
-public class OrderDetail  implements Serializable{
+public class OrderDetail extends BaseBean implements Serializable{
 	
 	/**
 	 * 商品名称

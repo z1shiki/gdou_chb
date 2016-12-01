@@ -56,4 +56,5 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:24.2.1'
     //test
     testCompile 'junit:junit:4.12'
+    compile 'com.google.code.gson:gson:2.8.0'
 }

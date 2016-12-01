@@ -9,7 +9,7 @@ import java.io.Serializable;
  * @updated 22-十一月-2016 20:16:39
  */
 
-public class Shop implements Serializable{
+public class Shop  extends BaseBean implements Serializable{
 	
 	/**
 	 * 营业时间

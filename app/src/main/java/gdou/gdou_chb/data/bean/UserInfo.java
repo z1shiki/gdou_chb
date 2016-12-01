@@ -10,7 +10,7 @@ import java.io.Serializable;
  * @updated 22-十一月-2016 20:16:41
  */
 
-public class UserInfo  implements Serializable {
+public class UserInfo extends BaseBean implements Serializable {
 
 	/**
 	 * 用户真实姓名

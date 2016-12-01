@@ -9,7 +9,7 @@ import java.io.Serializable;
  * @updated 22-十一月-2016 20:16:36
  */
 
-public class Classification  implements Serializable {
+public class Classification extends BaseBean  implements Serializable {
 
 	/**
 	 * 分类名字

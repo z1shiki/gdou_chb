@@ -10,7 +10,7 @@ import java.io.Serializable;
  * @updated 22-十一月-2016 20:21:21
  */
 
-public class Resolution implements Serializable{
+public class Resolution extends BaseBean implements Serializable{
 	/**
 	 * 回答
 	 */

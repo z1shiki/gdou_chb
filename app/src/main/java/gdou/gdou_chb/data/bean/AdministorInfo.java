@@ -9,7 +9,7 @@ import java.io.Serializable;
  * @updated 22-十一月-2016 20:16:35
  */
 
-public class AdministorInfo  implements Serializable {
+public class AdministorInfo  extends BaseBean implements Serializable {
 
 	/**
 	 * 标记账号信息，关联登录账号信息

@@ -1,5 +1,7 @@
 package gdou.gdou_chb.model;
 
+import com.kymjs.rxvolley.client.HttpCallback;
+
 import gdou.gdou_chb.data.bean.User;
 
 /**
@@ -15,7 +17,7 @@ public interface UserModel {
      * @param verifyCode
      * @return
      */
-    User register(String account,String password,String verifyCode);
+    void register(String account,String password,String verifyCode);
 
     /**
      * 登录
@@ -23,7 +25,7 @@ public interface UserModel {
      * @param password
      * @return
      */
-    User doLogin(String accout,String password);
+    void doLogin(String accout,String password );
 
     /**
      * 忘记密码
@@ -32,7 +34,7 @@ public interface UserModel {
      * @param verifyCode
      * @return
      */
-    User resetPassword(String account,String password,String verifyCode);
+    void resetPassword(String account,String password,String verifyCode);
 
     /**
      * 更改密码
@@ -41,7 +43,7 @@ public interface UserModel {
      * @param newPassword
      * @return
      */
-    User changePassword(String oldPassword, Long id, String newPassword) ;
+    void changePassword(String oldPassword, Long id, String newPassword);
 
 
     /**
@@ -49,7 +51,7 @@ public interface UserModel {
      * @param userId
      * @return
      */
-    User findUserInfo(Long userId);
+    void findUserInfo(Long userId );
 
 
 
@@ -63,6 +65,7 @@ public interface UserModel {
      * @param safePassword
      * @return
      */
-    User update(String username,String realName,Long phone,Long loginId,Long userImg,Long safePassword);
+    void update(String username,String realName,Long phone,
+                Long loginId,Long userImg,Long safePassword );
 
 }
