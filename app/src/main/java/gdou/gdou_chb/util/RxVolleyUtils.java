@@ -1,9 +1,11 @@
 package gdou.gdou_chb.util;
 
+import com.kymjs.rxvolley.RxVolley;
 import com.kymjs.rxvolley.client.HttpCallback;
 import com.kymjs.rxvolley.client.HttpParams;
+import com.kymjs.rxvolley.rx.Result;
 
-import com.kymjs.rxvolley.RxVolley;
+import rx.Observable;
 
 
 /**
@@ -64,23 +66,23 @@ public class RxVolleyUtils {
      * @param params  请求参数
      * @param callback  回调函数
      */
-    public void post(String url, HttpParams params, HttpCallback callback) {
-        if (null == params) {
-            params = new HttpParams();
-        }
-        this.url = url;
-        this.params = params;
-        this.callback = callback;
-        new RxVolley
-                .Builder()
-                .params(params)
-                .httpMethod(RxVolley.Method.POST)
-                .url(url)
-                .callback(callback)
-                .shouldCache(false)
-                .timeout(5000)
-                .doTask();
-    }
+//    public void post(String url, HttpParams params, HttpCallback callback) {
+//        if (null == params) {
+//            params = new HttpParams();
+//        }
+//        this.url = url;
+//        this.params = params;
+//        this.callback = callback;
+//        new RxVolley
+//                .Builder()
+//                .params(params)
+//                .httpMethod(RxVolley.Method.POST)
+//                .url(url)
+//                .callback(callback)
+//                .shouldCache(false)
+//                .timeout(5000)
+//                .doTask();
+//    }
 
     /**
      *Post  Json请求
@@ -109,5 +111,17 @@ public class RxVolleyUtils {
                 .doTask();
     }
 
+    public Observable<Result> post(String url,HttpParams params){
+        if (params == null){
+            params =new HttpParams();
+        }
+        this.url = url;
+        return new RxVolley
+                .Builder()
+                .params(params)
+                .url(url)
+                .contentType(RxVolley.ContentType.JSON)
+                .getResult();
+    }
 }
 
