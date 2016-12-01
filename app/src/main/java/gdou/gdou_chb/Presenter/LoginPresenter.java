@@ -2,6 +2,9 @@ package gdou.gdou_chb.presenter;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
+
+import com.kymjs.rxvolley.rx.Result;
 
 import gdou.gdou_chb.contract.LoginContract;
 import gdou.gdou_chb.model.bean.User;
@@ -52,25 +55,48 @@ public class LoginPresenter implements LoginContract.Presenter {
         mLoginView.loginprogress(true);
         Subscription subscription =
                 mUserModel
-               .login(user)
+               .doLogin1(user)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribe(new Observer<User>() {
+                .subscribe(new Observer<Result>() {
                     @Override
                     public void onCompleted() {
+                        Log.i("Rx","OK");
                         //TODO:跳转到下一个Activity
-//                        mLoginView.showloginstate();
+//                      0  mLoginView.showloginstate();
                     }
 
                     @Override
                     public void onError(Throwable e) {
                         //返回错误信息
+                        Log.i("Rx","Error");
                     }
 
                     @Override
-                    public void onNext(User user) {
+                    public void onNext(Result result) {
                         //发送登录操作
-                        mLoginView.showloginstate();
+//                        mLoginView.showloginstate();
+                        Log.i("Rx","...");
+
+                    }
+                });
+
+        Subscription subscription1 = mUserModel.doLogin1(user)
+                .subscribe(new Observer<Result>() {
+                    @Override
+                    public void onCompleted() {
+                        Log.i("Rx","OK");
+                        mLoginView.loginprogress(false);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                        Log.i("Rx","error");
+                    }
+
+                    @Override
+                    public void onNext(Result result) {
 
                     }
                 });
