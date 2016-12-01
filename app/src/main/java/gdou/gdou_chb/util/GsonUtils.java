@@ -9,8 +9,8 @@ import com.google.gson.JsonParser;
 import java.util.ArrayList;
 import java.util.List;
 
-import gdou.gdou_chb.data.bean.BaseBean;
-import gdou.gdou_chb.data.bean.ResultBean;
+import gdou.gdou_chb.model.bean.BaseBean;
+import gdou.gdou_chb.model.bean.ResultBean;
 
 /**
  * Gson的工具类

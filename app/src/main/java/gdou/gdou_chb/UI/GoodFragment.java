@@ -1,4 +1,4 @@
-package gdou.gdou_chb.UI;
+package gdou.gdou_chb.ui;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -65,4 +65,13 @@ public class GoodFragment extends BaseFragment implements GoodContract.View {
     }
 
 
+    @Override
+    public void changeTrolley() {
+
+    }
+
+    @Override
+    public void jump2Order() {
+
+    }
 }

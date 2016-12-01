@@ -10,9 +10,15 @@ import gdou.gdou_chb.util.MVP.BaseView;
 public interface GoodContract {
 
     interface View extends BaseView<Presenter>{
+        void changeTrolley();
+        void jump2Order();
     }
 
     interface Presenter extends BasePresenter{
+        void add2Trolley();
+        void del2Trolley();
+        void delAllTrolley();
+        void showHand();
     }
 
 }

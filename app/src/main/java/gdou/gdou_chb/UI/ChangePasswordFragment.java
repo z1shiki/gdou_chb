@@ -1,4 +1,4 @@
-package gdou.gdou_chb.UI;
+package gdou.gdou_chb.ui;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -65,4 +65,8 @@ public class ChangePasswordFragment extends BaseFragment implements ChangePasswo
     }
 
 
+    @Override
+    public void waittingSend() {
+
+    }
 }

@@ -1,11 +1,11 @@
-package gdou.gdou_chb.Activity;
+package gdou.gdou_chb.activity;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
 import butterknife.ButterKnife;
 import gdou.gdou_chb.R;
-import gdou.gdou_chb.UI.HomeFragment;
+import gdou.gdou_chb.ui.HomeFragment;
 import gdou.gdou_chb.presenter.HomePresenter;
 import gdou.gdou_chb.util.Java.ActivityUtils;
 import gdou.gdou_chb.util.Java.BaseActivity;

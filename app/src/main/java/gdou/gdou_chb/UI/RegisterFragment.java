@@ -1,4 +1,4 @@
-package gdou.gdou_chb.UI;
+package gdou.gdou_chb.ui;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -65,4 +65,8 @@ public class RegisterFragment extends BaseFragment implements RegisterContract.V
     }
 
 
+    @Override
+    public void waittingSend() {
+
+    }
 }

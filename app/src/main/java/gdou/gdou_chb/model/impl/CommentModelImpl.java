@@ -1,6 +1,6 @@
 package gdou.gdou_chb.model.impl;
 
-import gdou.gdou_chb.data.bean.Comment;
+import gdou.gdou_chb.model.bean.Comment;
 import gdou.gdou_chb.model.CommentModel;
 
 /**

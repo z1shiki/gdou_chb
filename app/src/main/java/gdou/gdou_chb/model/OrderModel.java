@@ -1,8 +1,6 @@
 package gdou.gdou_chb.model;
 
-import com.kymjs.rxvolley.client.HttpCallback;
-
-import gdou.gdou_chb.data.bean.Orders;
+import gdou.gdou_chb.model.bean.Orders;
 
 /**
  * Created by WT on 2016/11/30.

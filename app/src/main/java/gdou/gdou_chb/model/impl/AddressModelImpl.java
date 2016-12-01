@@ -2,7 +2,7 @@ package gdou.gdou_chb.model.impl;
 
 import com.kymjs.rxvolley.client.HttpCallback;
 
-import gdou.gdou_chb.data.bean.Address;
+import gdou.gdou_chb.model.bean.Address;
 import gdou.gdou_chb.model.AddressModel;
 
 /**

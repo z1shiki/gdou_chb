@@ -1,4 +1,4 @@
-package gdou.gdou_chb.UI;
+package gdou.gdou_chb.ui;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -20,10 +20,10 @@ import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import gdou.gdou_chb.Activity.HomeActivity;
+import gdou.gdou_chb.activity.HomeActivity;
 import gdou.gdou_chb.R;
 import gdou.gdou_chb.contract.LoginContract;
-import gdou.gdou_chb.data.bean.User;
+import gdou.gdou_chb.model.bean.User;
 import gdou.gdou_chb.util.Java.BaseActivity;
 import gdou.gdou_chb.util.MVP.BaseFragment;
 

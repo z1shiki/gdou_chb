@@ -1,6 +1,6 @@
 package gdou.gdou_chb.contract;
 
-import gdou.gdou_chb.data.bean.User;
+import gdou.gdou_chb.model.bean.User;
 import gdou.gdou_chb.util.MVP.BasePresenter;
 import gdou.gdou_chb.util.MVP.BaseView;
 

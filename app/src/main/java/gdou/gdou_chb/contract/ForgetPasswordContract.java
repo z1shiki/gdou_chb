@@ -10,9 +10,12 @@ import gdou.gdou_chb.util.MVP.BaseView;
 public interface ForgetPasswordContract {
 
     interface View extends BaseView<Presenter>{
+        void waittingSend();
     }
 
     interface Presenter extends BasePresenter{
+        void sentcode(int phonenumber);
+        void forgetPassword();
     }
 
 }

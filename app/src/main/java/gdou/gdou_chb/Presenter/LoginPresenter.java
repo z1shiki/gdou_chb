@@ -4,7 +4,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import gdou.gdou_chb.contract.LoginContract;
-import gdou.gdou_chb.data.bean.User;
+import gdou.gdou_chb.model.bean.User;
 import gdou.gdou_chb.model.impl.UserModelImpl;
 import rx.Observer;
 import rx.Subscription;
@@ -71,6 +71,7 @@ public class LoginPresenter implements LoginContract.Presenter {
                     public void onNext(User user) {
                         //发送登录操作
                         mLoginView.showloginstate();
+
                     }
                 });
         mSubscription.add(subscription);

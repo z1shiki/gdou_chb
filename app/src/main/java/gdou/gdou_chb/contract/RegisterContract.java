@@ -1,5 +1,6 @@
 package gdou.gdou_chb.contract;
 
+import gdou.gdou_chb.model.bean.User;
 import gdou.gdou_chb.util.MVP.BasePresenter;
 import gdou.gdou_chb.util.MVP.BaseView;
 
@@ -10,10 +11,12 @@ import gdou.gdou_chb.util.MVP.BaseView;
 public interface RegisterContract {
 
     interface View extends BaseView<Presenter>{
+        void waittingSend();
     }
 
     interface Presenter extends BasePresenter{
-        void register();
+        void sentcode(int phonenumber);
+        void register(User user);
     }
 
 }

@@ -1,6 +1,6 @@
 package gdou.gdou_chb.model.impl;
 
-import gdou.gdou_chb.data.bean.Orders;
+import gdou.gdou_chb.model.bean.Orders;
 import gdou.gdou_chb.model.OrderModel;
 
 /**

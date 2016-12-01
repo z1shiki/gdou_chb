@@ -1,4 +1,4 @@
-package gdou.gdou_chb.data.bean;
+package gdou.gdou_chb.model.bean;
 
 import java.io.Serializable;
 

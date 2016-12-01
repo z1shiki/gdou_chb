@@ -1,6 +1,6 @@
 package gdou.gdou_chb.model.impl;
 
-import gdou.gdou_chb.data.bean.User;
+import gdou.gdou_chb.model.bean.User;
 import gdou.gdou_chb.model.UserModel;
 import rx.Observable;
 

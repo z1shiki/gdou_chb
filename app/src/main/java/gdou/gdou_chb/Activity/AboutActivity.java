@@ -1,4 +1,4 @@
-package gdou.gdou_chb.Activity;
+package gdou.gdou_chb.activity;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

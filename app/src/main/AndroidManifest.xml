@@ -31,13 +31,13 @@
         <meta-data android:name="com.amap.api.v2.apikey"
                    android:value="193232f7fe77eb6cdfa68d16b50cebd7">
         </meta-data>
-        <activity android:name=".Activity.LoginActivity">
+        <activity android:name=".activity.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".Activity.HomeActivity">
+        <activity android:name=".activity.HomeActivity">
         </activity>
 
         <service android:name="com.amap.api.location.APSService"/>
