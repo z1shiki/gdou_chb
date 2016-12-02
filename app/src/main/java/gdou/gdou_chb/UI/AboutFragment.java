@@ -49,13 +49,13 @@ public class AboutFragment extends BaseFragment implements AboutContract.View{
     @Override
     public void onResume() {
         super.onResume();
-        mPresenter.subscribe();
+
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        mPresenter.unsubscribe();
+
     }
 
     public void setPresenter(@NonNull AboutContract.Presenter presenter) {

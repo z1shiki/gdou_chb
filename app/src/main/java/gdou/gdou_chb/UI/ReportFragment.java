@@ -35,13 +35,13 @@ public class ReportFragment extends BaseFragment implements ReportContract.View 
     @Override
     public void onResume() {
         super.onResume();
-        mPresenter.subscribe();
+
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        mPresenter.unsubscribe();
+
     }
 
     @Override

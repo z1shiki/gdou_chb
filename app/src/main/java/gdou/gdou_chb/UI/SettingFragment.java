@@ -6,9 +6,14 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import gdou.gdou_chb.R;
+import gdou.gdou_chb.activity.AboutActivity;
+import gdou.gdou_chb.activity.ReportActivity;
 import gdou.gdou_chb.contract.SettingContract;
 import gdou.gdou_chb.util.MVP.BaseFragment;
 
@@ -18,6 +23,10 @@ import gdou.gdou_chb.util.MVP.BaseFragment;
 
 public class SettingFragment extends BaseFragment implements SettingContract.View {
 
+    @BindView(R.id.report_view)
+    TextView reportView;
+    @BindView(R.id.about_view)
+    TextView aboutView;
     private SettingContract.Presenter mPresenter;
 
     public SettingFragment() { //Requires empty public constructor
@@ -35,13 +44,13 @@ public class SettingFragment extends BaseFragment implements SettingContract.Vie
     @Override
     public void onResume() {
         super.onResume();
-        mPresenter.subscribe();
+
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        mPresenter.unsubscribe();
+
     }
 
     @Override
@@ -54,15 +63,24 @@ public class SettingFragment extends BaseFragment implements SettingContract.Vie
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.setting_frag, container, false);
 
-               
-        
+
         //setup
         ButterKnife.bind(this, root);
-        
-        
+
 
         return root;
     }
 
 
+    @OnClick({R.id.report_view, R.id.about_view})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.report_view:
+                jump2Activity(ReportActivity.class);
+                break;
+            case R.id.about_view:
+                jump2Activity(AboutActivity.class);
+                break;
+        }
     }
+}
