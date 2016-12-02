@@ -50,11 +50,11 @@ public class LoginPresenter implements LoginContract.Presenter {
     }
 
     @Override
-    public void login(User user) {
+    public void login(String account,String password) {
         mLoginView.loginprogress(true);
         Subscription subscription =
                 mUserModel
-                .doLogin1(user)
+                .doLogin(account,password)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(new Observer<Result>() {
