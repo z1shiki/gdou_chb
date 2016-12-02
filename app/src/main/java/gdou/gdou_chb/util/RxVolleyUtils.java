@@ -32,85 +32,32 @@ public class RxVolleyUtils {
 
     }
 
-
     /**
-     *不带缓存的Get请求
-     * @param url  请求路径
-     * @param params  请求参数
-     * @param callback  回调函数
+     * get请求
+     * @param url
+     * @param params
+     * @return
      */
-    public void get(String url, HttpParams params, HttpCallback callback) {
-
-        if (null == params) {
-            params = new HttpParams();
+    public Observable<Result> get(String url,HttpParams params){
+        if (params == null){
+            params =new HttpParams();
         }
         this.url = url;
-        this.params = params;
-        this.callback = callback;
-
-        new RxVolley
+        return new RxVolley
                 .Builder()
-                .params(params)
-                .url(url)
                 .httpMethod(RxVolley.Method.GET)
-                .callback(callback)
-                .shouldCache(false)
-                .timeout(5000)
-                .doTask();
-    }
-
-
-    /**
-     *Post请求
-     * @param url  请求路径
-     * @param params  请求参数
-     * @param callback  回调函数
-     */
-//    public void post(String url, HttpParams params, HttpCallback callback) {
-//        if (null == params) {
-//            params = new HttpParams();
-//        }
-//        this.url = url;
-//        this.params = params;
-//        this.callback = callback;
-//        new RxVolley
-//                .Builder()
-//                .params(params)
-//                .httpMethod(RxVolley.Method.POST)
-//                .url(url)
-//                .callback(callback)
-//                .shouldCache(false)
-//                .timeout(5000)
-//                .doTask();
-//    }
-
-    /**
-     *Post  Json请求
-     * @param url  请求路径
-     * @param params  请求参数
-     * @param callback  回调函数
-     */
-    public void postJson(String url, HttpParams params, HttpCallback callback) {
-
-        if (null == params) {
-            params = new HttpParams();
-        }
-        this.url = url;
-        this.params = params;
-        this.callback = callback;
-
-        new RxVolley
-                .Builder()
                 .params(params)
-                .httpMethod(RxVolley.Method.POST)
                 .url(url)
                 .contentType(RxVolley.ContentType.JSON)
-                .callback(callback)
-                .shouldCache(false)
-                .timeout(5000)
-                .doTask();
+                .getResult();
     }
 
+    /**
+     * post请求
+     * @param url
+     * @param params
+     * @return
+     */
     public Observable<Result> post(String url,HttpParams params){
         if (params == null){
             params =new HttpParams();
@@ -120,8 +67,33 @@ public class RxVolleyUtils {
                 .Builder()
                 .params(params)
                 .url(url)
+                .httpMethod(RxVolley.Method.POST)
                 .contentType(RxVolley.ContentType.JSON)
                 .getResult();
     }
+
+
+
+    /**
+     * delete请求
+     * @param url
+     * @param params
+     * @return
+     */
+    public Observable<Result> delete(String url,HttpParams params){
+        if (params == null){
+            params =new HttpParams();
+        }
+        this.url = url;
+        return new RxVolley
+                .Builder()
+                .params(params)
+                .url(url)
+                .httpMethod(RxVolley.Method.DELETE)
+                .contentType(RxVolley.ContentType.JSON)
+                .getResult();
+    }
+
+
 }
 

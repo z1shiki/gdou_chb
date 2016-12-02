@@ -1,6 +1,9 @@
 package gdou.gdou_chb.model;
 
+import com.kymjs.rxvolley.rx.Result;
+
 import gdou.gdou_chb.model.bean.Orders;
+import rx.Observable;
 
 /**
  * Created by WT on 2016/11/30.
@@ -12,19 +15,19 @@ public interface OrderModel {
      * @param orders
      * @return
      */
-    void placeOrder(Orders orders );
+    Observable<Result> placeOrder(Orders orders );
 
     /**
      * 用户完成订单
      * @param ordersId
      * @return
      */
-    void doneOrders(long ordersId);
+    Observable<Result> doneOrders(long ordersId);
 
     /**
      * 用户申请退单
      * @param ordersId
      * @return
      */
-    void rebackOrders(long ordersId );
+    Observable<Result> rebackOrders(long ordersId );
 }

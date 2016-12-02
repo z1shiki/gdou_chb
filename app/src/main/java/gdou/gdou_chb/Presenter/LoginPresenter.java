@@ -2,7 +2,6 @@ package gdou.gdou_chb.presenter;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.util.Log;
 
 import com.kymjs.rxvolley.rx.Result;
 
@@ -55,51 +54,26 @@ public class LoginPresenter implements LoginContract.Presenter {
         mLoginView.loginprogress(true);
         Subscription subscription =
                 mUserModel
-               .doLogin1(user)
+                .doLogin1(user)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(new Observer<Result>() {
-                    @Override
-                    public void onCompleted() {
-                        Log.i("Rx","OK");
-                        //TODO:跳转到下一个Activity
-//                      0  mLoginView.showloginstate();
-                    }
+                               @Override
+                               public void onCompleted() {
 
-                    @Override
-                    public void onError(Throwable e) {
-                        //返回错误信息
-                        Log.i("Rx","Error");
-                    }
+                               }
 
-                    @Override
-                    public void onNext(Result result) {
-                        //发送登录操作
-//                        mLoginView.showloginstate();
-                        Log.i("Rx","...");
+                               @Override
+                               public void onError(Throwable e) {
 
-                    }
-                });
+                               }
 
-        Subscription subscription1 = mUserModel.doLogin1(user)
-                .subscribe(new Observer<Result>() {
-                    @Override
-                    public void onCompleted() {
-                        Log.i("Rx","OK");
-                        mLoginView.loginprogress(false);
-                    }
+                               @Override
+                               public void onNext(Result result) {
 
-                    @Override
-                    public void onError(Throwable e) {
-
-                        Log.i("Rx","error");
-                    }
-
-                    @Override
-                    public void onNext(Result result) {
-
-                    }
-                });
+                               }
+                           }
+                );
         mSubscription.add(subscription);
     }
 }

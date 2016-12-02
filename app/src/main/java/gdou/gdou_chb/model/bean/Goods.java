@@ -12,6 +12,11 @@ import java.io.Serializable;
 public class Goods  extends BaseBean implements Serializable {
 
 	/**
+	 * 商品ID
+	 */
+	private long goodId;
+
+	/**
 	 * 商品分类
 	 */
 	private long classification;
@@ -61,6 +66,9 @@ public class Goods  extends BaseBean implements Serializable {
 
 	}
 
+	public int getGoodId(){
+		return number;
+	}
 
 	public int getNumber(){
 		return number;
@@ -76,6 +84,14 @@ public class Goods  extends BaseBean implements Serializable {
 
 	public boolean isWatch(){
 		return watch;
+	}
+
+	/**
+	 *
+	 * @param GoodId
+	 */
+	public void setGoodId(int GoodId){
+		this.goodId = GoodId;
 	}
 
 	/**
