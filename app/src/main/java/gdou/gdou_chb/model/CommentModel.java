@@ -1,6 +1,9 @@
 package gdou.gdou_chb.model;
 
+import com.kymjs.rxvolley.rx.Result;
+
 import gdou.gdou_chb.model.bean.Comment;
+import rx.Observable;
 
 /**
  * Created by WT on 2016/11/30.
@@ -12,19 +15,19 @@ public interface CommentModel {
      * @param comment
      * @return
      */
-    void commentOrders(Comment comment);
+    Observable<Result> commentOrders(Comment comment);
 
     /**
      * 查找指定订单评论
      * @param orderId
      * @return
      */
-    void findByOrderId(long orderId);
+    Observable<Result> findByOrderId(long orderId);
 
     /**
      * 得到商家回复
      * @param orderId
      * @return
      */
-    void getRevent(long orderId );
+    Observable<Result> getRevent(long orderId );
 }

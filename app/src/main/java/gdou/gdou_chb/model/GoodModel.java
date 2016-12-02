@@ -1,6 +1,10 @@
 package gdou.gdou_chb.model;
 
 
+import com.kymjs.rxvolley.rx.Result;
+
+import rx.Observable;
+
 /**
  * Created by WT on 2016/11/30.
  */
@@ -12,6 +16,6 @@ public interface GoodModel {
      * @param goodsId 商品ID
      * @return
      */
-    void findByGoodsId(Long goodsId);
+    Observable<Result> findByGoodsId(Long goodsId);
 }
 

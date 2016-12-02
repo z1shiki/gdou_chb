@@ -3,6 +3,8 @@ package gdou.gdou_chb.presenter;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
+import com.kymjs.rxvolley.rx.Result;
+
 import gdou.gdou_chb.contract.LoginContract;
 import gdou.gdou_chb.model.bean.User;
 import gdou.gdou_chb.model.impl.UserModelImpl;
@@ -48,32 +50,30 @@ public class LoginPresenter implements LoginContract.Presenter {
     }
 
     @Override
-    public void login(User user) {
+    public void login(String account,String password) {
         mLoginView.loginprogress(true);
         Subscription subscription =
                 mUserModel
-               .login(user)
+                .doLogin(account,password)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribe(new Observer<User>() {
-                    @Override
-                    public void onCompleted() {
-                        //TODO:跳转到下一个Activity
-//                        mLoginView.showloginstate();
-                    }
+                .subscribe(new Observer<Result>() {
+                               @Override
+                               public void onCompleted() {
 
-                    @Override
-                    public void onError(Throwable e) {
-                        //返回错误信息
-                    }
+                               }
 
-                    @Override
-                    public void onNext(User user) {
-                        //发送登录操作
-                        mLoginView.showloginstate();
+                               @Override
+                               public void onError(Throwable e) {
 
-                    }
-                });
+                               }
+
+                               @Override
+                               public void onNext(Result result) {
+
+                               }
+                           }
+                );
         mSubscription.add(subscription);
     }
 }

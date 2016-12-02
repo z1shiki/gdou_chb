@@ -1,5 +1,9 @@
 package gdou.gdou_chb.model;
 
+import com.kymjs.rxvolley.rx.Result;
+
+import rx.Observable;
+
 /**
  * Created by WT on 2016/11/30.
  */
@@ -13,7 +17,7 @@ public interface UserModel {
      * @param verifyCode
      * @return
      */
-    void register(String account,String password,String verifyCode);
+    Observable<Result> register(String account, String password, String verifyCode);
 
     /**
      * 登录
@@ -21,7 +25,7 @@ public interface UserModel {
      * @param password
      * @return
      */
-    void doLogin(String accout,String password );
+    Observable<Result> doLogin(String accout,String password );
 
     /**
      * 忘记密码
@@ -30,7 +34,7 @@ public interface UserModel {
      * @param verifyCode
      * @return
      */
-    void resetPassword(String account,String password,String verifyCode);
+    Observable<Result> resetPassword(String account,String password,String verifyCode);
 
     /**
      * 更改密码
@@ -39,7 +43,7 @@ public interface UserModel {
      * @param newPassword
      * @return
      */
-    void changePassword(String oldPassword, Long id, String newPassword);
+    Observable<Result> changePassword(String oldPassword, Long id, String newPassword);
 
 
     /**
@@ -47,7 +51,7 @@ public interface UserModel {
      * @param userId
      * @return
      */
-    void findUserInfo(Long userId );
+    Observable<Result> findUserInfo(Long userId );
 
 
 
@@ -61,7 +65,7 @@ public interface UserModel {
      * @param safePassword
      * @return
      */
-    void update(String username,String realName,Long phone,
+    Observable<Result> update(String username,String realName,Long phone,
                 Long loginId,Long userImg,Long safePassword );
 
 }
