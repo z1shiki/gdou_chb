@@ -5,4 +5,5 @@ package gdou.gdou_chb.adapter;
  */
 
 public class OrderAdapter {
+
 }

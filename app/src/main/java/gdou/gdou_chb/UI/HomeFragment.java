@@ -26,7 +26,7 @@ import gdou.gdou_chb.util.MVP.BaseFragment;
  * Created by Z1shiki on 2016/11/16.
  */
 
-public class HomeFragment extends BaseFragment implements HomeContract.View {
+public class HomeFragment extends BaseFragment implements HomeContract.ShopView {
 
 
 
@@ -58,12 +58,15 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
     public void onResume() {
         super.onResume();
         mActivity= (BaseActivity) this.getActivity();
+        //mPresenter.subscribe();
     }
 
     @Override
     public void onPause() {
         super.onPause();
         mActivity= (BaseActivity) this.getActivity();
+        //mPresenter.unsubscribe();
+
     }
 
     @Override

@@ -44,12 +44,14 @@ public class SettingFragment extends BaseFragment implements SettingContract.Vie
     @Override
     public void onResume() {
         super.onResume();
+        mPresenter.subscribe();
 
     }
 
     @Override
     public void onPause() {
         super.onPause();
+        mPresenter.unsubscribe();
 
     }
 

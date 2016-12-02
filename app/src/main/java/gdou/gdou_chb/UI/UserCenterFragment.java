@@ -15,14 +15,14 @@ import gdou.gdou_chb.R;
 import gdou.gdou_chb.activity.AddressActivity;
 import gdou.gdou_chb.activity.SafeCenterActivity;
 import gdou.gdou_chb.activity.SettingActivity;
-import gdou.gdou_chb.contract.UserCenterContract;
+import gdou.gdou_chb.contract.HomeContract;
 import gdou.gdou_chb.util.MVP.BaseFragment;
 
 /**
  * Created by Z1shiki on 2016/11/16.
  */
 
-public class UserCenterFragment extends BaseFragment implements UserCenterContract.View {
+public class UserCenterFragment extends BaseFragment implements HomeContract.UserCenterView {
 
     @BindView(R.id.safe_center)
     TextView safeCenter;
@@ -30,7 +30,7 @@ public class UserCenterFragment extends BaseFragment implements UserCenterContra
     TextView address;
     @BindView(R.id.setting)
     TextView setting;
-    private UserCenterContract.Presenter mPresenter;
+    private HomeContract.Presenter mPresenter;
 
     public UserCenterFragment() { //Requires empty public constructor
     }
@@ -47,15 +47,17 @@ public class UserCenterFragment extends BaseFragment implements UserCenterContra
     @Override
     public void onResume() {
         super.onResume();
+        mPresenter.subscribe();
     }
 
     @Override
     public void onPause() {
         super.onPause();
+        mPresenter.unsubscribe();
     }
 
     @Override
-    public void setPresenter(@NonNull UserCenterContract.Presenter presenter) {
+    public void setPresenter(@NonNull HomeContract.Presenter presenter) {
         mPresenter = presenter;
     }
 

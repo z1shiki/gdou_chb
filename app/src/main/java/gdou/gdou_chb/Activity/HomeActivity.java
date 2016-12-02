@@ -27,7 +27,7 @@ public class HomeActivity extends BaseActivity {
     @BindView(bottomBar)
     BottomBar mBottomBar;
 
-
+    private HomePresenter mPresenter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -41,7 +41,7 @@ public class HomeActivity extends BaseActivity {
             mHomeFragment = HomeFragment.newInstanceState();
             ActivityUtils.addFragmentToActivity(getFragmentManager(),mHomeFragment, contentFrame);
         }
-        new HomePresenter(this,mHomeFragment);
+        mPresenter = new HomePresenter(this,mHomeFragment);
 
         mBottomBar.setOnTabSelectListener(new OnTabSelectListener() {
             @Override

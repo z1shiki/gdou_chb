@@ -77,11 +77,6 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.ViewHolder>{
     @Override
     public int getItemCount(){
         return mShopData == null ? 0 : mShopData.size();
-//        if(mShopData==null){
-//            Log.v("LOG","Warning, null filteredListData");
-//            return 0;
-//        }else{
-          //  return mShopData.size();
-        //}
+
     }
 }
