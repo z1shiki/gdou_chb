@@ -20,10 +20,9 @@ import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import gdou.gdou_chb.activity.HomeActivity;
 import gdou.gdou_chb.R;
+import gdou.gdou_chb.activity.HomeActivity;
 import gdou.gdou_chb.contract.LoginContract;
-import gdou.gdou_chb.model.bean.User;
 import gdou.gdou_chb.util.Java.BaseActivity;
 import gdou.gdou_chb.util.MVP.BaseFragment;
 
@@ -109,7 +108,7 @@ public class LoginFragment extends BaseFragment implements LoginContract.View {
 
     @OnClick(R.id.sign_in_btn)
     public void onClick() {
-        mPresenter.login(new User(mAccount.getText().toString(),mPassword.getText().toString()));
+        mPresenter.login(mAccount.getText().toString(),mPassword.getText().toString());
 //        ;startActivity(new Intent(getActivity(),MainActivity.class));
     }
 

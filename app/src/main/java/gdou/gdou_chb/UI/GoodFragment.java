@@ -53,9 +53,6 @@ public class GoodFragment extends BaseFragment implements GoodContract.View {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.good_frag, container, false);
-
-
-
         //setup
         ButterKnife.bind(this, root);
 
