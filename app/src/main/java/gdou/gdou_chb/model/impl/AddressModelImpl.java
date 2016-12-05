@@ -5,6 +5,7 @@ import com.kymjs.rxvolley.rx.Result;
 
 import gdou.gdou_chb.model.bean.Address;
 import gdou.gdou_chb.model.AddressModel;
+import gdou.gdou_chb.model.bean.User;
 import gdou.gdou_chb.util.RxVolleyUtils;
 import rx.Observable;
 
@@ -13,94 +14,41 @@ import rx.Observable;
  */
 
 public class AddressModelImpl implements AddressModel {
-    /**
-     * 添加收货地址
-     * @param address
-     * @return
-     */
-
     @Override
     public Observable<Result> addAddress(Address address) {
+        return null;
+    }
+
+    @Override
+    public Observable<Result> changeDefault(Address address) {
         HttpParams params = new HttpParams();
-        params.put("address", String.valueOf(address));
+        //params.put("address", address.getAddress());
+        //params.put("latitude", String.valueOf(address.getLatitude()));
+        //params.put("longitude",String.valueOf(address.getLongitude()));
+        //params.put("userId",user.getUserId());
+        //params.put("phone",);
         return RxVolleyUtils.getInstance().post(
-                BaseModelImpl.Service_URL +BaseModelImpl.addAddress_URL
-                ,params);
+        BaseModelImpl.Service_URL +BaseModelImpl.addAddress_URL
+         ,params);
     }
-
-    /**
-     * 改变默认收货地址
-     * @param addressId
-     * @return
-     */
 
     @Override
-    public Observable<Result> changeDefault(long addressId) {
-        HttpParams params = new HttpParams();
-        params.put("addressId", String.valueOf(addressId));
-        return RxVolleyUtils.getInstance().post(
-                BaseModelImpl.Service_URL +BaseModelImpl.changeDefault_URL
-                ,params);
+    public Observable<Result> delete(Address address) {
+        return null;
     }
-
-    /**
-     * 删除地址
-     * @param addressId
-     * @return
-     */
 
     @Override
-    public Observable<Result> delete(long addressId) {
-        HttpParams params = new HttpParams();
-        params.put("addressId", String.valueOf(addressId));
-        return RxVolleyUtils.getInstance().delete(
-                BaseModelImpl.Service_URL +BaseModelImpl.delete_URL
-                ,params);
+    public Observable<Result> all(User user) {
+        return null;
     }
-
-    /**
-     * 获取所有收货地址
-     * @param userId
-     * @return
-     */
 
     @Override
-    public Observable<Result> all(long userId) {
-        HttpParams params = new HttpParams();
-        params.put("userId", String.valueOf(userId));
-        return RxVolleyUtils.getInstance().get(
-                BaseModelImpl.Service_URL +BaseModelImpl.all_URL
-                ,params);
+    public Observable<Result> defalut(User user) {
+        return null;
     }
-
-    /**
-     * 默认地址
-     * @param userId
-     * @return
-     */
-
-    @Override
-    public Observable<Result> defalut(long userId) {
-        HttpParams params = new HttpParams();
-        params.put("address", String.valueOf(userId));
-        return RxVolleyUtils.getInstance().get(
-                BaseModelImpl.Service_URL +BaseModelImpl.defalut_URL
-                ,params);
-    }
-
-    /**
-     * 修改地址
-     * @param address
-     * @return
-     */
 
     @Override
     public Observable<Result> update(Address address) {
-        HttpParams params = new HttpParams();
-        params.put("address", String.valueOf(address));
-        return RxVolleyUtils.getInstance().post(
-                BaseModelImpl.Service_URL +BaseModelImpl.updateAdderss_URL
-                ,params);
+        return null;
     }
 }
-
