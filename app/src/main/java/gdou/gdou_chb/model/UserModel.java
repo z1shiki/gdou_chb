@@ -21,7 +21,7 @@ public interface UserModel {
      * @param user
      * @return
      */
-    Observable<Result> doLogin(User user );
+    Observable<Result> doLogin(User user);
     /**
      * 忘记密码
      * @param user
