@@ -16,8 +16,28 @@ public class ActivityUtils {
                                              @NonNull Fragment fragment, int frameId){
         checkNotNull(fragmentManager);
         checkNotNull(fragment);
+
         FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.add(frameId,fragment);
+        if(!fragment.isAdded()){transaction.add(frameId,fragment);}
+        transaction.commit();
+    }
+    public static void HideFragment(@NonNull FragmentManager fragmentManager,
+                                    @NonNull Fragment fragment){
+        checkNotNull(fragmentManager);
+        checkNotNull(fragment);
+
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.hide(fragment);
+        transaction.commit();
+    }
+    public static void ShowFragment(@NonNull FragmentManager fragmentManager,
+                                    @NonNull Fragment fragment,@NonNull int frameId){
+        checkNotNull(fragmentManager);
+        checkNotNull(fragment);
+
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        addFragmentToActivity(fragmentManager,fragment,frameId);
+        transaction.show(fragment);
         transaction.commit();
     }
 }

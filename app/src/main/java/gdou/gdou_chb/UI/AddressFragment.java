@@ -36,12 +36,14 @@ public class AddressFragment extends BaseFragment implements AddressContract.Vie
     public void onResume() {
         super.onResume();
         mPresenter.subscribe();
+
     }
 
     @Override
     public void onPause() {
         super.onPause();
         mPresenter.unsubscribe();
+
     }
 
     @Override

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:id="@+id/order">
 
-    <include layout="@layout/toolbar"
+    <include layout="@xml/toolbar"
         app:layout_scrollFlags="scroll|enterAlways"/>
     <include layout="@xml/tab_layout"
         android:id="@+id/order_tab"/>

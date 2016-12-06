@@ -36,12 +36,14 @@ public class SafeCenterFragment extends BaseFragment implements SafeCenterContra
     public void onResume() {
         super.onResume();
         mPresenter.subscribe();
+
     }
 
     @Override
     public void onPause() {
         super.onPause();
         mPresenter.unsubscribe();
+
     }
 
     @Override

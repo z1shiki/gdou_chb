@@ -9,16 +9,16 @@ import android.view.ViewGroup;
 
 import butterknife.ButterKnife;
 import gdou.gdou_chb.R;
-import gdou.gdou_chb.contract.OrderContract;
+import gdou.gdou_chb.contract.HomeContract;
 import gdou.gdou_chb.util.MVP.BaseFragment;
 
 /**
  * Created by Z1shiki on 2016/11/16.
  */
 
-public class OrderFragment extends BaseFragment implements OrderContract.View {
+public class OrderFragment extends BaseFragment implements HomeContract.OrderView {
 
-    private OrderContract.Presenter mPresenter;
+    private HomeContract.OrderPresenter mPresenter;
 
     public OrderFragment() { //Requires empty public constructor
     }
@@ -36,16 +36,18 @@ public class OrderFragment extends BaseFragment implements OrderContract.View {
     public void onResume() {
         super.onResume();
         mPresenter.subscribe();
+
     }
 
     @Override
     public void onPause() {
         super.onPause();
         mPresenter.unsubscribe();
+
     }
 
     @Override
-    public void setPresenter(@NonNull OrderContract.Presenter presenter) {
+    public void setPresenter(@NonNull HomeContract.OrderPresenter presenter) {
         mPresenter = presenter;
     }
 
