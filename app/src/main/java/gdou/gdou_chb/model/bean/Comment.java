@@ -9,58 +9,29 @@ import java.io.Serializable;
  * @updated 22-十一月-2016 20:37:06
  */
 
-public class Comment extends BaseBean implements Serializable {
-	
-	/**
-	 * 内容
-	 */
-	private String content;
-	/**
-	 * 订单id
-	 */
-	private long orderId;
-	/**
-	 * 发送消息的用户
-	 */
-	private long froms;
-	/**
-	 * 接收消息的用户
-	 */
-	private long tos;
+public class Comment implements Serializable {
+    /**
+     * 评论Id
+     */
+    private long commentId;
+    /**
+     * 评论内容
+     */
+    private String comment;
 
-	public String getContent() {
-		return content;
-	}
+    public long getCommentId() {
+        return commentId;
+    }
 
-	public void setContent(String content) {
-		this.content = content;
-	}
+    public void setCommentId(long commentId) {
+        this.commentId = commentId;
+    }
 
-	public long getOrderId() {
-		return orderId;
-	}
+    public String getComment() {
+        return comment;
+    }
 
-	public void setOrderId(long orderId) {
-		this.orderId = orderId;
-	}
-
-
-	public long getFroms() {
-		return froms;
-	}
-
-	public void setFroms(long froms) {
-		this.froms = froms;
-	}
-
-	public long getTos() {
-		return tos;
-	}
-
-	public void setTos(long tos) {
-		this.tos = tos;
-	}
-
-
-
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
 }

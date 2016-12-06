@@ -2,70 +2,55 @@ package gdou.gdou_chb.model;
 
 import com.kymjs.rxvolley.rx.Result;
 
+import gdou.gdou_chb.model.bean.User;
 import rx.Observable;
 
 /**
  * Created by WT on 2016/11/30.
  */
-
 public interface UserModel {
-
     /**
      * 用户注册
-     * @param account
-     * @param password
+     * @param user
      * @param verifyCode
      * @return
      */
-    Observable<Result> register(String account, String password, String verifyCode);
-
+    Observable<Result> register(User user, String verifyCode);
     /**
      * 登录
-     * @param accout
-     * @param password
+     * @param user
      * @return
      */
-    Observable<Result> doLogin(String accout,String password );
-
+    Observable<Result> doLogin(User user);
     /**
      * 忘记密码
-     * @param account
-     * @param password
+     * @param user
      * @param verifyCode
      * @return
      */
-    Observable<Result> resetPassword(String account,String password,String verifyCode);
-
+    Observable<Result> resetPassword(User user,String verifyCode);
     /**
      * 更改密码
-     * @param oldPassword
-     * @param id
-     * @param newPassword
+     * @param user
      * @return
      */
-    Observable<Result> changePassword(String oldPassword, Long id, String newPassword);
-
-
+    Observable<Result> changePassword(User user);
+    /**
+     * 更改手机
+     * @param user
+     * @return
+     */
+    Observable<Result> changePhone(User user);
+    /**
+     * 修改头像
+     * @param user
+     * @return
+     */
+    Observable<Result> changeUserImg(User user);
     /**
      * 查找指定用户信息
-     * @param userId
+     * @param user
      * @return
      */
-    Observable<Result> findUserInfo(Long userId );
-
-
-
-    /**
-     * 更新信息
-     * @param username
-     * @param realName
-     * @param phone
-     * @param loginId
-     * @param userImg
-     * @param safePassword
-     * @return
-     */
-    Observable<Result> update(String username,String realName,Long phone,
-                Long loginId,Long userImg,Long safePassword );
-
+    Observable<Result> findUserInfo(User user );
 }

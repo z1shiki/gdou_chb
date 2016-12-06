@@ -6,73 +6,78 @@ import java.io.Serializable;
  * Created by WT on 2016/11/29.
  */
 
-public class User extends BaseBean implements Serializable {
-
+public class User implements Serializable {
     /**
-     * 登录账号
+     * 用户ID
+     */
+    private long userId;
+    /**
+     * 账户
      */
     private String account;
-    /**
-     * 是否禁用 冻结用户
-     */
-    private boolean enable;
-
     /**
      * 密码
      */
     private String password;
     /**
-     * 加密盐
+     * 用户名
      */
-    private String salt;
+    private String username;
+    /**
+     * 手机号
+     */
+    private long phone;
+    /**
+     * 头像
+     */
+    private long userImg;
 
-    public User(String account, String password) {
-        this.account = account;
-        this.password = password;
+    public long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(long userId) {
+        this.userId = userId;
     }
 
     public String getAccount() {
         return account;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public String getSalt() {
-        return salt;
-    }
-
-    public boolean isEnable() {
-        return enable;
-    }
-
-    /**
-     * @param account account
-     */
     public void setAccount(String account) {
         this.account = account;
     }
 
-    /**
-     * @param enable enable
-     */
-    public void setEnable(boolean enable) {
-        this.enable = enable;
+    public String getPassword() {
+        return password;
     }
 
-    /**
-     * @param password password
-     */
     public void setPassword(String password) {
         this.password = password;
     }
 
-    /**
-     * @param salt salt
-     */
-    public void setSalt(String salt) {
-        this.salt = salt;
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public long getPhone() {
+        return phone;
+    }
+
+    public void setPhone(long phone) {
+        this.phone = phone;
+    }
+
+    public long getUserImg() {
+        return userImg;
+    }
+
+    public void setUserImg(long userImg) {
+        this.userImg = userImg;
     }
 }
 

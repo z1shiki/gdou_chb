@@ -2,29 +2,28 @@ package gdou.gdou_chb.model;
 
 import com.kymjs.rxvolley.rx.Result;
 
+import gdou.gdou_chb.model.bean.Shop;
 import rx.Observable;
 
 /**
  * Created by WT on 2016/11/30.
  */
-
 public interface ShopModel {
     /**
      * 商店列表
-     * @param userId
+     * @param shop
      */
-    Observable<Result> Shop(long userId);
+    Observable<Result> Shop(Shop shop);
     /**
-     * 商家营业
-     * @param userId
+     * 开店时间
+     * @param shop
      * @return
      */
-    Observable<Result> Online(long userId);
-
+    Observable<Result> OpenTime(Shop shop);
     /**
-     * 商家休息
-     * @param userId
+     * 关店时间
+     * @param shop
      * @return
      */
-    Observable<Result> OffLine(long userId);
+    Observable<Result> StopTime(Shop shop);
 }
