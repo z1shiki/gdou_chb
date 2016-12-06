@@ -1,6 +1,7 @@
 package gdou.gdou_chb.util.MVP;
 
 import android.app.Fragment;
+import android.content.Context;
 import android.content.Intent;
 
 /**
@@ -8,6 +9,7 @@ import android.content.Intent;
  */
 
 public class BaseFragment extends Fragment {
+    private static  Context mContext;
 
     public void jump2Activity(Class cla) {
         this.getActivity().startActivity(new Intent(this.getActivity(), cla));
@@ -16,4 +18,15 @@ public class BaseFragment extends Fragment {
 
     };
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mContext =context;
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mContext = null;
+    }
 }

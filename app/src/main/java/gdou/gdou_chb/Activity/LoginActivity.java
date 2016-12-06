@@ -23,6 +23,7 @@ public class LoginActivity extends BaseActivity {
     @BindView(R.id.toolbar_text)
     TextView mToolbarText;
 
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +42,7 @@ public class LoginActivity extends BaseActivity {
         new LoginPresenter(
                 new UserModelImpl(),//usermodel
                 mLoginFragment);
+
     }
 
 

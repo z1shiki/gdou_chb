@@ -30,7 +30,7 @@ public class UserCenterFragment extends BaseFragment implements HomeContract.Use
     TextView address;
     @BindView(R.id.setting)
     TextView setting;
-    private HomeContract.Presenter mPresenter;
+    private HomeContract.UserCenterPresenter mPresenter;
 
     public UserCenterFragment() { //Requires empty public constructor
     }
@@ -57,7 +57,7 @@ public class UserCenterFragment extends BaseFragment implements HomeContract.Use
     }
 
     @Override
-    public void setPresenter(@NonNull HomeContract.Presenter presenter) {
+    public void setPresenter(@NonNull HomeContract.UserCenterPresenter presenter) {
         mPresenter = presenter;
     }
 

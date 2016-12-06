@@ -4,16 +4,15 @@ import android.content.Context;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.ViewGroup;
 import android.view.View;
-import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.TextView;
 
-import butterknife.ButterKnife;
 import java.util.List;
 
+import butterknife.ButterKnife;
 import gdou.gdou_chb.R;
-import gdou.gdou_chb.data.bean.Address;
+import gdou.gdou_chb.model.bean.Address;
 /**
  * Created by AC on 2016/11/30.
  */

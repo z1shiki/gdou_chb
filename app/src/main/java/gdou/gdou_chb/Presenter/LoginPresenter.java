@@ -5,8 +5,8 @@ import android.support.annotation.Nullable;
 
 import com.kymjs.rxvolley.rx.Result;
 
+import gdou.gdou_chb.activity.HomeActivity;
 import gdou.gdou_chb.contract.LoginContract;
-import gdou.gdou_chb.model.bean.User;
 import gdou.gdou_chb.model.impl.UserModelImpl;
 import rx.Observer;
 import rx.Subscription;
@@ -65,7 +65,7 @@ public class LoginPresenter implements LoginContract.Presenter {
 
                                @Override
                                public void onError(Throwable e) {
-
+                                   mLoginView.jump2Activity(HomeActivity.class);
                                }
 
                                @Override

@@ -9,24 +9,30 @@ import gdou.gdou_chb.util.MVP.BaseView;
 
 public interface HomeContract {
 
-    interface ShopView extends BaseView<Presenter>{
+    interface ShopView extends BaseView<ShopPresenter>{
         void setLocation();//显示地址的方法，参数是地址
         void changeShoplist();//显示商店列表的方法 参数是商店列表
         void choiceShop();//进入GoodActivity  Intent传 参数是ShopName
 }
-    interface OrderView extends BaseView<Presenter>{
+    interface OrderView extends BaseView<OrderPresenter>{
 
     }
-    interface UserCenterView extends BaseView<Presenter>{
+    interface UserCenterView extends BaseView<UserCenterPresenter>{
 
     }
 
-    interface Presenter extends BasePresenter{
+    interface ShopPresenter extends BasePresenter{
         void initAmap();
         void getGPS();
         void changelocation();
         void doSerach();
 
+    }
+
+    interface UserCenterPresenter extends BasePresenter{
+    }
+
+    interface OrderPresenter extends BasePresenter{
     }
 
 }

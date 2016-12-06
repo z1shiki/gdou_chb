@@ -18,7 +18,7 @@ import gdou.gdou_chb.util.MVP.BaseFragment;
 
 public class OrderFragment extends BaseFragment implements HomeContract.OrderView {
 
-    private HomeContract.Presenter mPresenter;
+    private HomeContract.OrderPresenter mPresenter;
 
     public OrderFragment() { //Requires empty public constructor
     }
@@ -47,7 +47,7 @@ public class OrderFragment extends BaseFragment implements HomeContract.OrderVie
     }
 
     @Override
-    public void setPresenter(@NonNull HomeContract.Presenter presenter) {
+    public void setPresenter(@NonNull HomeContract.OrderPresenter presenter) {
         mPresenter = presenter;
     }
 

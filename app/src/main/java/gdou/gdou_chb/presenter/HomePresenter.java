@@ -16,12 +16,10 @@ import rx.subscriptions.CompositeSubscription;
  * Created by Z1shiki on 2016/11/30.
  */
 
-public class HomePresenter implements HomeContract.Presenter {
+public class HomePresenter implements HomeContract.ShopPresenter {
 
     private CompositeSubscription mSubscription;
     private final HomeContract.ShopView mHomeView;
-    private HomeContract.OrderView mOrderView;
-    private HomeContract.UserCenterView mUserCenterView;
     //Home需要操作的数据 地址 商家
     //声明AMapLocationClient类对象
     public AMapLocationClient mLocationClient = null;
@@ -37,22 +35,11 @@ public class HomePresenter implements HomeContract.Presenter {
     public HomePresenter(Context context, @Nullable HomeContract.ShopView homeView)
     {
         mHomeView = homeView;
-        mOrderView = null;
-        mUserCenterView = null;
+
         mContext = context;
         mSubscription = new CompositeSubscription();
         mHomeView.setPresenter(this);
     }
-
-    public void setmUserCenterView(HomeContract.UserCenterView view){
-        mUserCenterView = view;
-    }
-
-    public void setmOrderView(HomeContract.OrderView view){
-        mOrderView = view;
-    }
-
-
 
 
     @Override
@@ -132,6 +119,7 @@ public class HomePresenter implements HomeContract.Presenter {
     public void doSerach() {
         //TODO : 发送搜索栏里的值给商家列表
         //返回新的商家列表
+        Log.i("btb", "doSerach: ");
 //        mHomeView.changeShoplist(维护的商家列表参数); 数据层返回了搜索过后的新的商家列表
     }
 }

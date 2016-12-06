@@ -84,7 +84,7 @@ public class LoginFragment extends BaseFragment implements LoginContract.View {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.login_frag, container, false);
 
-        setHasOptionsMenu(true);
+//        setHasOptionsMenu(true);
 //        mToolBar.setTitle("");
 //        ((AppCompatActivity) getActivity()).setSupportActionBar(mToolBar);
 
