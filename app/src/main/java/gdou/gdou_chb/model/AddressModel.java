@@ -29,16 +29,16 @@ public interface AddressModel {
     Observable<Result> delete(Address address);
     /**
      * 查找指定用户的所有地址
-     * @param user
+     * @param address
      * @return
      */
-    Observable<Result> all(User user);
+    Observable<Result> all(Address address);
     /**
      * 查找指定用户的默认地址
-     * @param user
+     * @param address
      * @return
      */
-    Observable<Result> defalut(User user);
+    Observable<Result> defalut(Address address);
     /**
      * 修改收货地址
      * @param address

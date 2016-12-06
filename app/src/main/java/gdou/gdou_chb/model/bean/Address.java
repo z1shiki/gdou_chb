@@ -4,9 +4,7 @@ import java.io.Serializable;
 
 /**
  * 收货地址
- * @author Administrator
- * @version 1.0
- * @updated 22-十一月-2016 20:16:35
+ * Created by WT on 2016/11/29.
  */
 
 public class Address implements Serializable{
@@ -30,6 +28,15 @@ public class Address implements Serializable{
      * 收货人名称
      */
     private String name;
+    /**
+     * 用户id
+     */
+    private long userId;
+    /**
+     * 手机号
+     */
+    private long phone;
+
 
     public long getAddressId() {
         return addressId;
@@ -69,5 +76,21 @@ public class Address implements Serializable{
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(long userId) {
+        this.userId = userId;
+    }
+
+    public long getPhone() {
+        return phone;
+    }
+
+    public void setPhone(long phone) {
+        this.phone = phone;
     }
 }

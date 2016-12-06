@@ -1,5 +1,7 @@
 package gdou.gdou_chb.util;
 
+import android.util.Log;
+
 import com.kymjs.rxvolley.RxVolley;
 import com.kymjs.rxvolley.client.HttpCallback;
 import com.kymjs.rxvolley.client.HttpParams;
@@ -63,12 +65,13 @@ public class RxVolleyUtils {
             params =new HttpParams();
         }
         this.url = url;
+        Log.d("URL", url);
         return new RxVolley
                 .Builder()
                 .params(params)
                 .url(url)
                 .httpMethod(RxVolley.Method.POST)
-                .contentType(RxVolley.ContentType.JSON)
+                .timeout(5000)
                 .getResult();
     }
 

@@ -35,15 +35,79 @@
             android:text="@string/shop_name"
             android:textSize="20sp" />
 
-        <TextView
-            android:id="@+id/shop_introduce"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_toEndOf="@+id/shop_img"
             android:layout_below="@+id/shop_name"
+            android:layout_marginTop="8dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="12dp"
-            android:text="@string/shop_introduce"/>
+            android:id="@+id/score">
+        <TextView
+            android:id="@+id/shop_score"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/rate"/>
+            <TextView
+                android:id="@+id/shopscore"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/shop_score"
+                android:layout_marginStart="4dp"
+                android:text="123"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/shop_img"
+            android:layout_below="@+id/score"
+            android:layout_marginTop="2dp"
+            android:layout_marginStart="16dp"
+            android:id="@+id/price">
+            <TextView
+                android:id="@+id/starting_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/starting_price"/>
+            <TextView
+                android:id="@+id/startingprice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/starting_price"
+                android:layout_marginStart="4dp"
+                android:text="999"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/shop_img"
+            android:layout_below="@+id/price"
+            android:layout_marginTop="2dp"
+            android:layout_marginStart="16dp">
+            <TextView
+                android:id="@+id/distribution_fee"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/distribution_fee"/>
+            <TextView
+                android:id="@+id/distributionfee"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/distribution_fee"
+                android:layout_marginStart="4dp"
+                android:text="999"/>
+        </RelativeLayout>
+        <!--<TextView-->
+            <!--android:id="@+id/distribution_fee"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_toEndOf="@+id/shop_img"-->
+            <!--android:layout_below="@+id/starting_price"-->
+            <!--android:layout_marginStart="16dp"-->
+            <!--android:layout_marginTop="4dp"-->
+            <!--android:text="@string/distribution_fee"/>-->
 
     </RelativeLayout>
 

@@ -4,9 +4,7 @@ import java.io.Serializable;
 
 /**
  * 商品基本信息
- * @author Administrator
- * @version 1.0
- * @created 23-十一月-2016 16:59:43
+ * Created by WT on 2016/11/29.
  */
 
 public class Goods implements Serializable {

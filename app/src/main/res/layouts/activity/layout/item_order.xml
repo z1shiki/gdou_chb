@@ -11,18 +11,27 @@
     card_view:cardElevation="2dp">
 
     <RelativeLayout
-        android:paddingTop="15dp"
-        android:paddingLeft="15dp"
-        android:paddingRight="15dp"
+        android:paddingTop="10dp"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
 
         <TextView
-            android:id="@+id/order_num"
-            android:layout_width="match_parent"
+            android:id="@+id/ordernum"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/order_mun"
+            android:padding="4dp"
+            android:gravity="start"
+            />
+        <TextView
+            android:id="@+id/order_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/ordernum"
+            android:text=""
             android:padding="4dp"
             android:gravity="start"
             />
@@ -43,7 +52,7 @@
             android:textSize="18sp" />
 
         <TextView
-            android:id="@+id/order_state"
+            android:id="@+id/order_status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -56,7 +65,7 @@
             />
 
         <TextView
-            android:id="@+id/order_good"
+            android:id="@+id/good_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/shop_name"
@@ -67,7 +76,7 @@
             android:text="@string/good_name"/>
 
         <TextView
-            android:id="@+id/order_money"
+            android:id="@+id/total_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="18dp"
@@ -82,7 +91,7 @@
             android:layout_width="match_parent"
             android:layout_height="0.05dp"
             android:layout_marginTop="6dp"
-            android:layout_below="@+id/order_good"
+            android:layout_below="@+id/good_name"
             android:background="@color/gray"/>
 
         <android.support.v7.widget.AppCompatButton
@@ -92,7 +101,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginBottom="2dp"
             android:layout_alignParentEnd="true"
-            android:layout_below="@id/order_good"
+            android:layout_below="@id/good_name"
             android:textSize="14sp"
             android:text="@string/confirm_receipt"/>
 
@@ -103,7 +112,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginBottom="2dp"
             android:layout_toStartOf="@+id/confirm_receipt_btn"
-            android:layout_below="@id/order_good"
+            android:layout_below="@id/good_name"
             android:textSize="14sp"
             android:text="@string/charge_back"/>
 

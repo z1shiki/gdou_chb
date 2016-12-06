@@ -10,20 +10,7 @@ import rx.Observable;
  */
 public interface ShopModel {
     /**
-     * 商店列表
-     * @param shop
+     * 商店列表，返回列表名称，开店和关店时间
      */
-    Observable<Result> Shop(Shop shop);
-    /**
-     * 开店时间
-     * @param shop
-     * @return
-     */
-    Observable<Result> OpenTime(Shop shop);
-    /**
-     * 关店时间
-     * @param shop
-     * @return
-     */
-    Observable<Result> StopTime(Shop shop);
+    Observable<Result> Shop();
 }

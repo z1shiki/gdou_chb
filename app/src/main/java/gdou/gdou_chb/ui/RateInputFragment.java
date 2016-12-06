@@ -7,6 +7,6 @@ import gdou.gdou_chb.util.MVP.BaseFragment;
  * Created by Administrator on 2016/11/29/0029.
  */
 
-public class RateInputFragment extends BaseFragment{
+public class RateInputFragment extends BaseFragment {
 
 }

@@ -16,39 +16,65 @@ import rx.Observable;
 public class AddressModelImpl implements AddressModel {
     @Override
     public Observable<Result> addAddress(Address address) {
-        return null;
+        HttpParams params = new HttpParams();
+        params.put("address", address.getAddress());
+        params.put("latitude", String.valueOf(address.getLatitude()));
+        params.put("longitude",String.valueOf(address.getLongitude()));
+        params.put("userId", String.valueOf(address.getUserId()));
+        params.put("phone", String.valueOf(address.getPhone()));
+        params.put("name",address.getName());
+        return RxVolleyUtils.getInstance().post(
+                BaseModelImpl.Service_URL +BaseModelImpl.addAddress_URL
+                ,params);
     }
 
     @Override
     public Observable<Result> changeDefault(Address address) {
         HttpParams params = new HttpParams();
-        //params.put("address", address.getAddress());
-        //params.put("latitude", String.valueOf(address.getLatitude()));
-        //params.put("longitude",String.valueOf(address.getLongitude()));
-        //params.put("userId",user.getUserId());
-        //params.put("phone",);
+        params.put("address", address.getAddress());
+        params.put("latitude", String.valueOf(address.getLatitude()));
+        params.put("longitude",String.valueOf(address.getLongitude()));
+        params.put("userId",String.valueOf(address.getUserId()));
+        params.put("phone",String.valueOf(address.getPhone()));
+        params.put("name",address.getName());
         return RxVolleyUtils.getInstance().post(
-        BaseModelImpl.Service_URL +BaseModelImpl.addAddress_URL
-         ,params);
+                BaseModelImpl.Service_URL +BaseModelImpl.updateAdderss_URL
+                ,params);
     }
 
     @Override
     public Observable<Result> delete(Address address) {
-        return null;
+        HttpParams params = new HttpParams();
+        params.put("addressId", String.valueOf(address.getAddressId()));
+        return RxVolleyUtils.getInstance().delete(
+                BaseModelImpl.Service_URL +BaseModelImpl.delete_URL
+                ,params);
     }
 
     @Override
-    public Observable<Result> all(User user) {
-        return null;
+    public Observable<Result> all(Address address) {
+        HttpParams params = new HttpParams();
+        params.put("userId", String.valueOf(address.getUserId()));
+        return RxVolleyUtils.getInstance().get(
+                BaseModelImpl.Service_URL +BaseModelImpl.allUser_URL
+                ,params);
     }
 
     @Override
-    public Observable<Result> defalut(User user) {
-        return null;
+    public Observable<Result> defalut(Address address) {
+        HttpParams params = new HttpParams();
+        params.put("userId", String.valueOf(address.getUserId()));
+        return RxVolleyUtils.getInstance().get(
+                BaseModelImpl.Service_URL +BaseModelImpl.defalut_URL
+                ,params);
     }
 
     @Override
     public Observable<Result> update(Address address) {
-        return null;
+        HttpParams params = new HttpParams();
+        params.put("addressId", String.valueOf(address.getAddressId()));
+        return RxVolleyUtils.getInstance().post(
+                BaseModelImpl.Service_URL +BaseModelImpl.changeDefault_URL
+                ,params);
     }
 }

@@ -15,12 +15,9 @@ public interface OrderModel {
     /**
      * 用户下单
      * @param orders
-     * @param user
-     * @param shop
-     * @param goods
      * @return
      */
-    Observable<Result> placeOrder(Orders orders, User user, Shop shop, Goods goods);
+    Observable<Result> placeOrder(Orders orders);
     /**
      * 用户完成订单
      * @param orders
@@ -29,8 +26,15 @@ public interface OrderModel {
     Observable<Result> doneOrders(Orders orders);
     /**
      * 用户申请退单
+     * @param
+     * @return
+     */
+    Observable<Result> rebackOrders(Orders orders);
+
+    /**
+     * 查找用户所有订单
      * @param orders
      * @return
      */
-    Observable<Result> UserAllOrders(User user);
+    Observable<Result> UserAllOrders(Orders orders);
 }

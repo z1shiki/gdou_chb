@@ -5,16 +5,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
 
 import gdou.gdou_chb.R;
 import gdou.gdou_chb.model.bean.Shop;
-
-
-//import com.bumptech.glide.Glide;
 
 /**
  * Created by Administrator on 2016/12/1/0001.
@@ -28,27 +24,33 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.ViewHolder>{
     private LayoutInflater mLayoutInflater;
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
-        public TextView nameText;
-        public ImageView shopImage;
+        public TextView shopName;
+        //public ImageView shopImg;
+        //public TextView distributionFee;
+        //public TextView startingPrice;
+        //TODO:score
 
         //构造方法接受每一项的布局作为参数，存储成员变量以便于访问
         public ViewHolder(View itemView){
             super(itemView);
-            nameText = (TextView) itemView.findViewById(R.id.shop_name);
-            shopImage = (ImageView) itemView.findViewById(R.id.shop_img);
+            shopName = (TextView) itemView.findViewById(R.id.shop_name);
+            //shopImg = (ImageView) itemView.findViewById(R.id.shop_img);
+            //startingPrice = (TextView) itemView.findViewById(R.id.startingprice);
+            //distributionFee = (TextView) itemView.findViewById(R.id.distributionfee);
 
         }
     }
 
     //为了方便的访问Context变量
-    public ShopAdapter(Context context, List<Shop> shop){
+    public ShopAdapter(Context context, List<Shop> datas){
         this.mContext = context;
-        this.mShopData = shop;
+        this.mShopData = datas;
+        this.notifyDataSetChanged();
         mLayoutInflater = LayoutInflater.from(context);
 
     }
 
-    public Context getmContext(){
+    public Context getContext(){
         return mContext;
     }
 
@@ -60,23 +62,22 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.ViewHolder>{
         //返回一个holder实例
         return new ViewHolder(item);
     }
+
     //通过holder将数据填充进项
     @Override
     public void onBindViewHolder(ViewHolder holder,int i){
         //得到数据的对象
         Shop shop = mShopData.get(i);
         //设置itemView的内容
-        holder.nameText.setText(shop.getName());
-       // holder.shopImage.setImageResource(shop.getImgId());
-
- //       holder.shopImage.setImageDrawable(mContext.getDrawable(p.getImageResourceId(mContext)));
-//        Glide.with(mContext).load(shop.getShopImg()).into(holder.shopImage);
-
+        holder.shopName.setText(shop.getShopName());
+        //holder.startingPrice.setText(shop.getStartingPrice());
+        //holder.distributionFee.setText(shop.getDistributionFee());
+       // holder.shopImg.setImageResource(shop.getshopImg));
     }
+
     //返回项的数量
     @Override
     public int getItemCount(){
         return mShopData == null ? 0 : mShopData.size();
-
     }
 }

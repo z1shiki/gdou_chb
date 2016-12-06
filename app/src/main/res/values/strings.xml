@@ -37,12 +37,13 @@
     <string name="about">关于吃货宝</string>
     <string name="sign_out">退出登录</string>
 
-    <!-- Strings related to home_page -->
+    <!-- Strings related to shop -->
     <string name="gps">定位</string>
     <string name="search">搜索</string>
     <string name="shop_name">这里是商家名</string>
     <string name="shop_introduce">这里是商家介绍</string>
-    <string name="starting_price">起送价</string>
+    <string name="starting_price">起送价:</string>
+    <string name="distribution_fee">配送费:</string>
 
     <!-- Strings related to trolley -->
     <string name="total">总价</string>
@@ -105,21 +106,19 @@
     <string name="wait_receive">等待接单</string>
     <string name="wait_pay">等待付款</string>
     <string name="order_money">￥99</string>
-    
+
+    <!-- Strings related to others -->
     <string name="ok">确定</string>
     <string name="cancel">取消</string>
 
 
-
-
     <string name="news_one_title">商家1</string>
-    <string name="news_one_desc">and ows the dark van ramming the nose of a police car before retreating in reverse</string>
-
     <string name="news_two_title">商家2</string>
-    <string name="news_two_desc">(CNN)-Hugh Jackman may be finished playing Wolverine in Marvels X-Men films,but the actior still uses his superhuman powers to impact global poverty，Humanitarianism is deeply ingrained in Jackman upbringing. His father, Christopher Jackman, instilled the value of giving through his work as a volunteer accountant for charities serving the developing world.
-    I suppose he was leading by example, Jackman said. Areas of poverty and extreme poverty, I learned, are not a natural state. It is man-made and solvable.</string>
     <string name="news_three_title">商家3</string>
-    <string name="news_three_desc">Australia in charge of second Test against West Indies in Jamaica</string>
     <string name="news_four_title">商家4</string>
-    <string name="news_four_desc">记得关注哦</string>
+
+    <string name="a">1</string>
+    <string name="b">2</string>
+    <string name="c">3</string>
+    <string name="d">4</string>
 </resources>

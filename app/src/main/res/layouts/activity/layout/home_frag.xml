@@ -3,22 +3,14 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:gravity="center_horizontal"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/home_frag"
     >
 
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rvshop"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:clipToPadding="false"/>
-
-    </RelativeLayout>
 
 </LinearLayout>

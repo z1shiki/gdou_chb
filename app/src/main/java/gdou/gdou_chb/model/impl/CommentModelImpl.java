@@ -16,16 +16,23 @@ import rx.Observable;
 public class CommentModelImpl implements CommentModel {
     @Override
     public Observable<Result> commentOrders(Comment comment) {
-        return null;
+        HttpParams params  = new HttpParams();
+        params.put("OrderId", String.valueOf(comment.getOrdersId()));
+        params.put("userId",String.valueOf(comment.getUserId()));
+        params.put("shopUserId",String.valueOf(comment.getShopUserId()));
+        params.put("content",String.valueOf(comment.getContent()));
+        return  RxVolleyUtils.getInstance().post(
+                BaseModelImpl.Service_URL + BaseModelImpl.commentOrders_URL
+                ,params);
     }
 
     @Override
-    public Observable<Result> findByOrderId(Orders orders) {
-        return null;
+    public Observable<Result> findByOrderId(Comment comment) {
+        HttpParams params  = new HttpParams();
+        params.put("ordersId", String.valueOf(comment.getOrdersId()));
+        return  RxVolleyUtils.getInstance().get(
+                BaseModelImpl.Service_URL + BaseModelImpl.findByOrderId_URL
+                ,params);
     }
 
-    @Override
-    public Observable<Result> getRevent(Comment comment) {
-        return null;
-    }
 }

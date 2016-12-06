@@ -10,13 +10,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <include layout="@xml/toolbar" />
-
-        <FrameLayout
-            android:id="@+id/contentFrame"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_above="@+id/bottomBar"/>
+            android:layout_height="wrap_content"
+            android:id="@+id/sb">
+            <include layout="@xml/toolbar" />
+        </LinearLayout>
 
         <com.roughike.bottombar.BottomBar
             android:id="@+id/bottomBar"
@@ -24,6 +23,14 @@
             android:layout_height="@dimen/bottombar_height"
             android:layout_alignParentBottom="true"
             app:bb_tabXmlResource="@xml/user_bottombar"/>
+
+        <FrameLayout
+            android:id="@+id/contentFrame"
+            android:layout_below="@id/sb"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/bottomBar"
+            />
 
     </RelativeLayout>
 </LinearLayout>

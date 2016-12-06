@@ -23,6 +23,7 @@ import butterknife.OnClick;
 import gdou.gdou_chb.R;
 import gdou.gdou_chb.activity.HomeActivity;
 import gdou.gdou_chb.contract.LoginContract;
+import gdou.gdou_chb.model.bean.User;
 import gdou.gdou_chb.util.Java.BaseActivity;
 import gdou.gdou_chb.util.MVP.BaseFragment;
 
@@ -83,11 +84,7 @@ public class LoginFragment extends BaseFragment implements LoginContract.View {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.login_frag, container, false);
-
-//        setHasOptionsMenu(true);
-//        mToolBar.setTitle("");
-//        ((AppCompatActivity) getActivity()).setSupportActionBar(mToolBar);
-
+        setHasOptionsMenu(true);
         //setup
         ButterKnife.bind(this, root);
 
@@ -108,11 +105,7 @@ public class LoginFragment extends BaseFragment implements LoginContract.View {
 
     @OnClick(R.id.sign_in_btn)
     public void onClick() {
-<<<<<<< Updated upstream
-        mPresenter.login(mAccount.getText().toString(),mPassword.getText().toString());
-=======
-        mPresenter.login( mAccount.getText().toString(),mPassword.getText().toString());
->>>>>>> Stashed changes
+        mPresenter.login(new User(mAccount.getText().toString(),mPassword.getText().toString()));
 //        ;startActivity(new Intent(getActivity(),MainActivity.class));
     }
 

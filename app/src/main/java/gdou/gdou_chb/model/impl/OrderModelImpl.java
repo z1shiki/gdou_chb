@@ -17,17 +17,41 @@ import rx.Observable;
 
 public class OrderModelImpl implements OrderModel {
     @Override
-    public Observable<Result> placeOrder(Orders orders, User user, Shop shop, Goods goods) {
-        return null;
+    public Observable<Result> placeOrder(Orders orders) {
+        HttpParams params  = new HttpParams();
+        params.put("number", String.valueOf(orders.getNumber()));
+        params.put("shopPrice", String.valueOf(orders.getTotalPrice()));
+        params.put("userId", String.valueOf(orders.getUserId()));
+        params.put("shopId", String.valueOf(orders.getShopId()));
+        return RxVolleyUtils.getInstance().post(
+                BaseModelImpl.Service_URL + BaseModelImpl.placeOrder_URL
+                ,params);
     }
 
     @Override
     public Observable<Result> doneOrders(Orders orders) {
-        return null;
+        HttpParams params  = new HttpParams();
+        params.put("ordersId", String.valueOf(orders.getOrdersId()));
+        return  RxVolleyUtils.getInstance().post(
+                BaseModelImpl.Service_URL + BaseModelImpl.doneOrders_URL
+                ,params);
     }
 
     @Override
-    public Observable<Result> UserAllOrders(User user) {
-        return null;
+    public Observable<Result> rebackOrders(Orders orders) {
+        HttpParams params  = new HttpParams();
+        params.put("ordersId", String.valueOf(orders.getOrdersId()));
+        return  RxVolleyUtils.getInstance().post(
+                BaseModelImpl.Service_URL + BaseModelImpl.rebackOrders_URL
+                ,params);
+    }
+
+    @Override
+    public Observable<Result> UserAllOrders(Orders orders) {
+        HttpParams params  = new HttpParams();
+        params.put("usrId", String.valueOf(orders.getUserId()));
+        return  RxVolleyUtils.getInstance().get(
+                BaseModelImpl.Service_URL + BaseModelImpl.userAllOrders_URL
+                ,params);
     }
 }

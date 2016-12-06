@@ -20,6 +20,10 @@ public class User implements Serializable {
      */
     private String password;
     /**
+     * 新密码
+     */
+    private String newPassword;
+    /**
      * 用户名
      */
     private String username;
@@ -31,6 +35,20 @@ public class User implements Serializable {
      * 头像
      */
     private long userImg;
+
+    /**
+     * 新头像
+     */
+    private long newUserImg;
+
+    public User(String account, String password) {
+        this.account = account;
+        this.password = password;
+    }
+
+    public User() {
+
+    }
 
     public long getUserId() {
         return userId;
@@ -56,6 +74,14 @@ public class User implements Serializable {
         this.password = password;
     }
 
+    public String getNewPassword() {
+        return newPassword;
+    }
+
+    public void setNewPassword(String newPassword) {
+        this.newPassword = newPassword;
+    }
+
     public String getUsername() {
         return username;
     }
@@ -78,6 +104,14 @@ public class User implements Serializable {
 
     public void setUserImg(long userImg) {
         this.userImg = userImg;
+    }
+
+    public long getNewUserImg() {
+        return newUserImg;
+    }
+
+    public void setNewUserImg(long newUserImg) {
+        this.newUserImg = newUserImg;
     }
 }
 

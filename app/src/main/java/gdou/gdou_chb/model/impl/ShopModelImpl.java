@@ -14,17 +14,10 @@ import rx.Observable;
 
 public class ShopModelImpl implements ShopModel {
     @Override
-    public Observable<Result> Shop(Shop shop) {
-        return null;
-    }
-
-    @Override
-    public Observable<Result> OpenTime(Shop shop) {
-        return null;
-    }
-
-    @Override
-    public Observable<Result> StopTime(Shop shop) {
-        return null;
+    public Observable<Result> Shop() {
+        HttpParams params  = new HttpParams();
+        return RxVolleyUtils.getInstance().get(
+                BaseModelImpl.Service_URL + BaseModelImpl.shop_URL
+                ,params);
     }
 }

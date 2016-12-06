@@ -8,7 +8,7 @@ public class BaseModelImpl {
     /**
      * 公共接口号
      */
-    public static final String Service_URL = "169.254.10.150:9001/";
+    public static final String Service_URL = "http://172.16.12.102:9001/";
     /**
      * 用户
      * User_URL
@@ -28,19 +28,17 @@ public class BaseModelImpl {
     public static final String updateAdderss_URL = "address/update";
     public static final String defalut_URL = "address/defalut/"+"userId";
     public static final String changeDefault_URL = "address/changeDefault/"+"addressId";
-    public static final String all_URL = "address/all";
+    public static final String allUser_URL = "address/all/"+"userId";
     /**
      * 商店
      * Shop_URL
      */
-    public static final String shop_URL = "";
-    public static final String OnLine_URL = "shop/online/"+"userId";
-    public static final String OffLine_URL = "shop/offline/"+"userId";
+    public static final String shop_URL = "shop/all";
     /**
      * 商品
      * Good_URL
      */
-    public static final String findByGoodId_URL = "goods/"+"goodId";
+    public static final String findByShopId_URL = "goods/shop/"+"shopId";
     /**
      * 订单
      * Orders_URL
@@ -48,6 +46,7 @@ public class BaseModelImpl {
     public static final String placeOrder_URL = "orders/placeOrder";
     public static final String doneOrders_URL = "orders/done/"+"ordersId";
     public static final String rebackOrders_URL = "orders/reback/"+"ordersId";
+    public static final String userAllOrders_URL = "orders/user/"+"userId";
     /**
      * 评论
      * Comment_URL

@@ -3,6 +3,7 @@ package gdou.gdou_chb.model;
 import com.kymjs.rxvolley.rx.Result;
 
 import gdou.gdou_chb.model.bean.Goods;
+import gdou.gdou_chb.model.bean.Shop;
 import rx.Observable;
 
 /**
@@ -11,9 +12,9 @@ import rx.Observable;
 public interface GoodModel {
     /**
      * 查询商品
-     * @param goods
+     * @param shop
      * @return
      */
-    Observable<Result> findByGoodsId(Goods goods);
+    Observable<Result> findByGoodsId(Shop shop);
 }
 

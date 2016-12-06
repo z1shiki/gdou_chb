@@ -2,15 +2,20 @@ package gdou.gdou_chb.presenter;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 
 import com.kymjs.rxvolley.rx.Result;
 
 import gdou.gdou_chb.activity.HomeActivity;
 import gdou.gdou_chb.contract.LoginContract;
+import gdou.gdou_chb.model.bean.ResultBean;
+import gdou.gdou_chb.model.bean.User;
 import gdou.gdou_chb.model.impl.UserModelImpl;
-import rx.Observer;
+import gdou.gdou_chb.util.GsonUtils;
+import rx.Subscriber;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 import rx.subscriptions.CompositeSubscription;
 
@@ -50,30 +55,51 @@ public class LoginPresenter implements LoginContract.Presenter {
     }
 
     @Override
-    public void login(String account,String password) {
+    public void login(User user) {
         mLoginView.loginprogress(true);
         Subscription subscription =
                 mUserModel
-                .doLogin(account,password)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
-                .subscribe(new Observer<Result>() {
-                               @Override
-                               public void onCompleted() {
+                        .doLogin(user)
+                        .map(new Func1<Result, String>() {
 
-                               }
+                            @Override
+                            public String call(Result result) {
+                                return new String(result.data);
+                            }
+                        } )
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribeOn(Schedulers.io())
+                        .subscribe(new Subscriber<String>() {
+                                       @Override
+                                       public void onCompleted() {
+                                           Log.d("Login", "succ");
+                                       }
 
-                               @Override
-                               public void onError(Throwable e) {
-                                   mLoginView.jump2Activity(HomeActivity.class);
-                               }
+                                       @Override
+                                       public void onError(Throwable e) {
+                                           mLoginView.jump2Activity(HomeActivity.class);
+                                           Log.d("Login","error");
+                                       }
 
-                               @Override
-                               public void onNext(Result result) {
-
-                               }
-                           }
-                );
+                                       @Override
+                                       public void onNext(String string) {
+                                           ResultBean resultBean = GsonUtils.getResultBeanByJson(string);
+                                           //Log.d("resultBean Info", resultBean.getResultInfo());
+                                           User user = GsonUtils.getBeanFromResultBean(resultBean, "user",User.class);
+                                           //User user2 = GsonUtils.getBeanFromResultStr(string, "user", User.class);
+                                           //User user = GsonUtils.parseJsonWithGson(resultBean.getResultParm().toString(), User.class);
+                                           //Log.d("resultBean Param", resultBean.getResultParm().get("user").toString());
+                                           //Log.d("User Param", user.toString());
+                                           //Log.d("result", string);
+                                           //Log.d("Login","next");
+                                       }
+                                   }
+                        );
         mSubscription.add(subscription);
+    }
+
+    @Override
+    public void register(User user, String verifyCode) {
+
     }
 }

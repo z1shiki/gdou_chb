@@ -18,14 +18,8 @@ public interface CommentModel {
     Observable<Result> commentOrders(Comment comment);
     /**
      * 查找指定订单评论
-     * @param orders
-     * @return
-     */
-    Observable<Result> findByOrderId(Orders orders);
-    /**
-     * 得到商家回复
      * @param comment
      * @return
      */
-    Observable<Result> getRevent(Comment comment);
+    Observable<Result> findByOrderId(Comment comment);
 }
