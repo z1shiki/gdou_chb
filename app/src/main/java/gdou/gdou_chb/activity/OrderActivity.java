@@ -1,8 +1,5 @@
 package gdou.gdou_chb.activity;
 
-
-import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
@@ -15,23 +12,26 @@ import com.roughike.bottombar.OnTabSelectListener;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import gdou.gdou_chb.R;
-import gdou.gdou_chb.presenter.HomePresenter;
-import gdou.gdou_chb.ui.HomeFragment;
+import gdou.gdou_chb.presenter.OrderPresenter;
+import gdou.gdou_chb.ui.OrderFragment;
 import gdou.gdou_chb.util.Java.ActivityUtils;
 import gdou.gdou_chb.util.Java.BaseActivity;
 
 import static gdou.gdou_chb.R.id.bottomBar;
 import static gdou.gdou_chb.R.id.contentFrame;
 
-public class HomeActivity extends BaseActivity {
+/**
+ * Created by Z1shiki on 2016/12/6.
+ */
+
+public class OrderActivity extends BaseActivity {
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
     @BindView(bottomBar)
     BottomBar mBottomBar;
-    private Activity mActivity;
 
 
-    private HomeFragment mHomeFragment;
+    private OrderFragment mOrderFragment;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -40,13 +40,13 @@ public class HomeActivity extends BaseActivity {
         setContentView(R.layout.home_act);
         ButterKnife.bind(this);
         mToolbar.setTitle(null);
-        mHomeFragment =
-                (HomeFragment) getFragmentManager().findFragmentById(contentFrame);
-        if (mHomeFragment == null) {
-            mHomeFragment = HomeFragment.newInstanceState();
-            ActivityUtils.addFragmentToActivity(getFragmentManager(), mHomeFragment, contentFrame);
+        mOrderFragment=
+                (OrderFragment) getFragmentManager().findFragmentById(contentFrame);
+        if (mOrderFragment == null) {
+            mOrderFragment = OrderFragment.newInstanceState();
+            ActivityUtils.addFragmentToActivity(getFragmentManager(), mOrderFragment, contentFrame);
         }
-        new HomePresenter(this, mHomeFragment);
+        new OrderPresenter(mOrderFragment);
 
 
         mBottomBar.setOnTabSelectListener(new OnTabSelectListener() {
@@ -54,19 +54,15 @@ public class HomeActivity extends BaseActivity {
             public void onTabSelected(@IdRes int tabId) {
                 switch (tabId) {
                     case R.id.tab_home:
-
                         Log.i("sai", "Home ");
                         break;
                     case R.id.tab_order:
-                        startActivity(new Intent(mActivity,OrderActivity.class));
                         Log.i("sai", "order ");
                         break;
                     case R.id.tab_usercenter:
-                        startActivity(new Intent(mActivity,UserCenterActivity.class));
                         break;
                 }
             }
         });
     }
 }
-

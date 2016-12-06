@@ -23,11 +23,20 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.flipboard.bottomsheet.BottomSheetLayout;
+import com.kymjs.rxvolley.rx.Result;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
 
 import gdou.gdou_chb.R;
+import gdou.gdou_chb.model.bean.Shop;
+import gdou.gdou_chb.model.impl.GoodModelImpl;
+import rx.Subscriber;
+import rx.Subscription;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Func1;
+import rx.schedulers.Schedulers;
+import rx.subscriptions.CompositeSubscription;
 import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
 
 public class ShoppingCartActivity extends AppCompatActivity implements View.OnClickListener{
@@ -40,10 +49,14 @@ public class ShoppingCartActivity extends AppCompatActivity implements View.OnCl
     private View bottomSheet;
     private StickyListHeadersListView listView;
 
-
     private ArrayList<GoodsItem> dataList,typeList;
     private SparseArray<GoodsItem> selectedList;
     private SparseIntArray groupSelect;
+
+    private GoodModelImpl mGoodModel;
+    private Shop mShop;
+    private Subscription RxShop;
+    private CompositeSubscription mSubscription;
 
     private GoodsAdapter myAdapter;
     private SelectAdapter selectAdapter;
@@ -58,11 +71,46 @@ public class ShoppingCartActivity extends AppCompatActivity implements View.OnCl
         nf = NumberFormat.getCurrencyInstance();
         nf.setMaximumFractionDigits(2);
         mHanlder = new Handler(getMainLooper());
-        dataList = GoodsItem.getGoodsList();//商品列表
-        typeList = GoodsItem.getTypeList();
+
+        mGoodModel = new GoodModelImpl();
+        RxShop = mGoodModel.findByGoodsId(mShop)
+                .map(new Func1<Result, String>() {
+
+                    @Override
+                    public String call(Result result) {
+                        return new String(result.data);
+                    }
+                } )
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new Subscriber<String>() {
+                    @Override
+                    public void onCompleted() {
+                        //TODO : 获取真的数据
+                        dataList = GoodsItem.getGoodsList();//商品列表
+                        typeList = GoodsItem.getTypeList();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onNext(String string) {
+
+                    }
+                });
+
+
+
+
+
         selectedList = new SparseArray<>();//已选中的
         groupSelect = new SparseIntArray();
         initView();
+
+
     }
 
     private void initView(){
@@ -182,6 +230,10 @@ public class ShoppingCartActivity extends AppCompatActivity implements View.OnCl
                 break;
             case R.id.tvSubmit:
                 Toast.makeText(ShoppingCartActivity.this, "结算", Toast.LENGTH_SHORT).show();
+//                TODO： selectedLists是(一个商品ID，与GoodItem的键值对
+//                 TODO：商品数量是item.count )作为封装成order类传入HomeActivity.Fragment
+//                  TODO：
+//                selected
                 break;
             default:
                 break;
@@ -245,7 +297,7 @@ public class ShoppingCartActivity extends AppCompatActivity implements View.OnCl
 
         tvCount.setText(String.valueOf(count));
 
-        if(cost > 99.99){
+        if(cost > 22){
             tvTips.setVisibility(View.GONE);
             tvSubmit.setVisibility(View.VISIBLE);
         }else{

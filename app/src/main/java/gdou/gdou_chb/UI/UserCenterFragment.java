@@ -47,13 +47,13 @@ public class UserCenterFragment extends BaseFragment implements HomeContract.Use
     @Override
     public void onResume() {
         super.onResume();
-        mPresenter.subscribe();
+//        mPresenter.subscribe();
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        mPresenter.unsubscribe();
+//        mPresenter.unsubscribe();
     }
 
     @Override
