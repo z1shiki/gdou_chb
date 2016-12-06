@@ -1,6 +1,7 @@
 package gdou.gdou_chb.presenter;
 
 import android.content.Context;
+import android.support.annotation.Nullable;
 import android.util.Log;
 
 import com.amap.api.location.AMapLocation;
@@ -15,10 +16,10 @@ import rx.subscriptions.CompositeSubscription;
  * Created by Z1shiki on 2016/11/30.
  */
 
-public class HomePresenter implements HomeContract.Presenter {
+public class HomePresenter implements HomeContract.ShopPresenter {
 
     private CompositeSubscription mSubscription;
-    private final HomeContract.View mHomeView;
+    private final HomeContract.ShopView mHomeView;
     //Home需要操作的数据 地址 商家
     //声明AMapLocationClient类对象
     public AMapLocationClient mLocationClient = null;
@@ -31,14 +32,14 @@ public class HomePresenter implements HomeContract.Presenter {
 
     private Context mContext;
 
-    public HomePresenter(Context context,HomeContract.View homeView) {
+    public HomePresenter(Context context, @Nullable HomeContract.ShopView homeView)
+    {
         mHomeView = homeView;
+
         mContext = context;
         mSubscription = new CompositeSubscription();
         mHomeView.setPresenter(this);
     }
-
-
 
 
     @Override
@@ -118,6 +119,7 @@ public class HomePresenter implements HomeContract.Presenter {
     public void doSerach() {
         //TODO : 发送搜索栏里的值给商家列表
         //返回新的商家列表
+        Log.i("btb", "doSerach: ");
 //        mHomeView.changeShoplist(维护的商家列表参数); 数据层返回了搜索过后的新的商家列表
     }
 }

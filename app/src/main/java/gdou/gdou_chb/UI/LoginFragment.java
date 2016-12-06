@@ -84,7 +84,7 @@ public class LoginFragment extends BaseFragment implements LoginContract.View {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.login_frag, container, false);
 
-        setHasOptionsMenu(true);
+//        setHasOptionsMenu(true);
 //        mToolBar.setTitle("");
 //        ((AppCompatActivity) getActivity()).setSupportActionBar(mToolBar);
 
@@ -108,11 +108,7 @@ public class LoginFragment extends BaseFragment implements LoginContract.View {
 
     @OnClick(R.id.sign_in_btn)
     public void onClick() {
-<<<<<<< Updated upstream
         mPresenter.login(mAccount.getText().toString(),mPassword.getText().toString());
-=======
-        mPresenter.login( mAccount.getText().toString(),mPassword.getText().toString());
->>>>>>> Stashed changes
 //        ;startActivity(new Intent(getActivity(),MainActivity.class));
     }
 
