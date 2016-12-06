@@ -2,32 +2,35 @@ package gdou.gdou_chb.model;
 
 import com.kymjs.rxvolley.rx.Result;
 
+import gdou.gdou_chb.model.bean.Goods;
 import gdou.gdou_chb.model.bean.Orders;
+import gdou.gdou_chb.model.bean.Shop;
+import gdou.gdou_chb.model.bean.User;
 import rx.Observable;
 
 /**
  * Created by WT on 2016/11/30.
  */
-
 public interface OrderModel {
     /**
-     * 客户下单
+     * 用户下单
+     * @param orders
+     * @param user
+     * @param shop
+     * @param goods
+     * @return
+     */
+    Observable<Result> placeOrder(Orders orders, User user, Shop shop, Goods goods);
+    /**
+     * 用户完成订单
      * @param orders
      * @return
      */
-    Observable<Result> placeOrder(Orders orders );
-
-    /**
-     * 用户完成订单
-     * @param ordersId
-     * @return
-     */
-    Observable<Result> doneOrders(long ordersId);
-
+    Observable<Result> doneOrders(Orders orders);
     /**
      * 用户申请退单
-     * @param ordersId
+     * @param orders
      * @return
      */
-    Observable<Result> rebackOrders(long ordersId );
+    Observable<Result> UserAllOrders(User user);
 }

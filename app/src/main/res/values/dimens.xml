@@ -10,4 +10,5 @@
     <dimen name="bottombar_height">60dp</dimen>
 
     <dimen name="cardview_margin">8dp</dimen>
+    <dimen name="vertical_padding">8px</dimen>
 </resources>
