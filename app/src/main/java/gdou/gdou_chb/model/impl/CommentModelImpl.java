@@ -31,7 +31,7 @@ public class CommentModelImpl implements CommentModel {
         HttpParams params  = new HttpParams();
         params.put("ordersId", String.valueOf(comment.getOrdersId()));
         return  RxVolleyUtils.getInstance().get(
-                BaseModelImpl.Service_URL + BaseModelImpl.findByOrderId_URL
+                BaseModelImpl.Service_URL + BaseModelImpl.findByOrderId_URL + comment.getOrdersId()
                 ,params);
     }
 

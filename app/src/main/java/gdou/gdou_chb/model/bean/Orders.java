@@ -1,6 +1,7 @@
 package gdou.gdou_chb.model.bean;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * 订单

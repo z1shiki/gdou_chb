@@ -3,11 +3,8 @@ package gdou.gdou_chb.model.impl;
 import com.kymjs.rxvolley.client.HttpParams;
 import com.kymjs.rxvolley.rx.Result;
 
-import gdou.gdou_chb.model.bean.Goods;
 import gdou.gdou_chb.model.bean.Orders;
 import gdou.gdou_chb.model.OrderModel;
-import gdou.gdou_chb.model.bean.Shop;
-import gdou.gdou_chb.model.bean.User;
 import gdou.gdou_chb.util.RxVolleyUtils;
 import rx.Observable;
 
@@ -17,10 +14,9 @@ import rx.Observable;
 
 public class OrderModelImpl implements OrderModel {
     @Override
-    public Observable<Result> placeOrder(Orders orders) {
+    public Observable<Result> placeOrder(Orders orders, String goodsList) {
         HttpParams params  = new HttpParams();
-        params.put("number", String.valueOf(orders.getNumber()));
-        params.put("shopPrice", String.valueOf(orders.getTotalPrice()));
+        params.put("goodList", goodsList);
         params.put("userId", String.valueOf(orders.getUserId()));
         params.put("shopId", String.valueOf(orders.getShopId()));
         return RxVolleyUtils.getInstance().post(
@@ -33,7 +29,7 @@ public class OrderModelImpl implements OrderModel {
         HttpParams params  = new HttpParams();
         params.put("ordersId", String.valueOf(orders.getOrdersId()));
         return  RxVolleyUtils.getInstance().post(
-                BaseModelImpl.Service_URL + BaseModelImpl.doneOrders_URL
+                BaseModelImpl.Service_URL + BaseModelImpl.doneOrders_URL + orders.getOrdersId()
                 ,params);
     }
 
@@ -42,7 +38,7 @@ public class OrderModelImpl implements OrderModel {
         HttpParams params  = new HttpParams();
         params.put("ordersId", String.valueOf(orders.getOrdersId()));
         return  RxVolleyUtils.getInstance().post(
-                BaseModelImpl.Service_URL + BaseModelImpl.rebackOrders_URL
+                BaseModelImpl.Service_URL + BaseModelImpl.rebackOrders_URL + orders.getOrdersId()
                 ,params);
     }
 
@@ -51,7 +47,7 @@ public class OrderModelImpl implements OrderModel {
         HttpParams params  = new HttpParams();
         params.put("usrId", String.valueOf(orders.getUserId()));
         return  RxVolleyUtils.getInstance().get(
-                BaseModelImpl.Service_URL + BaseModelImpl.userAllOrders_URL
+                BaseModelImpl.Service_URL + BaseModelImpl.userAllOrders_URL + orders.getUserId()
                 ,params);
     }
 }

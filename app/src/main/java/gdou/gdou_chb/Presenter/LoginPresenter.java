@@ -10,6 +10,7 @@ import gdou.gdou_chb.activity.HomeActivity;
 import gdou.gdou_chb.contract.LoginContract;
 import gdou.gdou_chb.model.bean.ResultBean;
 import gdou.gdou_chb.model.bean.User;
+import gdou.gdou_chb.model.impl.BaseModelImpl;
 import gdou.gdou_chb.model.impl.UserModelImpl;
 import gdou.gdou_chb.util.GsonUtils;
 import rx.Subscriber;
@@ -84,22 +85,11 @@ public class LoginPresenter implements LoginContract.Presenter {
                                        @Override
                                        public void onNext(String string) {
                                            ResultBean resultBean = GsonUtils.getResultBeanByJson(string);
-                                           //Log.d("resultBean Info", resultBean.getResultInfo());
                                            User user = GsonUtils.getBeanFromResultBean(resultBean, "user",User.class);
-                                           //User user2 = GsonUtils.getBeanFromResultStr(string, "user", User.class);
-                                           //User user = GsonUtils.parseJsonWithGson(resultBean.getResultParm().toString(), User.class);
-                                           //Log.d("resultBean Param", resultBean.getResultParm().get("user").toString());
-                                           //Log.d("User Param", user.toString());
-                                           //Log.d("result", string);
-                                           //Log.d("Login","next");
+                                           BaseModelImpl.user = user;
                                        }
                                    }
                         );
         mSubscription.add(subscription);
-    }
-
-    @Override
-    public void register(User user, String verifyCode) {
-
     }
 }

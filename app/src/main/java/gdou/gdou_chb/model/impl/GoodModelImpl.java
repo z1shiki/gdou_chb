@@ -19,7 +19,7 @@ public class GoodModelImpl extends BaseModelImpl implements GoodModel {
         HttpParams params  = new HttpParams();
         params.put("shop", String.valueOf(shop.getShopId()));
         return RxVolleyUtils.getInstance().get(
-                BaseModelImpl.Service_URL + BaseModelImpl.findByShopId_URL
+                BaseModelImpl.Service_URL + BaseModelImpl.findByShopId_URL + shop.getShopId()
                 ,params);
     }
 }

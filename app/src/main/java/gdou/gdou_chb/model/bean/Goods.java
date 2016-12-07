@@ -13,6 +13,10 @@ public class Goods implements Serializable {
      */
     private long goodId;
     /**
+     * 商品名字
+     */
+    private String goodsName;
+    /**
      * 商品数量
      */
     private long number;
@@ -43,5 +47,13 @@ public class Goods implements Serializable {
 
     public void setPrice(long price) {
         this.price = price;
+    }
+
+    public String getGoodsName() {
+        return goodsName;
+    }
+
+    public void setGoodsName(String goodsName) {
+        this.goodsName = goodsName;
     }
 }

@@ -8,8 +8,23 @@ import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
+import com.kymjs.rxvolley.rx.Result;
 
+import java.util.List;
+
+import gdou.gdou_chb.activity.HomeActivity;
 import gdou.gdou_chb.contract.HomeContract;
+import gdou.gdou_chb.model.UserModel;
+import gdou.gdou_chb.model.bean.ResultBean;
+import gdou.gdou_chb.model.bean.Shop;
+import gdou.gdou_chb.model.bean.User;
+import gdou.gdou_chb.model.impl.ShopModelImpl;
+import gdou.gdou_chb.util.GsonUtils;
+import rx.Subscriber;
+import rx.Subscription;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Func1;
+import rx.schedulers.Schedulers;
 import rx.subscriptions.CompositeSubscription;
 
 /**
@@ -31,6 +46,7 @@ public class HomePresenter implements HomeContract.ShopPresenter {
     private String mAddress;
 
     private Context mContext;
+    private ShopModelImpl mShopModel;
 
     public HomePresenter(Context context, @Nullable HomeContract.ShopView homeView)
     {
@@ -121,5 +137,42 @@ public class HomePresenter implements HomeContract.ShopPresenter {
         //返回新的商家列表
         Log.i("btb", "doSerach: ");
 //        mHomeView.changeShoplist(维护的商家列表参数); 数据层返回了搜索过后的新的商家列表
+    }
+
+    @Override
+    public void getShopList() {
+        Subscription subscription =
+                mShopModel
+                        .Shop()
+                        .map(new Func1<Result, String>() {
+
+                            @Override
+                            public String call(Result result) {
+                                return new String(result.data);
+                            }
+                        } )
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribeOn(Schedulers.io())
+                        .subscribe(new Subscriber<String>() {
+                                       @Override
+                                       public void onCompleted() {
+                                           Log.d("Login", "succ");
+                                       }
+
+                                       @Override
+                                       public void onError(Throwable e) {
+                                           Log.d("Login","error");
+                                       }
+
+                                       @Override
+                                       public void onNext(String string) {
+                                           ResultBean resultBean = GsonUtils.getResultBeanByJson(string);
+                                           Log.d("goodsList", GsonUtils.getJsonStr(resultBean.getResultParm()));
+                                           List<Shop> shopList= GsonUtils.getBeanFromResultBeanList(resultBean, "shopList", Shop.class);
+                                           mHomeView.changeShoplist(shopList);
+                                       }
+                                   }
+                        );
+        mSubscription.add(subscription);
     }
 }

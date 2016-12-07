@@ -1,5 +1,7 @@
 package gdou.gdou_chb.car;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -23,14 +25,29 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.flipboard.bottomsheet.BottomSheetLayout;
+import com.google.android.gms.appindexing.Action;
+import com.google.android.gms.appindexing.AppIndex;
+import com.google.android.gms.appindexing.Thing;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.kymjs.rxvolley.rx.Result;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.List;
 
 import gdou.gdou_chb.R;
+import gdou.gdou_chb.activity.HomeActivity;
+import gdou.gdou_chb.model.bean.Goods;
+import gdou.gdou_chb.model.bean.GoodsVo;
+import gdou.gdou_chb.model.bean.Orders;
+import gdou.gdou_chb.model.bean.ResultBean;
 import gdou.gdou_chb.model.bean.Shop;
+import gdou.gdou_chb.model.bean.User;
+import gdou.gdou_chb.model.impl.BaseModelImpl;
 import gdou.gdou_chb.model.impl.GoodModelImpl;
+import gdou.gdou_chb.model.impl.OrderModelImpl;
+import gdou.gdou_chb.util.ChangeGoosToGoodItem;
+import gdou.gdou_chb.util.GsonUtils;
 import rx.Subscriber;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
@@ -39,17 +56,17 @@ import rx.schedulers.Schedulers;
 import rx.subscriptions.CompositeSubscription;
 import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
 
-public class ShoppingCartActivity extends AppCompatActivity implements View.OnClickListener{
+public class ShoppingCartActivity extends AppCompatActivity implements View.OnClickListener {
 
     private ImageView imgCart;
     private ViewGroup anim_mask_layout;
-    private RecyclerView rvType,rvSelected;
-    private TextView tvCount,tvCost,tvSubmit,tvTips;
+    private RecyclerView rvType, rvSelected;
+    private TextView tvCount, tvCost, tvSubmit, tvTips;
     private BottomSheetLayout bottomSheetLayout;
     private View bottomSheet;
     private StickyListHeadersListView listView;
 
-    private ArrayList<GoodsItem> dataList,typeList;
+    private ArrayList<GoodsItem> dataList, typeList;
     private SparseArray<GoodsItem> selectedList;
     private SparseIntArray groupSelect;
 
@@ -64,6 +81,12 @@ public class ShoppingCartActivity extends AppCompatActivity implements View.OnCl
 
     private NumberFormat nf;
     private Handler mHanlder;
+    /**
+     * ATTENTION: This was auto-generated to implement the App Indexing API.
+     * See https://g.co/AppIndexing/AndroidStudio for more information.
+     */
+    private GoogleApiClient client;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,7 +103,7 @@ public class ShoppingCartActivity extends AppCompatActivity implements View.OnCl
                     public String call(Result result) {
                         return new String(result.data);
                     }
-                } )
+                })
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(new Subscriber<String>() {
@@ -98,12 +121,14 @@ public class ShoppingCartActivity extends AppCompatActivity implements View.OnCl
 
                     @Override
                     public void onNext(String string) {
-
+                        ResultBean resultBean = GsonUtils.getResultBeanByJson(string);
+                        List<Goods> goodsList = GsonUtils.getBeanFromResultBeanList(resultBean, "goodsList", Goods.class);
+                        //转换
+                        for (Goods goods : goodsList) {
+                            dataList.add(ChangeGoosToGoodItem.change(goods));
+                        }
                     }
                 });
-
-
-
 
 
         selectedList = new SparseArray<>();//已选中的
@@ -111,13 +136,16 @@ public class ShoppingCartActivity extends AppCompatActivity implements View.OnCl
         initView();
 
 
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
-    private void initView(){
+    private void initView() {
         tvCount = (TextView) findViewById(R.id.tvCount);
         tvCost = (TextView) findViewById(R.id.tvCost);
         tvTips = (TextView) findViewById(R.id.tvTips);
-        tvSubmit  = (TextView) findViewById(R.id.tvSubmit);
+        tvSubmit = (TextView) findViewById(R.id.tvSubmit);
         rvType = (RecyclerView) findViewById(R.id.typeRecyclerView);
 
         imgCart = (ImageView) findViewById(R.id.imgCart);
@@ -127,11 +155,11 @@ public class ShoppingCartActivity extends AppCompatActivity implements View.OnCl
         listView = (StickyListHeadersListView) findViewById(R.id.itemListView);
 
         rvType.setLayoutManager(new LinearLayoutManager(this));
-        typeAdapter = new TypeAdapter(this,typeList);
+        typeAdapter = new TypeAdapter(this, typeList);
         rvType.setAdapter(typeAdapter);
         rvType.addItemDecoration(new DividerDecoration(this));
 
-        myAdapter = new GoodsAdapter(dataList,this);
+        myAdapter = new GoodsAdapter(dataList, this);
         listView.setAdapter(myAdapter);
 
         listView.setOnScrollListener(new AbsListView.OnScrollListener() {
@@ -143,7 +171,7 @@ public class ShoppingCartActivity extends AppCompatActivity implements View.OnCl
             @Override
             public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
                 GoodsItem item = dataList.get(firstVisibleItem);
-                if(typeAdapter.selectTypeId != item.typeId) {
+                if (typeAdapter.selectTypeId != item.typeId) {
                     typeAdapter.selectTypeId = item.typeId;
                     typeAdapter.notifyDataSetChanged();
                     rvType.smoothScrollToPosition(getSelectedGroupPosition(item.typeId));
@@ -155,23 +183,23 @@ public class ShoppingCartActivity extends AppCompatActivity implements View.OnCl
 
     //动画方法
 
-    public void playAnimation(int[] start_location){
+    public void playAnimation(int[] start_location) {
         ImageView img = new ImageView(this);
         img.setImageResource(R.drawable.button_add);
-        setAnim(img,start_location);
+        setAnim(img, start_location);
     }
 
-    private Animation createAnim(int startX,int startY){
+    private Animation createAnim(int startX, int startY) {
         int[] des = new int[2];
         imgCart.getLocationInWindow(des);
 
         AnimationSet set = new AnimationSet(false);
 
-        Animation translationX = new TranslateAnimation(0, des[0]-startX, 0, 0);
+        Animation translationX = new TranslateAnimation(0, des[0] - startX, 0, 0);
         translationX.setInterpolator(new LinearInterpolator());
-        Animation translationY = new TranslateAnimation(0, 0, 0, des[1]-startY);
+        Animation translationY = new TranslateAnimation(0, 0, 0, des[1] - startY);
         translationY.setInterpolator(new AccelerateInterpolator());
-        Animation alpha = new AlphaAnimation(1,0.5f);
+        Animation alpha = new AlphaAnimation(1, 0.5f);
         set.addAnimation(translationX);
         set.addAnimation(translationY);
         set.addAnimation(alpha);
@@ -188,13 +216,14 @@ public class ShoppingCartActivity extends AppCompatActivity implements View.OnCl
         int[] loc = new int[2];
         vg.getLocationInWindow(loc);
         view.setX(x);
-        view.setY(y-loc[1]);
+        view.setY(y - loc[1]);
         vg.addView(view);
     }
+
     private void setAnim(final View v, int[] start_location) {
 
         addViewToAnimLayout(anim_mask_layout, v, start_location);
-        Animation set = createAnim(start_location[0],start_location[1]);
+        Animation set = createAnim(start_location[0], start_location[1]);
         set.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
@@ -208,7 +237,7 @@ public class ShoppingCartActivity extends AppCompatActivity implements View.OnCl
                     public void run() {
                         anim_mask_layout.removeView(v);
                     }
-                },100);
+                }, 100);
             }
 
             @Override
@@ -220,8 +249,8 @@ public class ShoppingCartActivity extends AppCompatActivity implements View.OnCl
     }
 
     @Override
-    public void onClick(View v){
-        switch (v.getId()){
+    public void onClick(View v) {
+        switch (v.getId()) {
             case R.id.bottom:
                 showBottomSheet();
                 break;
@@ -233,130 +262,192 @@ public class ShoppingCartActivity extends AppCompatActivity implements View.OnCl
 //                TODO： selectedLists是(一个商品ID，与GoodItem的键值对
 //                 TODO：商品数量是item.count )作为封装成order类传入HomeActivity.Fragment
 //                  TODO：
-//                selected
+                List<GoodsVo> goodsVoList = new ArrayList<>();
+
+                for (int i = 0; i <= selectedList.size(); i++) {
+                    int j = selectedList.keyAt(i);
+                    int id = selectedList.get(j).id;
+                    int count = selectedList.get(j).count;
+                    goodsVoList.add(new GoodsVo(id, count));
+                }
+                Orders order = new Orders();
+                if (null != BaseModelImpl.user) {
+                    //TODO用户没有登陆
+                    //Toast.makeText(ShoppingCartActivity.class, "请去登陆", Toast.LENGTH_LONG).show();
+                    order.setUserId(BaseModelImpl.user.getUserId());
+                }
+
+                order.setShopId(mShop.getShopId());
+                OrderModelImpl mOrderModel = null;
+                Subscription subscription =
+                        mOrderModel
+                                .placeOrder(order, GsonUtils.getJsonStr(goodsVoList))
+                                .map(new Func1<Result, String>() {
+
+                                    @Override
+                                    public String call(Result result) {
+                                        return new String(result.data);
+                                    }
+                                })
+                                .observeOn(AndroidSchedulers.mainThread())
+                                .subscribeOn(Schedulers.io())
+                                .subscribe(new Subscriber<String>() {
+                                               @Override
+                                               public void onCompleted() {
+
+                                               }
+
+                                               @Override
+                                               public void onError(Throwable e) {
+
+                                               }
+
+                                               @Override
+                                               public void onNext(String string) {
+                                                   ResultBean resultBean = GsonUtils.getResultBeanByJson(string);
+                                                   //解析成对应的对象
+                                                   if (resultBean.isServiceResult()) {
+                                                      toHomePage();
+                                                   }
+                                               }
+                                           }
+                                );
+
+
                 break;
             default:
                 break;
         }
     }
+
+    private void toHomePage() {
+        startActivity(new Intent(this, HomeActivity.class));
+    }
+
     //添加商品
-    public void add(GoodsItem item,boolean refreshGoodList){
+    public void add(GoodsItem item, boolean refreshGoodList) {
 
         int groupCount = groupSelect.get(item.typeId);
-        if(groupCount==0){
-            groupSelect.append(item.typeId,1);
-        }else{
-            groupSelect.append(item.typeId,++groupCount);
+        if (groupCount == 0) {
+            groupSelect.append(item.typeId, 1);
+        } else {
+            groupSelect.append(item.typeId, ++groupCount);
         }
 
         GoodsItem temp = selectedList.get(item.id);
-        if(temp==null){
-            item.count=1;
-            selectedList.append(item.id,item);
-        }else{
+        if (temp == null) {
+            item.count = 1;
+            selectedList.append(item.id, item);
+        } else {
             temp.count++;
         }
         update(refreshGoodList);
     }
+
     //移除商品
-    public void remove(GoodsItem item,boolean refreshGoodList){
+    public void remove(GoodsItem item, boolean refreshGoodList) {
 
         int groupCount = groupSelect.get(item.typeId);
-        if(groupCount==1){
+        if (groupCount == 1) {
             groupSelect.delete(item.typeId);
-        }else if(groupCount>1){
-            groupSelect.append(item.typeId,--groupCount);
+        } else if (groupCount > 1) {
+            groupSelect.append(item.typeId, --groupCount);
         }
 
         GoodsItem temp = selectedList.get(item.id);
-        if(temp!=null){
-            if(temp.count<2){
+        if (temp != null) {
+            if (temp.count < 2) {
                 selectedList.remove(item.id);
-            }else{
+            } else {
                 item.count--;
             }
         }
         update(refreshGoodList);
     }
+
     //刷新布局 总价、购买数量等
-    private void update(boolean refreshGoodList){
+    private void update(boolean refreshGoodList) {
         int size = selectedList.size();
-        int count =0;
+        int count = 0;
         double cost = 0;
-        for(int i=0;i<size;i++){
+        for (int i = 0; i < size; i++) {
             GoodsItem item = selectedList.valueAt(i);
             count += item.count;
-            cost += item.count*item.price;
+            cost += item.count * item.price;
         }
 
-        if(count<1){
+        if (count < 1) {
             tvCount.setVisibility(View.GONE);
-        }else{
+        } else {
             tvCount.setVisibility(View.VISIBLE);
         }
 
         tvCount.setText(String.valueOf(count));
 
-        if(cost > 22){
+        if (cost > 22) {
             tvTips.setVisibility(View.GONE);
             tvSubmit.setVisibility(View.VISIBLE);
-        }else{
+        } else {
             tvSubmit.setVisibility(View.GONE);
             tvTips.setVisibility(View.VISIBLE);
         }
 
         tvCost.setText(nf.format(cost));
 
-        if(myAdapter!=null && refreshGoodList){
+        if (myAdapter != null && refreshGoodList) {
             myAdapter.notifyDataSetChanged();
         }
-        if(selectAdapter!=null){
+        if (selectAdapter != null) {
             selectAdapter.notifyDataSetChanged();
         }
-        if(typeAdapter!=null){
+        if (typeAdapter != null) {
             typeAdapter.notifyDataSetChanged();
         }
-        if(bottomSheetLayout.isSheetShowing() && selectedList.size()<1){
+        if (bottomSheetLayout.isSheetShowing() && selectedList.size() < 1) {
             bottomSheetLayout.dismissSheet();
         }
     }
+
     //清空购物车
-    public void clearCart(){
+    public void clearCart() {
         selectedList.clear();
         groupSelect.clear();
         update(true);
 
     }
+
     //根据商品id获取当前商品的采购数量
-    public int getSelectedItemCountById(int id){
+    public int getSelectedItemCountById(int id) {
         GoodsItem temp = selectedList.get(id);
-        if(temp==null){
+        if (temp == null) {
             return 0;
         }
         return temp.count;
     }
+
     //根据类别Id获取属于当前类别的数量
-    public int getSelectedGroupCountByTypeId(int typeId){
+    public int getSelectedGroupCountByTypeId(int typeId) {
         return groupSelect.get(typeId);
     }
+
     //根据类别id获取分类的Position 用于滚动左侧的类别列表
-    public int getSelectedGroupPosition(int typeId){
-        for(int i=0;i<typeList.size();i++){
-            if(typeId==typeList.get(i).typeId){
+    public int getSelectedGroupPosition(int typeId) {
+        for (int i = 0; i < typeList.size(); i++) {
+            if (typeId == typeList.get(i).typeId) {
                 return i;
             }
         }
         return 0;
     }
 
-    public void onTypeClicked(int typeId){
+    public void onTypeClicked(int typeId) {
         listView.setSelection(getSelectedPosition(typeId));
     }
 
-    private int getSelectedPosition(int typeId){
+    private int getSelectedPosition(int typeId) {
         int position = 0;
-        for(int i=0;i<dataList.size();i++){
-            if(dataList.get(i).typeId == typeId){
+        for (int i = 0; i < dataList.size(); i++) {
+            if (dataList.get(i).typeId == typeId) {
                 position = i;
                 break;
             }
@@ -364,27 +455,63 @@ public class ShoppingCartActivity extends AppCompatActivity implements View.OnCl
         return position;
     }
 
-    private View createBottomSheetView(){
-        View view = LayoutInflater.from(this).inflate(R.layout.layout_bottom_sheet,(ViewGroup) getWindow().getDecorView(),false);
+    private View createBottomSheetView() {
+        View view = LayoutInflater.from(this).inflate(R.layout.layout_bottom_sheet, (ViewGroup) getWindow().getDecorView(), false);
         rvSelected = (RecyclerView) view.findViewById(R.id.selectRecyclerView);
         rvSelected.setLayoutManager(new LinearLayoutManager(this));
         TextView clear = (TextView) view.findViewById(R.id.clear);
         clear.setOnClickListener(this);
-        selectAdapter = new SelectAdapter(this,selectedList);
+        selectAdapter = new SelectAdapter(this, selectedList);
         rvSelected.setAdapter(selectAdapter);
         return view;
     }
 
-    private void showBottomSheet(){
-        if(bottomSheet==null){
+    private void showBottomSheet() {
+        if (bottomSheet == null) {
             bottomSheet = createBottomSheetView();
         }
-        if(bottomSheetLayout.isSheetShowing()){
+        if (bottomSheetLayout.isSheetShowing()) {
             bottomSheetLayout.dismissSheet();
-        }else {
-            if(selectedList.size()!=0){
+        } else {
+            if (selectedList.size() != 0) {
                 bottomSheetLayout.showWithSheetView(bottomSheet);
             }
         }
+    }
+
+    /**
+     * ATTENTION: This was auto-generated to implement the App Indexing API.
+     * See https://g.co/AppIndexing/AndroidStudio for more information.
+     */
+    public Action getIndexApiAction() {
+        Thing object = new Thing.Builder()
+                .setName("ShoppingCart Page") // TODO: Define a title for the content shown.
+                // TODO: Make sure this auto-generated URL is correct.
+                .setUrl(Uri.parse("http://[ENTER-YOUR-URL-HERE]"))
+                .build();
+        return new Action.Builder(Action.TYPE_VIEW)
+                .setObject(object)
+                .setActionStatus(Action.STATUS_TYPE_COMPLETED)
+                .build();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client.connect();
+        AppIndex.AppIndexApi.start(client, getIndexApiAction());
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        AppIndex.AppIndexApi.end(client, getIndexApiAction());
+        client.disconnect();
     }
 }

@@ -53,6 +53,17 @@ public class GsonUtils {
     }
 
     /**
+     * 获取ResultBean中的实体列表
+     * @param resultBean
+     * @param key
+     * @param clazz
+     * @param <T>
+     * @return
+     */
+    public static <T> List<T> getBeanFromResultBeanList(ResultBean resultBean, String key, Class<T> clazz) {
+        return parseJsonArrayWithGson(resultBean.getResultParm().get(key).toString(), clazz);
+    }
+    /**
      * 将Json数组解析成相应的映射对象列表
      */
     public static <T> List<T> parseJsonArrayWithGson(String jsonData, Class<T> type) {

@@ -47,7 +47,7 @@ public class AddressModelImpl implements AddressModel {
         HttpParams params = new HttpParams();
         params.put("addressId", String.valueOf(address.getAddressId()));
         return RxVolleyUtils.getInstance().delete(
-                BaseModelImpl.Service_URL +BaseModelImpl.delete_URL
+                BaseModelImpl.Service_URL +BaseModelImpl.delete_URL + address.getAddressId()
                 ,params);
     }
 
@@ -65,7 +65,7 @@ public class AddressModelImpl implements AddressModel {
         HttpParams params = new HttpParams();
         params.put("userId", String.valueOf(address.getUserId()));
         return RxVolleyUtils.getInstance().get(
-                BaseModelImpl.Service_URL +BaseModelImpl.defalut_URL
+                BaseModelImpl.Service_URL +BaseModelImpl.defalut_URL + address.getUserId()
                 ,params);
     }
 
@@ -74,7 +74,7 @@ public class AddressModelImpl implements AddressModel {
         HttpParams params = new HttpParams();
         params.put("addressId", String.valueOf(address.getAddressId()));
         return RxVolleyUtils.getInstance().post(
-                BaseModelImpl.Service_URL +BaseModelImpl.changeDefault_URL
+                BaseModelImpl.Service_URL +BaseModelImpl.changeDefault_URL + address.getAddressId()
                 ,params);
     }
 }

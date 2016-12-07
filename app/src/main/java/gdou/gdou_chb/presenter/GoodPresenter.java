@@ -22,17 +22,14 @@ public class GoodPresenter implements GoodContract.Presenter {
     public void unsubscribe() {
 
     }
-
     @Override
     public void add2Trolley() {
 
     }
-
     @Override
     public void del2Trolley() {
 
     }
-
     @Override
     public void delAllTrolley() {
 

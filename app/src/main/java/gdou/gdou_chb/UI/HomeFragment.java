@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -118,7 +119,7 @@ public class HomeFragment extends BaseFragment implements HomeContract.ShopView 
     }
 
     @Override
-    public void changeShoplist() {
+    public void changeShoplist(List<Shop> shopList) {
 
     }
 

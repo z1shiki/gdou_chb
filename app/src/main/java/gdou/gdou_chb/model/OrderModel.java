@@ -15,9 +15,10 @@ public interface OrderModel {
     /**
      * 用户下单
      * @param orders
+     * @param  goodsList
      * @return
      */
-    Observable<Result> placeOrder(Orders orders);
+    Observable<Result> placeOrder(Orders orders, String goodsList);
     /**
      * 用户完成订单
      * @param orders

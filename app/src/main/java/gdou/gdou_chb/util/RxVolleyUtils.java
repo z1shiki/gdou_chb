@@ -45,6 +45,8 @@ public class RxVolleyUtils {
             params =new HttpParams();
         }
         this.url = url;
+
+        Log.d("请求URL", "get: " + url);
         return new RxVolley
                 .Builder()
                 .httpMethod(RxVolley.Method.GET)
@@ -65,7 +67,7 @@ public class RxVolleyUtils {
             params =new HttpParams();
         }
         this.url = url;
-        Log.d("URL", url);
+        Log.d("请求URL", "post: " + url);
         return new RxVolley
                 .Builder()
                 .params(params)
@@ -96,7 +98,5 @@ public class RxVolleyUtils {
                 .contentType(RxVolley.ContentType.JSON)
                 .getResult();
     }
-
-
 }
 

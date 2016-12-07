@@ -53,4 +53,6 @@ public interface UserModel {
      * @return
      */
     Observable<Result> findUserInfo(User user);
+
+
 }
