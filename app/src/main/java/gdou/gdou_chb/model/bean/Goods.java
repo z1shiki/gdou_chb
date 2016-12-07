@@ -11,11 +11,11 @@ public class Goods implements Serializable {
     /**
      * 商品Id
      */
-    private long goodId;
+    private long id;
     /**
      * 商品名字
      */
-    private String goodsName;
+    private String name;
     /**
      * 商品数量
      */
@@ -25,13 +25,6 @@ public class Goods implements Serializable {
      */
     private long price;
 
-    public long getGoodId() {
-        return goodId;
-    }
-
-    public void setGoodId(long goodId) {
-        this.goodId = goodId;
-    }
 
     public long getNumber() {
         return number;
@@ -49,11 +42,19 @@ public class Goods implements Serializable {
         this.price = price;
     }
 
-    public String getGoodsName() {
-        return goodsName;
+    public long getId() {
+        return id;
     }
 
-    public void setGoodsName(String goodsName) {
-        this.goodsName = goodsName;
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

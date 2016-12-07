@@ -52,6 +52,7 @@ public class RxVolleyUtils {
                 .httpMethod(RxVolley.Method.GET)
                 .params(params)
                 .url(url)
+                .shouldCache(false)
                 .contentType(RxVolley.ContentType.JSON)
                 .getResult();
     }

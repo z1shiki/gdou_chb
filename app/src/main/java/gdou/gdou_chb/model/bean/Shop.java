@@ -10,7 +10,16 @@ public class Shop  implements Serializable{
 	/**
 	 * 商店Id
 	 */
-	private long shopId;
+	private long id;
+
+	/**
+	 * 起送价
+	 */
+	private int startingPrice;
+	/**
+	 * 配送费
+	 */
+	private int distributionFee;
 	/**
 	 * 纬度
 	 */
@@ -32,6 +41,8 @@ public class Shop  implements Serializable{
 	 */
 	private int stopTime;
 
+	private String createdDate;
+
 	public Shop(String shopName) {
 		this.shopName = shopName;
 	}
@@ -40,12 +51,12 @@ public class Shop  implements Serializable{
 
 	}
 
-	public long getShopId() {
-		return shopId;
+	public long getId() {
+		return id;
 	}
 
-	public void setShopId(long shopId) {
-		this.shopId = shopId;
+	public void setId(long id) {
+		this.id = id;
 	}
 
 	public double getLatitude() {
@@ -86,5 +97,44 @@ public class Shop  implements Serializable{
 
 	public void setStopTime(int stopTime) {
 		this.stopTime = stopTime;
+	}
+
+	public String getCreatedDate() {
+		return createdDate;
+	}
+
+	public void setCreatedDate(String createdDate) {
+		this.createdDate = createdDate;
+	}
+
+	public int getDistributionFee() {
+		return distributionFee;
+	}
+
+	public void setDistributionFee(int distributionFee) {
+		this.distributionFee = distributionFee;
+	}
+
+	public int getStartingPrice() {
+		return startingPrice;
+	}
+
+	public void setStartingPrice(int startingPrice) {
+		this.startingPrice = startingPrice;
+	}
+
+	@Override
+	public String toString() {
+		return "Shop{" +
+				"id=" + id +
+				", startingPrice=" + startingPrice +
+				", distributionFee=" + distributionFee +
+				", latitude=" + latitude +
+				", loongitude=" + loongitude +
+				", shopName='" + shopName + '\'' +
+				", openTime=" + openTime +
+				", stopTime=" + stopTime +
+				", createdDate='" + createdDate + '\'' +
+				'}';
 	}
 }

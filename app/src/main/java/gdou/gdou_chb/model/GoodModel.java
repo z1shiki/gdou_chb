@@ -12,9 +12,9 @@ import rx.Observable;
 public interface GoodModel {
     /**
      * 查询商品
-     * @param shop
+     * @param shopId
      * @return
      */
-    Observable<Result> findByGoodsId(Shop shop);
+    Observable<Result> findByGoodsId(Long shopId);
 }
 

@@ -10,7 +10,7 @@ public class GoodsItem{
     public String name;
     public String typeName;
     public double price;
-    public int count;
+    public int count = 1;
 
     public GoodsItem(int id, double price, String name, int typeId, String typeName) {
         this.id = id;

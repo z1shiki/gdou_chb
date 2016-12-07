@@ -77,7 +77,7 @@ public class SelectAdapter extends RecyclerView.Adapter<SelectAdapter.ViewHolder
         public void bindData(GoodsItem item){
             this.item = item;
             tvName.setText(item.name);
-            tvCost.setText(nf.format(item.count*item.price));
+            tvCost.setText(nf.format(item.count * item.price));
             tvCount.setText(String.valueOf(item.count));
         }
     }

@@ -11,6 +11,7 @@ public class BaseFragment extends Fragment {
 
     public void jump2Activity(Class cla) {
         this.getActivity().startActivity(new Intent(this.getActivity(), cla));
+        this.getActivity().finish();
     }
     public void showToast(){
 

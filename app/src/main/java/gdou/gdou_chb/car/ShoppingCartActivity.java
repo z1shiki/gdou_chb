@@ -7,6 +7,7 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.util.SparseArray;
 import android.util.SparseIntArray;
 import android.view.LayoutInflater;
@@ -41,12 +42,9 @@ import gdou.gdou_chb.model.bean.Goods;
 import gdou.gdou_chb.model.bean.GoodsVo;
 import gdou.gdou_chb.model.bean.Orders;
 import gdou.gdou_chb.model.bean.ResultBean;
-import gdou.gdou_chb.model.bean.Shop;
-import gdou.gdou_chb.model.bean.User;
 import gdou.gdou_chb.model.impl.BaseModelImpl;
 import gdou.gdou_chb.model.impl.GoodModelImpl;
 import gdou.gdou_chb.model.impl.OrderModelImpl;
-import gdou.gdou_chb.util.ChangeGoosToGoodItem;
 import gdou.gdou_chb.util.GsonUtils;
 import rx.Subscriber;
 import rx.Subscription;
@@ -71,7 +69,7 @@ public class ShoppingCartActivity extends AppCompatActivity implements View.OnCl
     private SparseIntArray groupSelect;
 
     private GoodModelImpl mGoodModel;
-    private Shop mShop;
+    private Long mShopId = 0l;          //默认为第一个用户
     private Subscription RxShop;
     private CompositeSubscription mSubscription;
 
@@ -95,8 +93,32 @@ public class ShoppingCartActivity extends AppCompatActivity implements View.OnCl
         nf.setMaximumFractionDigits(2);
         mHanlder = new Handler(getMainLooper());
 
+
+        selectedList = new SparseArray<>();//已选中的
+        groupSelect = new SparseIntArray();
+
+        dataList = new ArrayList<>();
+        dataList.add(new GoodsItem(1,20.0,"meiyou",1,"meidd"));
+        typeList = new ArrayList<>();
+        initView();
+
+        initData();
+
+
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+    }
+
+    private void initData() {
+
+
+
+        mShopId = getIntent().getLongExtra("shopId", 0L);
+        Log.d("ShopId", "initData: " + mShopId);
+
         mGoodModel = new GoodModelImpl();
-        RxShop = mGoodModel.findByGoodsId(mShop)
+        RxShop = mGoodModel.findByGoodsId(mShopId)
                 .map(new Func1<Result, String>() {
 
                     @Override
@@ -116,29 +138,24 @@ public class ShoppingCartActivity extends AppCompatActivity implements View.OnCl
 
                     @Override
                     public void onError(Throwable e) {
-
+                        Log.e("Shoppingcar", "onError: 错误输出", e);
                     }
 
                     @Override
                     public void onNext(String string) {
                         ResultBean resultBean = GsonUtils.getResultBeanByJson(string);
-                        List<Goods> goodsList = GsonUtils.getBeanFromResultBeanList(resultBean, "goodsList", Goods.class);
+                        List<Goods> goodsList = GsonUtils.getBeanFromResultBeanListMiss(resultBean, "goodsList", Goods[].class);
                         //转换
                         for (Goods goods : goodsList) {
-                            dataList.add(ChangeGoosToGoodItem.change(goods));
+
+                            dataList.add(new GoodsItem((int) goods.getId(), goods.getPrice(),goods.getName(), 0, null));
                         }
+                        Log.d("Goods->List", GsonUtils.getJsonStr(goodsList));
+                        myAdapter.notifyDataSetChanged();
                     }
                 });
 
 
-        selectedList = new SparseArray<>();//已选中的
-        groupSelect = new SparseIntArray();
-        initView();
-
-
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
     private void initView() {
@@ -170,6 +187,7 @@ public class ShoppingCartActivity extends AppCompatActivity implements View.OnCl
 
             @Override
             public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+                //TODO有问题
                 GoodsItem item = dataList.get(firstVisibleItem);
                 if (typeAdapter.selectTypeId != item.typeId) {
                     typeAdapter.selectTypeId = item.typeId;
@@ -277,7 +295,7 @@ public class ShoppingCartActivity extends AppCompatActivity implements View.OnCl
                     order.setUserId(BaseModelImpl.user.getUserId());
                 }
 
-                order.setShopId(mShop.getShopId());
+                order.setShopId(mShopId);
                 OrderModelImpl mOrderModel = null;
                 Subscription subscription =
                         mOrderModel
@@ -294,6 +312,7 @@ public class ShoppingCartActivity extends AppCompatActivity implements View.OnCl
                                 .subscribe(new Subscriber<String>() {
                                                @Override
                                                public void onCompleted() {
+
 
                                                }
 

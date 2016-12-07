@@ -15,11 +15,11 @@ import rx.Observable;
 
 public class GoodModelImpl extends BaseModelImpl implements GoodModel {
     @Override
-    public Observable<Result> findByGoodsId(Shop shop) {
+    public Observable<Result> findByGoodsId(Long shopId) {
         HttpParams params  = new HttpParams();
-        params.put("shop", String.valueOf(shop.getShopId()));
+        params.put("shop", String.valueOf(shopId));
         return RxVolleyUtils.getInstance().get(
-                BaseModelImpl.Service_URL + BaseModelImpl.findByShopId_URL + shop.getShopId()
+                BaseModelImpl.Service_URL + BaseModelImpl.findByShopId_URL + shopId
                 ,params);
     }
 }

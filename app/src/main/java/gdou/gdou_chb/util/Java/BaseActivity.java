@@ -1,5 +1,6 @@
 package gdou.gdou_chb.util.Java;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -16,6 +17,10 @@ public class BaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
     }
 
+    public void jump2Activity(Class cla) {
+        startActivity(new Intent(this, cla));
+        this.finish();
+    }
     @Override
     protected void onDestroy() {
         super.onDestroy();

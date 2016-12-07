@@ -8,8 +8,11 @@ import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.kymjs.rxvolley.rx.Result;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import gdou.gdou_chb.activity.HomeActivity;
@@ -51,7 +54,7 @@ public class HomePresenter implements HomeContract.ShopPresenter {
     public HomePresenter(Context context, @Nullable HomeContract.ShopView homeView)
     {
         mHomeView = homeView;
-
+        mShopModel = new ShopModelImpl();
         mContext = context;
         mSubscription = new CompositeSubscription();
         mHomeView.setPresenter(this);
@@ -144,6 +147,7 @@ public class HomePresenter implements HomeContract.ShopPresenter {
         Subscription subscription =
                 mShopModel
                         .Shop()
+                        .retry(5)
                         .map(new Func1<Result, String>() {
 
                             @Override
@@ -156,19 +160,24 @@ public class HomePresenter implements HomeContract.ShopPresenter {
                         .subscribe(new Subscriber<String>() {
                                        @Override
                                        public void onCompleted() {
-                                           Log.d("Login", "succ");
+                                           Log.d("Shop", "succ");
                                        }
 
                                        @Override
                                        public void onError(Throwable e) {
-                                           Log.d("Login","error");
+                                           Log.e("Shop Error", "onError: ", e);
+                                           Log.d("Shop","error");
                                        }
 
                                        @Override
                                        public void onNext(String string) {
                                            ResultBean resultBean = GsonUtils.getResultBeanByJson(string);
-                                           Log.d("goodsList", GsonUtils.getJsonStr(resultBean.getResultParm()));
-                                           List<Shop> shopList= GsonUtils.getBeanFromResultBeanList(resultBean, "shopList", Shop.class);
+                                           Log.d("shopsList", GsonUtils.getJsonStr(resultBean.getResultParm()));
+                                           List<Shop> shopList = GsonUtils.
+                                                   getBeanFromResultBeanListMiss(resultBean, "shopList", Shop[].class);
+                                           Log.d("shopsList", "onNext: " + GsonUtils.getJsonStr(shopList));
+                                           Log.d("List", shopList.size() + "");
+
                                            mHomeView.changeShoplist(shopList);
                                        }
                                    }

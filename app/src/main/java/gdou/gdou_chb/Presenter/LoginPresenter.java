@@ -13,12 +13,14 @@ import gdou.gdou_chb.model.bean.User;
 import gdou.gdou_chb.model.impl.BaseModelImpl;
 import gdou.gdou_chb.model.impl.UserModelImpl;
 import gdou.gdou_chb.util.GsonUtils;
+import rx.Observer;
 import rx.Subscriber;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 import rx.subscriptions.CompositeSubscription;
+import rx.subscriptions.Subscriptions;
 
 /**
  * Created by Z1shiki on 2016/11/16.
@@ -29,9 +31,8 @@ public class LoginPresenter implements LoginContract.Presenter {
     @NonNull
     private final  LoginContract.View mLoginView;
     private final UserModelImpl mUserModel;
-
-
-    private CompositeSubscription mSubscription;
+    private final  CompositeSubscription mSubscription;
+    private Subscription subscription;
 
 
     //构建函数 Presenter和View相互保存对方实例
@@ -53,14 +54,22 @@ public class LoginPresenter implements LoginContract.Presenter {
     @Override
     public void unsubscribe() {
         mSubscription.clear();
+        mSubscription.unsubscribe();
+        Log.d("Rx---->login", "unsubscribe:All ");
+        if(subscription != null){
+            Log.d("unsubscribe: ", String.valueOf(subscription.isUnsubscribed()));
+            subscription.unsubscribe();
+            Log.d("Rx----->login", "unsubscribe:login ");
+        }
     }
 
     @Override
     public void login(User user) {
         mLoginView.loginprogress(true);
-        Subscription subscription =
+        subscription =
                 mUserModel
                         .doLogin(user)
+                        .retry(5)
                         .map(new Func1<Result, String>() {
 
                             @Override
@@ -74,12 +83,15 @@ public class LoginPresenter implements LoginContract.Presenter {
                                        @Override
                                        public void onCompleted() {
                                            Log.d("Login", "succ");
+                                           mLoginView.jump2Activity(HomeActivity.class);
                                        }
 
                                        @Override
                                        public void onError(Throwable e) {
+                                           Log.d("Login==>","error");
+                                           Log.e("Login Error", "登录错误信息", e);
                                            mLoginView.jump2Activity(HomeActivity.class);
-                                           Log.d("Login","error");
+
                                        }
 
                                        @Override
@@ -87,6 +99,7 @@ public class LoginPresenter implements LoginContract.Presenter {
                                            ResultBean resultBean = GsonUtils.getResultBeanByJson(string);
                                            User user = GsonUtils.getBeanFromResultBean(resultBean, "user",User.class);
                                            BaseModelImpl.user = user;
+                                           Log.d("user", GsonUtils.getJsonStr(user));
                                        }
                                    }
                         );

@@ -1,5 +1,6 @@
 package gdou.gdou_chb.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -7,19 +8,24 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import gdou.gdou_chb.R;
 import gdou.gdou_chb.adapter.ShopAdapter;
+import gdou.gdou_chb.car.ShoppingCartActivity;
 import gdou.gdou_chb.contract.HomeContract;
 import gdou.gdou_chb.model.bean.Shop;
+import gdou.gdou_chb.util.GsonUtils;
 import gdou.gdou_chb.util.Java.BaseActivity;
 import gdou.gdou_chb.util.MVP.BaseFragment;
 
@@ -35,6 +41,7 @@ public class HomeFragment extends BaseFragment implements HomeContract.ShopView 
     private ArrayList<Shop> mDataList;
     private HomeContract.ShopPresenter mPresenter;
     private BaseActivity mActivity;
+    private ShopAdapter adapter;
 
     public HomeFragment() { //Requires empty public constructor
     }
@@ -53,15 +60,14 @@ public class HomeFragment extends BaseFragment implements HomeContract.ShopView 
     public void onResume() {
         super.onResume();
         mActivity= (BaseActivity) this.getActivity();
-        //mPresenter.subscribe();
+        mPresenter.subscribe();
     }
 
     @Override
     public void onPause() {
         super.onPause();
         mActivity= (BaseActivity) this.getActivity();
-        //mPresenter.unsubscribe();
-
+        mPresenter.unsubscribe();
     }
 
     @Override
@@ -74,6 +80,7 @@ public class HomeFragment extends BaseFragment implements HomeContract.ShopView 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.home_frag, container, false);
         setHasOptionsMenu(true);
+
         initData();
         //setup
         ButterKnife.bind(this, root);
@@ -85,7 +92,7 @@ public class HomeFragment extends BaseFragment implements HomeContract.ShopView 
         //初始化列表
         //shop = Shop.createShopList(20);
         //创建适配器
-        ShopAdapter adapter = new ShopAdapter(mActivity, mDataList);
+        adapter = new ShopAdapter(mActivity, mDataList);
         //绑定适配器
         rvShop.setAdapter(adapter);
         //设置布局管理器
@@ -95,19 +102,28 @@ public class HomeFragment extends BaseFragment implements HomeContract.ShopView 
         //设置增加或删除条目的动画
         rvShop.setItemAnimator(new DefaultItemAnimator());
 
+        setViewLintener();
+
         return root;
     }
 
+    private void setViewLintener() {
+       adapter.setOnItemClickListener(new ShopAdapter.MyItemClickListener() {
+           @Override
+           public void onItemClick(View view, int postion) {
+               Shop shop = mDataList.get(postion);
+               Intent intent = new Intent(getActivity(), ShoppingCartActivity.class);
+               if (null != shop)
+                   intent.putExtra("shopId", shop.getId());
+               startActivity(intent);
+           }
+       });
+    }
 
 
     private void initData() {
+        mPresenter.getShopList();
         mDataList = new ArrayList<>();
-        //添加假数据
-        mDataList.add(new Shop(getString(R.string.news_one_title)));
-        mDataList.add(new Shop(getString(R.string.news_two_title)));
-        mDataList.add(new Shop(getString(R.string.news_three_title)));
-        mDataList.add(new Shop(getString(R.string.news_four_title)));
-
         }
 
 
@@ -120,12 +136,20 @@ public class HomeFragment extends BaseFragment implements HomeContract.ShopView 
 
     @Override
     public void changeShoplist(List<Shop> shopList) {
-
+        Log.d("shopS--->", GsonUtils.getJsonStr(shopList));
+        Log.d("size", shopList.size() + "");
+        for (Shop shop : shopList) {
+            if (null != shop)
+                mDataList.add(shop);
+        }
+        Log.d("size", mDataList.size() + "");
+        Log.d("dataList", GsonUtils.getJsonStr(mDataList));
+        adapter.notifyDataSetChanged();
     }
 
     @Override
     public void choiceShop() {
-
+        Log.d("你的点击了"," 你点击了");
 
     }
 
