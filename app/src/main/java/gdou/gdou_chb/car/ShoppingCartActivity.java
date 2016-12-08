@@ -282,7 +282,7 @@ public class ShoppingCartActivity extends AppCompatActivity implements View.OnCl
 //                  TODO：
                 List<GoodsVo> goodsVoList = new ArrayList<>();
 
-                for (int i = 0; i <= selectedList.size(); i++) {
+                for (int i = 0; i < selectedList.size(); i++) {
                     int j = selectedList.keyAt(i);
                     int id = selectedList.get(j).id;
                     int count = selectedList.get(j).count;
@@ -292,11 +292,11 @@ public class ShoppingCartActivity extends AppCompatActivity implements View.OnCl
                 if (null != BaseModelImpl.user) {
                     //TODO用户没有登陆
                     //Toast.makeText(ShoppingCartActivity.class, "请去登陆", Toast.LENGTH_LONG).show();
-                    order.setUserId(BaseModelImpl.user.getUserId());
+                    order.setUserId(BaseModelImpl.user.getId());
                 }
 
                 order.setShopId(mShopId);
-                OrderModelImpl mOrderModel = null;
+                OrderModelImpl mOrderModel = new OrderModelImpl();
                 Subscription subscription =
                         mOrderModel
                                 .placeOrder(order, GsonUtils.getJsonStr(goodsVoList))
@@ -318,7 +318,7 @@ public class ShoppingCartActivity extends AppCompatActivity implements View.OnCl
 
                                                @Override
                                                public void onError(Throwable e) {
-
+                                                   Log.e("Shopping", "onError: 错误",e );
                                                }
 
                                                @Override

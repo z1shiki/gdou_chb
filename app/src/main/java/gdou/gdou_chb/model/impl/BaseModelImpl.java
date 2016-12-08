@@ -15,7 +15,7 @@ public class BaseModelImpl {
     /**
      * 公共接口号
      */
-    public static final String Service_URL = "http://192.168.31.56:9001/";
+    public static final String Service_URL = "http://172.16.13.28:9001/";
     /**
      * 用户
      * User_URL

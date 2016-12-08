@@ -14,19 +14,24 @@ import rx.Observable;
 public interface OrderModel {
     /**
      * 用户下单
+     *
      * @param orders
-     * @param  goodsList
+     * @param goodsList
      * @return
      */
     Observable<Result> placeOrder(Orders orders, String goodsList);
+
     /**
      * 用户完成订单
+     *
      * @param orders
      * @return
      */
     Observable<Result> doneOrders(Orders orders);
+
     /**
      * 用户申请退单
+     *
      * @param
      * @return
      */
@@ -34,8 +39,9 @@ public interface OrderModel {
 
     /**
      * 查找用户所有订单
-     * @param orders
+     *
+     * @param userId
      * @return
      */
-    Observable<Result> UserAllOrders(Orders orders);
+    Observable<Result> UserAllOrders(Long userId);
 }

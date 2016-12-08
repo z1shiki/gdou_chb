@@ -71,7 +71,7 @@ public class UserModelImpl extends BaseModelImpl implements UserModel {
     public Observable<Result> changePassword(User user) {
         HttpParams params  = new HttpParams();
         params.put("oldPassword",user.getAccount());
-        params.put("id", String.valueOf(user.getUserId()));
+        params.put("id", String.valueOf(user.getId()));
         params.put("newPassword",user.getNewPassword());
         return RxVolleyUtils.getInstance().post(
                 BaseModelImpl.Service_URL + BaseModelImpl.changePassword_URL
@@ -89,7 +89,7 @@ public class UserModelImpl extends BaseModelImpl implements UserModel {
     public Observable<Result> changePhone(User user, String verifyCode) {
         HttpParams params  = new HttpParams();
         params.put("phone", String.valueOf(user.getPhone()));
-        params.put("id", String.valueOf(user.getUserId()));
+        params.put("id", String.valueOf(user.getId()));
         params.put("verifyCode",verifyCode);
         return RxVolleyUtils.getInstance().post(
                 BaseModelImpl.Service_URL + BaseModelImpl.updateUser_URL
@@ -105,7 +105,7 @@ public class UserModelImpl extends BaseModelImpl implements UserModel {
     public Observable<Result> changeUserImg(User user) {
         HttpParams params  = new HttpParams();
         params.put("userImg", String.valueOf(user.getUserImg()));
-        params.put("id", String.valueOf(user.getUserId()));
+        params.put("id", String.valueOf(user.getId()));
         params.put("newUserImg", String.valueOf(user.getNewUserImg()));
         return RxVolleyUtils.getInstance().post(
                 BaseModelImpl.Service_URL + BaseModelImpl.updateUser_URL
@@ -120,7 +120,7 @@ public class UserModelImpl extends BaseModelImpl implements UserModel {
     @Override
     public Observable<Result> findUserInfo(User user) {
         HttpParams params  = new HttpParams();
-        params.put("findUserInfo", String.valueOf(user.getUserId()));
+        params.put("findUserInfo", String.valueOf(user.getId()));
         return RxVolleyUtils.getInstance().post(
                 BaseModelImpl.Service_URL + BaseModelImpl.findUserInfo_URL
                 ,params);

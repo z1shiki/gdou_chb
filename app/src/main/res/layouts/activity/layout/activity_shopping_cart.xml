@@ -15,7 +15,6 @@
         android:background="#aa000000"
         android:id="@+id/bottom"
         android:clickable="true"
-        android:onClick="onClick"
         android:gravity="center_vertical"
         android:layout_alignParentBottom="true"
         android:layout_height="50dp">

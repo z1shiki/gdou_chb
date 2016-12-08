@@ -10,7 +10,7 @@ public class User implements Serializable {
     /**
      * 用户ID
      */
-    private long userId;
+    private long id;
     /**
      * 账户
      */
@@ -50,12 +50,12 @@ public class User implements Serializable {
 
     }
 
-    public long getUserId() {
-        return userId;
+    public long getId() {
+        return id;
     }
 
-    public void setUserId(long userId) {
-        this.userId = userId;
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getAccount() {
@@ -112,6 +112,20 @@ public class User implements Serializable {
 
     public void setNewUserImg(long newUserImg) {
         this.newUserImg = newUserImg;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", account='" + account + '\'' +
+                ", password='" + password + '\'' +
+                ", newPassword='" + newPassword + '\'' +
+                ", username='" + username + '\'' +
+                ", phone=" + phone +
+                ", userImg=" + userImg +
+                ", newUserImg=" + newUserImg +
+                '}';
     }
 }
 

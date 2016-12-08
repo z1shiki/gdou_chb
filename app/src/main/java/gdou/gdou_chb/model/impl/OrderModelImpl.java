@@ -1,5 +1,7 @@
 package gdou.gdou_chb.model.impl;
 
+import android.util.Log;
+
 import com.kymjs.rxvolley.client.HttpParams;
 import com.kymjs.rxvolley.rx.Result;
 
@@ -16,9 +18,11 @@ public class OrderModelImpl implements OrderModel {
     @Override
     public Observable<Result> placeOrder(Orders orders, String goodsList) {
         HttpParams params  = new HttpParams();
-        params.put("goodList", goodsList);
+        params.put("goodsList", goodsList);
+        params.put("addressId", String.valueOf(orders.getAddressId()));
         params.put("userId", String.valueOf(orders.getUserId()));
-        params.put("shopId", String.valueOf(orders.getShopId()));
+        params.put("shopUserId", String.valueOf(orders.getShopId()));
+        Log.d("用户ID", "userId: " + orders.getUserId());
         return RxVolleyUtils.getInstance().post(
                 BaseModelImpl.Service_URL + BaseModelImpl.placeOrder_URL
                 ,params);
@@ -43,11 +47,11 @@ public class OrderModelImpl implements OrderModel {
     }
 
     @Override
-    public Observable<Result> UserAllOrders(Orders orders) {
+    public Observable<Result> UserAllOrders(Long userId) {
         HttpParams params  = new HttpParams();
-        params.put("usrId", String.valueOf(orders.getUserId()));
+        params.put("usrId", String.valueOf(userId));
         return  RxVolleyUtils.getInstance().get(
-                BaseModelImpl.Service_URL + BaseModelImpl.userAllOrders_URL + orders.getUserId()
+                BaseModelImpl.Service_URL + BaseModelImpl.userAllOrders_URL + userId
                 ,params);
     }
 }

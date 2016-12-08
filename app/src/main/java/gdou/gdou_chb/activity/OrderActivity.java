@@ -34,6 +34,8 @@ public class OrderActivity extends BaseActivity {
 
     private OrderFragment mOrderFragment;
 
+
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
@@ -66,5 +68,5 @@ public class OrderActivity extends BaseActivity {
                     }
                 }
             });
-        }
+    }
 }

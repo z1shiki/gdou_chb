@@ -18,6 +18,10 @@ public class Orders implements Serializable{
      */
     private long shopId;
     /**
+     * 地址Id
+     */
+    private long addressId;
+    /**
      * 商品数量
      */
     private long Number;
@@ -69,5 +73,13 @@ public class Orders implements Serializable{
 
     public void setNumber(long number) {
         Number = number;
+    }
+
+    public long getAddressId() {
+        return addressId;
+    }
+
+    public void setAddressId(long addressId) {
+        this.addressId = addressId;
     }
 }
