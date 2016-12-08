@@ -14,7 +14,11 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import gdou.gdou_chb.R;
 import gdou.gdou_chb.presenter.HomePresenter;
+import gdou.gdou_chb.presenter.OrderPresenter;
+import gdou.gdou_chb.presenter.UsercenterPresenter;
 import gdou.gdou_chb.ui.HomeFragment;
+import gdou.gdou_chb.ui.OrderFragment;
+import gdou.gdou_chb.ui.UserCenterFragment;
 import gdou.gdou_chb.util.Java.ActivityUtils;
 import gdou.gdou_chb.util.Java.BaseActivity;
 
@@ -29,6 +33,8 @@ public class HomeActivity extends BaseActivity {
 
 
     private HomeFragment mHomeFragment;
+    private OrderFragment mOrderFragment;
+    private UserCenterFragment mCenterFragment;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -51,16 +57,26 @@ public class HomeActivity extends BaseActivity {
             public void onTabSelected(@IdRes int tabId) {
                 switch (tabId) {
                     case R.id.tab_home:
-
+                        if(mHomeFragment == null)
+                            mHomeFragment= HomeFragment.newInstanceState();
+                        ActivityUtils.replaceFragment(getFragmentManager(),mHomeFragment,R.id.contentFrame);
+                        new HomePresenter(getParent(),mHomeFragment);
                         Log.i("sai", "Home ");
                         break;
                     case R.id.tab_order:
+                        if(mOrderFragment == null)
+                            mOrderFragment = OrderFragment.newInstanceState();
+                        ActivityUtils.replaceFragment(getFragmentManager(),mOrderFragment,R.id.contentFrame);
+                        new OrderPresenter(mOrderFragment);
                         Log.i("sai", "order ");
-                        jump2Activity(OrderActivity.class);
+
                         break;
                     case R.id.tab_usercenter:
                         Log.i("sai", "order ");
-                        jump2Activity(UserCenterActivity.class);
+                        if(mCenterFragment == null)
+                            mCenterFragment = UserCenterFragment.newInstanceState();
+                        ActivityUtils.replaceFragment(getFragmentManager(),mCenterFragment,R.id.contentFrame);
+                        new UsercenterPresenter(mCenterFragment);
                         break;
                 }
             }
