@@ -1,8 +1,6 @@
 package gdou.gdou_chb.activity;
 
 
-import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
@@ -57,8 +55,8 @@ public class HomeActivity extends BaseActivity {
                         Log.i("sai", "Home ");
                         break;
                     case R.id.tab_order:
-                        jump2Activity(OrderActivity.class);
                         Log.i("sai", "order ");
+                        jump2Activity(OrderActivity.class);
                         break;
                     case R.id.tab_usercenter:
                         Log.i("sai", "order ");
@@ -69,4 +67,5 @@ public class HomeActivity extends BaseActivity {
         });
     }
 }
+
 

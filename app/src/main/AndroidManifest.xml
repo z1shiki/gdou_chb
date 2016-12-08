@@ -50,6 +50,8 @@
         <activity android:name=".activity.AboutActivity">
         </activity>
         <activity android:name=".car.ShoppingCartActivity"/>
+        <activity android:name=".activity.OrderActivity"/>
+        <activity android:name=".activity.UserCenterActivity"/>
 
         <service android:name="com.amap.api.location.APSService"/><!-- ATTENTION: This was auto-generated to add Google Play services to your project for
      App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->

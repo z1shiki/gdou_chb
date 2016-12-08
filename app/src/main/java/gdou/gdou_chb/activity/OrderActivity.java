@@ -1,5 +1,6 @@
 package gdou.gdou_chb.activity;
 
+
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
@@ -35,34 +36,35 @@ public class OrderActivity extends BaseActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.home_act);
-        ButterKnife.bind(this);
-        mToolbar.setTitle(null);
-        mOrderFragment=
-                (OrderFragment) getFragmentManager().findFragmentById(contentFrame);
-        if (mOrderFragment == null) {
-            mOrderFragment = OrderFragment.newInstanceState();
-            ActivityUtils.addFragmentToActivity(getFragmentManager(), mOrderFragment, contentFrame);
-        }
-        new OrderPresenter(mOrderFragment);
-
-
-        mBottomBar.setOnTabSelectListener(new OnTabSelectListener() {
-            @Override
-            public void onTabSelected(@IdRes int tabId) {
-                switch (tabId) {
-                    case R.id.tab_home:
-                        Log.i("sai", "Home ");
-                        break;
-                    case R.id.tab_order:
-                        Log.i("sai", "order ");
-                        break;
-                    case R.id.tab_usercenter:
-                        break;
-                }
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.order_act);
+            ButterKnife.bind(this);
+            mToolbar.setTitle(null);
+            mOrderFragment =
+                    (OrderFragment) getFragmentManager().findFragmentById(contentFrame);
+            if (mOrderFragment == null) {
+                mOrderFragment = OrderFragment.newInstanceState();
+                ActivityUtils.addFragmentToActivity(getFragmentManager(), mOrderFragment, contentFrame);
             }
-        });
-    }
+            new OrderPresenter(mOrderFragment);
+
+
+            mBottomBar.setOnTabSelectListener(new OnTabSelectListener() {
+                @Override
+                public void onTabSelected(@IdRes int tabId) {
+                    switch (tabId) {
+                        case R.id.tab_home:
+                            jump2Activity(HomeActivity.class);
+                            Log.i("sai", "Home ");
+                            break;
+                        case R.id.tab_order:
+                            break;
+                        case R.id.tab_usercenter:
+                            Log.i("sai", "user ");
+                            jump2Activity(UserCenterActivity.class);
+                            break;
+                    }
+                }
+            });
+        }
 }

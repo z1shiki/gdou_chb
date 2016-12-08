@@ -1,7 +1,5 @@
 package gdou.gdou_chb.activity;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
@@ -31,8 +29,6 @@ public class UserCenterActivity extends BaseActivity {
         Toolbar mToolbar;
         @BindView(bottomBar)
         BottomBar mBottomBar;
-        private Activity mActivity;
-
 
         private UserCenterFragment mUserCenterFragment;
 
@@ -57,11 +53,11 @@ public class UserCenterActivity extends BaseActivity {
                 public void onTabSelected(@IdRes int tabId) {
                     switch (tabId) {
                         case R.id.tab_home:
-                            startActivity(new Intent(mActivity,UserCenterActivity.class));
+                            jump2Activity(HomeActivity.class);
                             Log.i("sai", "UserCenter ");
                             break;
                         case R.id.tab_order:
-                            startActivity(new Intent(mActivity,OrderActivity.class));
+                            jump2Activity(OrderActivity.class);
                             Log.i("sai", "order ");
                             break;
                         case R.id.tab_usercenter:
