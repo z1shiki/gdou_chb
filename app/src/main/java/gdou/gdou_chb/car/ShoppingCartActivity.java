@@ -63,6 +63,7 @@ public class ShoppingCartActivity extends AppCompatActivity implements View.OnCl
     private BottomSheetLayout bottomSheetLayout;
     private View bottomSheet;
     private StickyListHeadersListView listView;
+    private CompositeSubscription mSubscription;
 
     private ArrayList<GoodsItem> dataList, typeList;
     private SparseArray<GoodsItem> selectedList;
@@ -70,8 +71,12 @@ public class ShoppingCartActivity extends AppCompatActivity implements View.OnCl
 
     private GoodModelImpl mGoodModel;
     private Long mShopId = 0l;          //默认为第一个用户
-    private Subscription RxShop;
-    private CompositeSubscription mSubscription;
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mSubscription.clear();
+    }
 
     private GoodsAdapter myAdapter;
     private SelectAdapter selectAdapter;
@@ -93,21 +98,18 @@ public class ShoppingCartActivity extends AppCompatActivity implements View.OnCl
         groupSelect = new SparseIntArray();
 
         dataList = new ArrayList<>();
-        dataList.add(new GoodsItem(1,20.0,"meiyou",1,"meidd"));
+//        dataList.add(new GoodsItem(1,20.0,"meiyou",1,"meidd"));
         typeList = new ArrayList<>();
 
         initData();
     }
 
     private void initData() {
-
-
-
         mShopId = getIntent().getLongExtra("shopId", 0L);
         Log.d("ShopId", "initData: " + mShopId);
 
         mGoodModel = new GoodModelImpl();
-        RxShop = mGoodModel.findByGoodsId(mShopId)
+        Subscription subscription = mGoodModel.findByGoodsId(mShopId)
                 .map(new Func1<Result, String>() {
 
                     @Override
@@ -144,8 +146,7 @@ public class ShoppingCartActivity extends AppCompatActivity implements View.OnCl
                         Log.d("Goods->List", GsonUtils.getJsonStr(goodsList));
                     }
                 });
-
-
+        mSubscription.add(subscription);
     }
 
     private void initView() {
@@ -270,67 +271,70 @@ public class ShoppingCartActivity extends AppCompatActivity implements View.OnCl
 //                TODO： selectedLists是(一个商品ID，与GoodItem的键值对
 //                 TODO：商品数量是item.count )作为封装成order类传入HomeActivity.Fragment
 //                  TODO：
-                List<GoodsVo> goodsVoList = new ArrayList<>();
-
-                for (int i = 0; i < selectedList.size(); i++) {
-                    int j = selectedList.keyAt(i);
-                    int id = selectedList.get(j).id;
-                    int count = selectedList.get(j).count;
-                    goodsVoList.add(new GoodsVo(id, count));
-                }
-                Orders order = new Orders();
-                if (null != BaseModelImpl.user) {
-                    //TODO用户没有登陆
-                    //Toast.makeText(ShoppingCartActivity.class, "请去登陆", Toast.LENGTH_LONG).show();
-                    order.setUserId(BaseModelImpl.user.getId());
-                }
-
-                order.setShopId(mShopId);
-                OrderModelImpl mOrderModel = new OrderModelImpl();
-                Subscription subscription =
-                        mOrderModel
-                                .placeOrder(order, GsonUtils.getJsonStr(goodsVoList))
-                                .map(new Func1<Result, String>() {
-
-                                    @Override
-                                    public String call(Result result) {
-                                        return new String(result.data);
-                                    }
-                                })
-                                .observeOn(AndroidSchedulers.mainThread())
-                                .subscribeOn(Schedulers.io())
-                                .subscribe(new Subscriber<String>() {
-                                               @Override
-                                               public void onCompleted() {
-
-
-                                               }
-
-                                               @Override
-                                               public void onError(Throwable e) {
-                                                   Log.e("Shopping", "onError: 错误",e );
-                                               }
-
-                                               @Override
-                                               public void onNext(String string) {
-                                                   ResultBean resultBean = GsonUtils.getResultBeanByJson(string);
-                                                   //解析成对应的对象
-                                                   if (resultBean.isServiceResult()) {
-                                                      toHomePage();
-                                                   }
-                                               }
-                                           }
-                                );
-
-
+                sumbitcar();
                 break;
             default:
                 break;
         }
     }
 
+    private void sumbitcar() {List<GoodsVo> goodsVoList = new ArrayList<>();
+
+        for (int i = 0; i < selectedList.size(); i++) {
+            int j = selectedList.keyAt(i);
+            int id = selectedList.get(j).id;
+            int count = selectedList.get(j).count;
+            goodsVoList.add(new GoodsVo(id, count));
+        }
+        Orders order = new Orders();
+        if (null != BaseModelImpl.user) {
+            //TODO用户没有登陆
+            //Toast.makeText(ShoppingCartActivity.class, "请去登陆", Toast.LENGTH_LONG).show();
+            order.setUserId(BaseModelImpl.user.getId());
+        }
+
+        order.setShopId(mShopId);
+        OrderModelImpl mOrderModel = new OrderModelImpl();
+        Subscription subscription =
+                mOrderModel
+                        .placeOrder(order, GsonUtils.getJsonStr(goodsVoList))
+                        .map(new Func1<Result, String>() {
+
+                            @Override
+                            public String call(Result result) {
+                                return new String(result.data);
+                            }
+                        })
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribeOn(Schedulers.io())
+                        .subscribe(new Subscriber<String>() {
+                                       @Override
+                                       public void onCompleted() {
+
+
+                                       }
+
+                                       @Override
+                                       public void onError(Throwable e) {
+                                           Log.e("Shopping", "onError: 错误",e );
+                                       }
+
+                                       @Override
+                                       public void onNext(String string) {
+                                           ResultBean resultBean = GsonUtils.getResultBeanByJson(string);
+                                           //解析成对应的对象
+                                           if (resultBean.isServiceResult()) {
+                                               toHomePage();
+                                           }
+                                       }
+                                   }
+                        );
+        mSubscription.add(subscription);
+    }
+
     private void toHomePage() {
         startActivity(new Intent(this, HomeActivity.class));
+        this.finish();
     }
 
     //添加商品
