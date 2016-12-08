@@ -7,9 +7,12 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.kymjs.rxvolley.rx.Result;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,9 +22,20 @@ import butterknife.ButterKnife;
 import gdou.gdou_chb.R;
 import gdou.gdou_chb.adapter.OrderAdapter;
 import gdou.gdou_chb.contract.HomeContract;
+import gdou.gdou_chb.model.OrderModel;
+import gdou.gdou_chb.model.bean.Goods;
 import gdou.gdou_chb.model.bean.Orders;
+import gdou.gdou_chb.model.bean.ResultBean;
+import gdou.gdou_chb.model.impl.BaseModelImpl;
+import gdou.gdou_chb.model.impl.OrderModelImpl;
+import gdou.gdou_chb.util.GsonUtils;
 import gdou.gdou_chb.util.Java.BaseActivity;
 import gdou.gdou_chb.util.MVP.BaseFragment;
+import rx.Subscriber;
+import rx.Subscription;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Func1;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by Z1shiki on 2016/11/16.
@@ -102,7 +116,47 @@ RecyclerView rvOrder;
         //adapter.setOnRecyclerViewListener(this);
         //adapter.notifyDataSetChanged();
 
+        initData();
+
         return root;
+    }
+
+    /**
+     * 加载数据
+     */
+    private void initData() {
+
+        OrderModel orderModel = new OrderModelImpl();
+
+         Subscription subscription =
+                         orderModel.UserAllOrders(BaseModelImpl.user.getId())
+                                 .map(new Func1<Result, String>() {
+                                     @Override
+                                     public String call(Result result) {
+                                         return new String(result.data);
+                                     }
+                                 } )
+                                 .observeOn(AndroidSchedulers.mainThread())
+                                 .subscribeOn(Schedulers.io())
+                                 .subscribe(new Subscriber<String>() {
+                                                @Override
+                                                public void onCompleted() {
+                                                    Log.d("orderslist", "succ");
+                                                }
+
+                                                @Override
+                                                public void onError(Throwable e) {
+                                                    Log.d("orderslist","error");
+                                                }
+
+                                                @Override
+                                                public void onNext(String string) {
+                                                    ResultBean resultBean = GsonUtils.getResultBeanByJson(string);
+                                                    //解析成对应的对象
+                                                    List<Orders> ordersList = GsonUtils.getBeanFromResultBeanListMiss(resultBean, "ordersList", Orders[].class);
+                                                }
+                                            }
+                                 );
     }
 
     public List<Orders> mDataList(){
