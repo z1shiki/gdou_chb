@@ -28,7 +28,6 @@ public class HomeActivity extends BaseActivity {
     Toolbar mToolbar;
     @BindView(bottomBar)
     BottomBar mBottomBar;
-    private Activity mActivity;
 
 
     private HomeFragment mHomeFragment;
@@ -58,11 +57,12 @@ public class HomeActivity extends BaseActivity {
                         Log.i("sai", "Home ");
                         break;
                     case R.id.tab_order:
-                        startActivity(new Intent(mActivity,OrderActivity.class));
+                        jump2Activity(OrderActivity.class);
                         Log.i("sai", "order ");
                         break;
                     case R.id.tab_usercenter:
-                        startActivity(new Intent(mActivity,UserCenterActivity.class));
+                        Log.i("sai", "order ");
+                        jump2Activity(UserCenterActivity.class);
                         break;
                 }
             }
