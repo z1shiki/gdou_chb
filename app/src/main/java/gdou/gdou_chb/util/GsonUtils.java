@@ -77,9 +77,13 @@ public class GsonUtils {
     }
 
     public static <T> List<T> getBeanFromResultBeanListMiss(ResultBean resultBean, String key, Class<T[]> clazz) {
-        String jsonStr = resultBean.getResultParm().get(key).toString();
-        Log.d("jsonStr", "getBeanFromResultBeanListMiss: " + jsonStr);
-        return stringToArray(resultBean.getResultParm().get(key).toString(), clazz);
+
+        if (null != resultBean.getResultParm().get(key)) {
+            String jsonStr = resultBean.getResultParm().get(key).toString();
+            Log.d("jsonStr", "getBeanFromResultBeanListMiss: " + jsonStr);
+            return stringToArray(resultBean.getResultParm().get(key).toString(), clazz);
+        }
+        return null;
     }
     /**
      * 将Json数组解析成相应的映射对象列表

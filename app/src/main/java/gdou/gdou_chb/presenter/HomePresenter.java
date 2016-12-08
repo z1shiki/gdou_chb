@@ -122,6 +122,7 @@ public class HomePresenter implements HomeContract.ShopPresenter {
 //        执行定位并且
         //启动定位
         mLocationClient.startLocation();
+        if(mAddress!=null)changelocation();
 //        TODO: 和数据层的 地址 进行交互
 //        存入一个本地地址库来读取商家
 //        mHomeView.setLocation(维护的地址参数);
@@ -129,6 +130,7 @@ public class HomePresenter implements HomeContract.ShopPresenter {
 
     @Override
     public void changelocation() {
+        mHomeView.setLocation(mAddress);
 //        TODO:从本地地址数据库选择地址、
 //         新的地址的经纬发送给数据层、从数据层获得新的商家列表
 //        mHomeView.changeShoplist(维护的商家列表参数);  修改商店列表的方法

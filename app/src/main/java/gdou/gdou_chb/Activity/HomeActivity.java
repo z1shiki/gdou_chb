@@ -13,6 +13,7 @@ import com.roughike.bottombar.OnTabSelectListener;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import gdou.gdou_chb.R;
+import gdou.gdou_chb.model.impl.OrderModelImpl;
 import gdou.gdou_chb.presenter.HomePresenter;
 import gdou.gdou_chb.presenter.OrderPresenter;
 import gdou.gdou_chb.presenter.UsercenterPresenter;
@@ -67,7 +68,7 @@ public class HomeActivity extends BaseActivity {
                         if(mOrderFragment == null)
                             mOrderFragment = OrderFragment.newInstanceState();
                         ActivityUtils.replaceFragment(getFragmentManager(),mOrderFragment,R.id.contentFrame);
-                        new OrderPresenter(mOrderFragment);
+                        new OrderPresenter(mOrderFragment,new OrderModelImpl());
                         Log.i("sai", "order ");
 
                         break;

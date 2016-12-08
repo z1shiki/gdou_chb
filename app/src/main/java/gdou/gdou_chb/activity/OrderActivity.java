@@ -13,6 +13,7 @@ import com.roughike.bottombar.OnTabSelectListener;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import gdou.gdou_chb.R;
+import gdou.gdou_chb.model.impl.OrderModelImpl;
 import gdou.gdou_chb.presenter.OrderPresenter;
 import gdou.gdou_chb.ui.OrderFragment;
 import gdou.gdou_chb.util.Java.ActivityUtils;
@@ -48,7 +49,7 @@ public class OrderActivity extends BaseActivity {
                 mOrderFragment = OrderFragment.newInstanceState();
                 ActivityUtils.addFragmentToActivity(getFragmentManager(), mOrderFragment, contentFrame);
             }
-            new OrderPresenter(mOrderFragment);
+            new OrderPresenter(mOrderFragment,new OrderModelImpl());
 
 
             mBottomBar.setOnTabSelectListener(new OnTabSelectListener() {

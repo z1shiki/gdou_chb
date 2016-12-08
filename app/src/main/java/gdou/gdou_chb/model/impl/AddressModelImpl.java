@@ -45,9 +45,9 @@ public class AddressModelImpl implements AddressModel {
     @Override
     public Observable<Result> delete(Address address) {
         HttpParams params = new HttpParams();
-        params.put("addressId", String.valueOf(address.getAddressId()));
+        params.put("addressId", String.valueOf(address.getId()));
         return RxVolleyUtils.getInstance().delete(
-                BaseModelImpl.Service_URL +BaseModelImpl.delete_URL + address.getAddressId()
+                BaseModelImpl.Service_URL +BaseModelImpl.delete_URL + address.getId()
                 ,params);
     }
 
@@ -72,9 +72,9 @@ public class AddressModelImpl implements AddressModel {
     @Override
     public Observable<Result> update(Address address) {
         HttpParams params = new HttpParams();
-        params.put("addressId", String.valueOf(address.getAddressId()));
+        params.put("addressId", String.valueOf(address.getId()));
         return RxVolleyUtils.getInstance().post(
-                BaseModelImpl.Service_URL +BaseModelImpl.changeDefault_URL + address.getAddressId()
+                BaseModelImpl.Service_URL +BaseModelImpl.changeDefault_URL + address.getId()
                 ,params);
     }
 }

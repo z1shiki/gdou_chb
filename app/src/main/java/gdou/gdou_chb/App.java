@@ -25,7 +25,10 @@ public class App extends Application {
                         .build());
 
         mContext = getApplicationContext();
+
     }
+
+
 
     public static Context getContext(){
         return mContext;

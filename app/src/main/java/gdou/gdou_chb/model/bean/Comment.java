@@ -23,18 +23,18 @@ public class Comment implements Serializable {
     /**
      * 评论Id
      */
-    private long commentId;
+    private long id;
     /**
      * 评论内容
      */
     private String content;
 
-    public long getCommentId() {
-        return commentId;
+    public long getId() {
+        return id;
     }
 
-    public void setCommentId(long commentId) {
-        this.commentId = commentId;
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getContent() {

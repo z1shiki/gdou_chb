@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -87,7 +88,9 @@ public class HomeFragment extends BaseFragment implements HomeContract.ShopView 
 
         Toolbar mToolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
         mToolbar.setTitle("");
+        mPresenter.initAmap();
         ((BaseActivity)getActivity()).setSupportActionBar(mToolbar);
+        mPresenter.getGPS();
 
         //初始化列表
         //shop = Shop.createShopList(20);
@@ -130,8 +133,11 @@ public class HomeFragment extends BaseFragment implements HomeContract.ShopView 
 
 
     @Override
-    public void setLocation() {
-
+    public void setLocation(String string) {
+        Toolbar mtoolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
+        TextView mTitle = (TextView) getActivity().findViewById(R.id.toolbar_text);
+        mTitle.setText(string);
+        mtoolbar.setTitle((CharSequence) mTitle);
     }
 
     @Override

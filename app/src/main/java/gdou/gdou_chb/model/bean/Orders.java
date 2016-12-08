@@ -28,19 +28,32 @@ public class Orders implements Serializable{
     /**
      * 订单ID
      */
-    private long ordersId;
+    private long id;
 
     /**
      * 订单总价
      */
     private long totalPrice;
 
-    public long getOrdersId() {
-        return ordersId;
+    /**
+     * 订单状态
+     */
+    private int status;
+    /**
+     * 点单地址
+     */
+    private String address;
+    /**
+     * 点单用户名
+     */
+    private String name;
+
+    public long getId() {
+        return id;
     }
 
-    public void setOrdersId(long ordersId) {
-        this.ordersId = ordersId;
+    public void setId(long id) {
+        this.id = id;
     }
 
     public long getTotalPrice() {
@@ -81,5 +94,44 @@ public class Orders implements Serializable{
 
     public void setAddressId(long addressId) {
         this.addressId = addressId;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "Orders{" +
+                "userId=" + userId +
+                ", shopId=" + shopId +
+                ", addressId=" + addressId +
+                ", Number=" + Number +
+                ", id=" + id +
+                ", totalPrice=" + totalPrice +
+                ", status=" + status +
+                ", address='" + address + '\'' +
+                ", name='" + name + '\'' +
+                '}';
     }
 }

@@ -24,18 +24,18 @@ public interface OrderModel {
     /**
      * 用户完成订单
      *
-     * @param orders
+     * @param orderId
      * @return
      */
-    Observable<Result> doneOrders(Orders orders);
+    Observable<Result> doneOrders(Long orderId);
 
     /**
      * 用户申请退单
      *
-     * @param
+     * @param orderId
      * @return
      */
-    Observable<Result> rebackOrders(Orders orders);
+    Observable<Result> rebackOrders(Long orderId);
 
     /**
      * 查找用户所有订单

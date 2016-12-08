@@ -29,20 +29,20 @@ public class OrderModelImpl implements OrderModel {
     }
 
     @Override
-    public Observable<Result> doneOrders(Orders orders) {
+    public Observable<Result> doneOrders(Long orderId) {
         HttpParams params  = new HttpParams();
-        params.put("ordersId", String.valueOf(orders.getOrdersId()));
+        params.put("ordersId", orderId + "");
         return  RxVolleyUtils.getInstance().post(
-                BaseModelImpl.Service_URL + BaseModelImpl.doneOrders_URL + orders.getOrdersId()
+                BaseModelImpl.Service_URL + BaseModelImpl.doneOrders_URL + orderId
                 ,params);
     }
 
     @Override
-    public Observable<Result> rebackOrders(Orders orders) {
+    public Observable<Result> rebackOrders(Long orderId) {
         HttpParams params  = new HttpParams();
-        params.put("ordersId", String.valueOf(orders.getOrdersId()));
+        params.put("ordersId", orderId + "");
         return  RxVolleyUtils.getInstance().post(
-                BaseModelImpl.Service_URL + BaseModelImpl.rebackOrders_URL + orders.getOrdersId()
+                BaseModelImpl.Service_URL + BaseModelImpl.rebackOrders_URL + orderId
                 ,params);
     }
 

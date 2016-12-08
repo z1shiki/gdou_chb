@@ -16,6 +16,7 @@ import gdou.gdou_chb.activity.AddressActivity;
 import gdou.gdou_chb.activity.SafeCenterActivity;
 import gdou.gdou_chb.activity.SettingActivity;
 import gdou.gdou_chb.contract.HomeContract;
+import gdou.gdou_chb.model.impl.BaseModelImpl;
 import gdou.gdou_chb.util.MVP.BaseFragment;
 
 /**
@@ -30,6 +31,8 @@ public class UserCenterFragment extends BaseFragment implements HomeContract.Use
     TextView address;
     @BindView(R.id.setting)
     TextView setting;
+    @BindView(R.id.user_name)
+    TextView user_name;
     private HomeContract.UserCenterPresenter mPresenter;
 
     public UserCenterFragment() { //Requires empty public constructor
@@ -66,12 +69,17 @@ public class UserCenterFragment extends BaseFragment implements HomeContract.Use
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.usercenter_frag, container, false);
 
-
         //setup
         ButterKnife.bind(this, root);
 
+        initView();
 
         return root;
+    }
+
+    private void initView() {
+
+        user_name.setText(BaseModelImpl.user.getAccount());
     }
 
     @OnClick({R.id.safe_center, R.id.address, R.id.setting})

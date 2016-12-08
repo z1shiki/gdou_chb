@@ -32,7 +32,6 @@ public class LoginPresenter implements LoginContract.Presenter {
     private final  LoginContract.View mLoginView;
     private final UserModelImpl mUserModel;
     private final  CompositeSubscription mSubscription;
-    private Subscription subscription;
 
 
     //构建函数 Presenter和View相互保存对方实例
@@ -48,25 +47,17 @@ public class LoginPresenter implements LoginContract.Presenter {
 
     @Override
     public void subscribe() {
-//        login(mUser);
     }
 
     @Override
     public void unsubscribe() {
         mSubscription.clear();
-        mSubscription.unsubscribe();
-        Log.d("Rx---->login", "unsubscribe:All ");
-        if(subscription != null){
-            Log.d("unsubscribe: ", String.valueOf(subscription.isUnsubscribed()));
-            subscription.unsubscribe();
-            Log.d("Rx----->login", "unsubscribe:login ");
-        }
     }
 
     @Override
     public void login(User user) {
         mLoginView.loginprogress(true);
-        subscription =
+        Subscription subscription =
                 mUserModel
                         .doLogin(user)
                         .retry(5)
@@ -90,8 +81,6 @@ public class LoginPresenter implements LoginContract.Presenter {
                                        public void onError(Throwable e) {
                                            Log.d("Login==>","error");
                                            Log.e("Login Error", "登录错误信息", e);
-                                           mLoginView.jump2Activity(HomeActivity.class);
-
                                        }
 
                                        @Override
