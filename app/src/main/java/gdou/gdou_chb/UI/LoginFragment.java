@@ -21,11 +21,11 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import gdou.gdou_chb.R;
-import gdou.gdou_chb.activity.HomeActivity;
 import gdou.gdou_chb.contract.LoginContract;
 import gdou.gdou_chb.model.bean.User;
 import gdou.gdou_chb.util.Java.BaseActivity;
 import gdou.gdou_chb.util.MVP.BaseFragment;
+import gdou.gdou_chb.util.SnackbarUtil;
 
 /**
  * Created by Z1shiki on 2016/11/16.
@@ -105,8 +105,24 @@ public class LoginFragment extends BaseFragment implements LoginContract.View {
 
     @OnClick(R.id.sign_in_btn)
     public void onClick() {
-        mPresenter.login(new User(mAccount.getText().toString(),mPassword.getText().toString()));
+        doLogin();
 //        ;startActivity(new Intent(getActivity(),MainActivity.class));
+    }
+
+    private void doLogin() {
+        mPresenter.login(new User(mAccount.getText().toString(),mPassword.getText().toString()));
+    }
+
+    @Override
+    public void showSnackbar() {
+        SnackbarUtil.LongSnackbar(getActivity().findViewById(R.id.contentFrame),
+                "登录失败",4).setAction("重新登录",
+                new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                doLogin();
+            }
+        }).show();
     }
 
     //登陆的动画
@@ -134,12 +150,6 @@ public class LoginFragment extends BaseFragment implements LoginContract.View {
 
     }
 
-    @Override
-    public void showloginstate() {
-        //登录成功
-        showToast();
-        jump2Activity(HomeActivity.class);
-    }
 
     @Override
     public void populateAutoComplete() {

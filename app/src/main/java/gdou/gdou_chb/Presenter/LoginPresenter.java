@@ -13,14 +13,12 @@ import gdou.gdou_chb.model.bean.User;
 import gdou.gdou_chb.model.impl.BaseModelImpl;
 import gdou.gdou_chb.model.impl.UserModelImpl;
 import gdou.gdou_chb.util.GsonUtils;
-import rx.Observer;
 import rx.Subscriber;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 import rx.subscriptions.CompositeSubscription;
-import rx.subscriptions.Subscriptions;
 
 /**
  * Created by Z1shiki on 2016/11/16.
@@ -81,6 +79,7 @@ public class LoginPresenter implements LoginContract.Presenter {
                                        public void onError(Throwable e) {
                                            Log.d("Login==>","error");
                                            Log.e("Login Error", "登录错误信息", e);
+                                           mLoginView.showSnackbar();
                                        }
 
                                        @Override
