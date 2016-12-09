@@ -12,6 +12,7 @@ import java.util.List;
 
 import gdou.gdou_chb.R;
 import gdou.gdou_chb.model.bean.Orders;
+import gdou.gdou_chb.util.GsonUtils;
 
 /**
  * Created by Administrator on 2016/12/2/0002.
@@ -55,12 +56,17 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder>{
 
                 doneBtn.setOnClickListener(this);
                 backBtn.setOnClickListener(this);
+                itemView.setOnClickListener(this);
             }
 
             @Override
             public void onClick(View view) {
                 view.setEnabled(false);
-                myOnClickLinstener.btnClick(view.getId(), mOrderData.get(getPosition()).getId() );
+                if (view.getId() == R.id.confirm_receipt_btn || view.getId() == R.id.charge_back_btn) {
+                    myOnClickLinstener.btnClick(view.getId(), mOrderData.get(getPosition()).getId());
+                } else {
+                    myOnClickLinstener.ItemClick(GsonUtils.getJsonStr(mOrderData.get(getPosition())));
+                }
             }
 
         }
@@ -143,6 +149,12 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder>{
 
     public interface MyOnClickLinstener{
         void btnClick(int viewId, Long orderId);
+
+        /**
+         * Item的点击事件
+         * @param orderJson
+         */
+        void ItemClick(String orderJson);
     }
 
 }

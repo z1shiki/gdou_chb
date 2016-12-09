@@ -31,15 +31,8 @@ public class User implements Serializable {
      * 手机号
      */
     private long phone;
-    /**
-     * 头像
-     */
-    private long userImg;
 
-    /**
-     * 新头像
-     */
-    private long newUserImg;
+    private String userImage;
 
     public User(String account, String password) {
         this.account = account;
@@ -98,20 +91,13 @@ public class User implements Serializable {
         this.phone = phone;
     }
 
-    public long getUserImg() {
-        return userImg;
+
+    public String getUserImage() {
+        return userImage;
     }
 
-    public void setUserImg(long userImg) {
-        this.userImg = userImg;
-    }
-
-    public long getNewUserImg() {
-        return newUserImg;
-    }
-
-    public void setNewUserImg(long newUserImg) {
-        this.newUserImg = newUserImg;
+    public void setUserImage(String userImage) {
+        this.userImage = userImage;
     }
 
     @Override
@@ -123,8 +109,7 @@ public class User implements Serializable {
                 ", newPassword='" + newPassword + '\'' +
                 ", username='" + username + '\'' +
                 ", phone=" + phone +
-                ", userImg=" + userImg +
-                ", newUserImg=" + newUserImg +
+                ", userImage='" + userImage + '\'' +
                 '}';
     }
 }

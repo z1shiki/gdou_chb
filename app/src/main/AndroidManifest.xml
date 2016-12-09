@@ -52,6 +52,7 @@
         <activity android:name=".car.ShoppingCartActivity"/>
         <activity android:name=".activity.OrderActivity"/>
         <activity android:name=".activity.UserCenterActivity"/>
+        <activity android:name=".activity.OrderdetailActivity"/>
 
         <service android:name="com.amap.api.location.APSService"/><!-- ATTENTION: This was auto-generated to add Google Play services to your project for
      App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->

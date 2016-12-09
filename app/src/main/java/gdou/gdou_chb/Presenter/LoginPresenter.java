@@ -85,6 +85,7 @@ public class LoginPresenter implements LoginContract.Presenter {
 
                                        @Override
                                        public void onNext(String string) {
+                                           Log.d("Login", "onNext: " + string);
                                            ResultBean resultBean = GsonUtils.getResultBeanByJson(string);
                                            User user = GsonUtils.getBeanFromResultBean(resultBean, "user",User.class);
                                            BaseModelImpl.user = user;

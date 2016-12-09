@@ -72,12 +72,6 @@ public class ShoppingCartActivity extends AppCompatActivity implements View.OnCl
     private GoodModelImpl mGoodModel;
     private Long mShopId = 0l;          //默认为第一个用户
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        mSubscription.clear();
-    }
-
     private GoodsAdapter myAdapter;
     private SelectAdapter selectAdapter;
     private TypeAdapter typeAdapter;
@@ -93,7 +87,7 @@ public class ShoppingCartActivity extends AppCompatActivity implements View.OnCl
         nf.setMaximumFractionDigits(2);
         mHanlder = new Handler(getMainLooper());
 
-
+        mSubscription = new CompositeSubscription();
         selectedList = new SparseArray<>();//已选中的
         groupSelect = new SparseIntArray();
 
@@ -159,6 +153,7 @@ public class ShoppingCartActivity extends AppCompatActivity implements View.OnCl
         imgCart = (ImageView) findViewById(R.id.imgCart);
         anim_mask_layout = (RelativeLayout) findViewById(R.id.containerLayout);
         bottomSheetLayout = (BottomSheetLayout) findViewById(R.id.bottomSheetLayout);
+
 
         listView = (StickyListHeadersListView) findViewById(R.id.itemListView);
 
@@ -329,7 +324,7 @@ public class ShoppingCartActivity extends AppCompatActivity implements View.OnCl
                                        }
                                    }
                         );
-        mSubscription.add(subscription);
+//        mSubscription.add(subscription);
     }
 
     private void toHomePage() {
@@ -492,4 +487,9 @@ public class ShoppingCartActivity extends AppCompatActivity implements View.OnCl
         }
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mSubscription.clear();
+    }
 }

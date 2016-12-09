@@ -54,6 +54,7 @@ public class BaseModelImpl {
     public static final String doneOrders_URL = "orders/done/";
     public static final String rebackOrders_URL = "orders/reback/";
     public static final String userAllOrders_URL = "orders/user/";
+    public static final String ordersInfo_URL = "orders/ordersInfo/";
     /**
      * 评论
      * Comment_URL

@@ -3,6 +3,8 @@ package gdou.gdou_chb.model.impl;
 import com.kymjs.rxvolley.client.HttpParams;
 import com.kymjs.rxvolley.rx.Result;
 
+import java.io.File;
+
 import gdou.gdou_chb.model.UserModel;
 import gdou.gdou_chb.model.bean.User;
 import gdou.gdou_chb.util.RxVolleyUtils;
@@ -104,9 +106,9 @@ public class UserModelImpl extends BaseModelImpl implements UserModel {
     @Override
     public Observable<Result> changeUserImg(User user) {
         HttpParams params  = new HttpParams();
-        params.put("userImg", String.valueOf(user.getUserImg()));
+        //TODO 上次用户头像
+        params.put("file", new File("dddd"));
         params.put("id", String.valueOf(user.getId()));
-        params.put("newUserImg", String.valueOf(user.getNewUserImg()));
         return RxVolleyUtils.getInstance().post(
                 BaseModelImpl.Service_URL + BaseModelImpl.updateUser_URL
                 ,params);

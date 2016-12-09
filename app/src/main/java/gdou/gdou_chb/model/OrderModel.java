@@ -44,4 +44,11 @@ public interface OrderModel {
      * @return
      */
     Observable<Result> UserAllOrders(Long userId);
+
+    /**
+     * 查看订单详情
+     * @param orderId
+     * @return
+     */
+    Observable<Result> getOrderDetail(Long orderId);
 }

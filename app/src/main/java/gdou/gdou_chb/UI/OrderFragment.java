@@ -1,5 +1,6 @@
 package gdou.gdou_chb.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -15,30 +16,18 @@ import android.view.ViewGroup;
 import com.kymjs.rxvolley.rx.Result;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import gdou.gdou_chb.R;
+import gdou.gdou_chb.activity.OrderdetailActivity;
 import gdou.gdou_chb.adapter.OrderAdapter;
 import gdou.gdou_chb.contract.HomeContract;
-import gdou.gdou_chb.model.OrderModel;
-import gdou.gdou_chb.model.bean.Goods;
+
 import gdou.gdou_chb.model.bean.Orders;
-import gdou.gdou_chb.model.bean.ResultBean;
-import gdou.gdou_chb.model.impl.BaseModelImpl;
-import gdou.gdou_chb.model.impl.OrderModelImpl;
-import gdou.gdou_chb.util.GsonUtils;
+
 import gdou.gdou_chb.util.Java.BaseActivity;
 import gdou.gdou_chb.util.MVP.BaseFragment;
-import rx.Subscriber;
-import rx.Subscription;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Func1;
-import rx.schedulers.Schedulers;
-
-import static gdou.gdou_chb.R.id.confirm_receipt_btn;
-
 /**
  * Created by Z1shiki on 2016/11/16.
  */
@@ -168,6 +157,13 @@ RecyclerView rvOrder;
                     //处理退单
                     mPresenter.backOrder(orderId);
                 }
+            }
+
+            @Override
+            public void ItemClick(String orderJson) {
+                Intent intent = new Intent(getActivity(), OrderdetailActivity.class);
+                intent.putExtra("order", orderJson);
+                startActivity(intent);
             }
         };
         return onClick;
