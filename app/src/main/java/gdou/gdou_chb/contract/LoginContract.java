@@ -12,8 +12,8 @@ public interface LoginContract {
 
     interface View extends BaseView<Presenter>{
         void loginprogress(boolean show);
-        void showloginstate();
         void populateAutoComplete();
+        void showSnackbar();
     }
 
     interface Presenter extends BasePresenter{
