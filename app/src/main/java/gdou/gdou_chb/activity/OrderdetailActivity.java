@@ -2,12 +2,16 @@ package gdou.gdou_chb.activity;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.widget.TextView;
 
 import com.kymjs.rxvolley.rx.Result;
+import com.zhy.adapter.recyclerview.CommonAdapter;
+import com.zhy.adapter.recyclerview.base.ViewHolder;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -35,7 +39,7 @@ public class OrderdetailActivity extends BaseActivity {
     TextView orderNum;
     @BindView(R.id.shop_name)
     TextView shopName;
-    @BindView(R.id.rvorder_details)
+    @BindView(R.id.order_details_goodslist)
     RecyclerView rvorderDetails;
     @BindView(R.id.total_price)
     TextView totalPrice;
@@ -43,6 +47,8 @@ public class OrderdetailActivity extends BaseActivity {
     private CompositeSubscription mSubscription;
     private Orders orders;
     private OrderModel ordermodel;
+    private List<OrderDetail> goodsList;
+    private CommonAdapter<OrderDetail> mAdapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -52,12 +58,30 @@ public class OrderdetailActivity extends BaseActivity {
         mSubscription = new CompositeSubscription();
 
         initData();
+
+        initView();
+    }
+
+    private void initView() {
+        rvorderDetails.setLayoutManager(new LinearLayoutManager(this));
+        mAdapter = new CommonAdapter<OrderDetail>(this, R.layout.item_order_details, goodsList) {
+            @Override
+            protected void convert(ViewHolder holder, OrderDetail orderDetail, int position) {
+                holder.setText(R.id.good_name, orderDetail.getGoodName());
+                holder.setText(R.id.good_number, orderDetail.getNumber() + "");
+                holder.setText(R.id.good_price, orderDetail.getPrice() + "");
+            }
+        };
+        rvorderDetails.setAdapter(mAdapter);
+
     }
 
     private void initData() {
+        goodsList = new ArrayList<>();
         if (null == getIntent().getStringExtra("order"))
             return;
         orders = GsonUtils.parseJsonWithGson(getIntent().getStringExtra("order"), Orders.class);
+
         initViewData();
         ordermodel = new OrderModelImpl();
         ordermodel.getOrderDetail(orders.getId())
@@ -89,7 +113,8 @@ public class OrderdetailActivity extends BaseActivity {
                                                                    List<OrderDetail> orderDetaList = GsonUtils
                                                                            .getBeanFromResultBeanListMiss(resultBean,"orderDetailList",
                                                                                    OrderDetail[].class);
-
+                                                                   goodsList.addAll(orderDetaList);
+                                                                   mAdapter.notifyDataSetChanged();
                                                                }
                                                            }
                                                 );

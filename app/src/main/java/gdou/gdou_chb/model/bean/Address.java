@@ -15,7 +15,7 @@ public class Address implements Serializable{
     /**
      * 地址名称
      */
-    private String address;
+    private String addressName;
     /**
      * 纬度
      */
@@ -35,7 +35,7 @@ public class Address implements Serializable{
     /**
      * 手机号
      */
-    private long phone;
+    private String phone;
 
 
     public long getId() {
@@ -46,12 +46,12 @@ public class Address implements Serializable{
         this.id = id;
     }
 
-    public String getAddress() {
-        return address;
+    public String getAddressName() {
+        return addressName;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setAddressName(String addressName) {
+        this.addressName = addressName;
     }
 
     public double getLatitude() {
@@ -86,11 +86,11 @@ public class Address implements Serializable{
         this.userId = userId;
     }
 
-    public long getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(long phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 
@@ -98,12 +98,12 @@ public class Address implements Serializable{
     public String toString() {
         return "Address{" +
                 "id=" + id +
-                ", address='" + address + '\'' +
+                ", addressName='" + addressName + '\'' +
                 ", latitude=" + latitude +
                 ", longitude=" + longitude +
                 ", name='" + name + '\'' +
                 ", userId=" + userId +
-                ", phone=" + phone +
+                ", phone='" + phone + '\'' +
                 '}';
     }
 }

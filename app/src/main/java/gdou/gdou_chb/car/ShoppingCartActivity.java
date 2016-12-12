@@ -1,7 +1,6 @@
 package gdou.gdou_chb.car;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -26,10 +25,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.flipboard.bottomsheet.BottomSheetLayout;
-import com.google.android.gms.appindexing.Action;
-import com.google.android.gms.appindexing.AppIndex;
-import com.google.android.gms.appindexing.Thing;
-import com.google.android.gms.common.api.GoogleApiClient;
+
 import com.kymjs.rxvolley.rx.Result;
 
 import java.text.NumberFormat;
@@ -174,12 +170,12 @@ public class ShoppingCartActivity extends AppCompatActivity implements View.OnCl
             @Override
             public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
                 //TODO有问题
-                GoodsItem item = dataList.get(firstVisibleItem);
-                if (typeAdapter.selectTypeId != item.typeId) {
-                    typeAdapter.selectTypeId = item.typeId;
-                    typeAdapter.notifyDataSetChanged();
-                    rvType.smoothScrollToPosition(getSelectedGroupPosition(item.typeId));
-                }
+//                GoodsItem item = dataList.get(firstVisibleItem);
+//                if (typeAdapter.selectTypeId != item.typeId) {
+//                    typeAdapter.selectTypeId = item.typeId;
+//                    typeAdapter.notifyDataSetChanged();
+//                    rvType.smoothScrollToPosition(getSelectedGroupPosition(item.typeId));
+//                }
             }
         });
 

@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <RelativeLayout
+        android:background="#87d4e9"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -17,7 +18,7 @@
             android:gravity="start"/>
 
         <TextView
-            android:id="@+id/price"
+            android:id="@+id/good_price"
             android:layout_width="50dp"
             android:padding="8dp"
             android:layout_height="wrap_content"
@@ -26,13 +27,13 @@
             android:text="11"/>
 
         <TextView
-            android:id="@+id/number"
+            android:id="@+id/good_number"
             android:padding="8dp"
             android:layout_height="wrap_content"
             android:layout_width="50dp"
             android:text="1"
             android:textSize="18sp"
-            android:layout_toStartOf="@id/price"/>
+            android:layout_toStartOf="@id/good_price"/>
 
     </RelativeLayout>
 
