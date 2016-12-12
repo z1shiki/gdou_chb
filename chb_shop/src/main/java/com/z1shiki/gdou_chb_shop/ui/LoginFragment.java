@@ -1,4 +1,4 @@
-package gdou.gdou_chb.ui;
+package com.z1shiki.gdou_chb_shop.ui;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -17,15 +17,17 @@ import android.widget.ProgressBar;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.z1shiki.gdou_chb_shop.R;
+import com.z1shiki.gdou_chb_shop.contract.LoginContract;
+import com.z1shiki.gdou_chb_shop.model.bean.User;
+import com.z1shiki.gdou_chb_shop.util.Java.BaseActivity;
+import com.z1shiki.gdou_chb_shop.util.MVP.BaseFragment;
+import com.z1shiki.gdou_chb_shop.util.SnackbarUtil;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import gdou.gdou_chb.R;
-import gdou.gdou_chb.contract.LoginContract;
-import gdou.gdou_chb.model.bean.User;
-import gdou.gdou_chb.util.Java.BaseActivity;
-import gdou.gdou_chb.util.MVP.BaseFragment;
-import gdou.gdou_chb.util.SnackbarUtil;
+
 
 /**
  * Created by Z1shiki on 2016/11/16.

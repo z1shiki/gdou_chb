@@ -1,0 +1,97 @@
+package com.z1shiki.gdou_chb_shop.presenter;
+
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.util.Log;
+
+import com.kymjs.rxvolley.rx.Result;
+import com.z1shiki.gdou_chb_shop.activity.HomeActivity;
+import com.z1shiki.gdou_chb_shop.contract.LoginContract;
+import com.z1shiki.gdou_chb_shop.model.bean.ResultBean;
+import com.z1shiki.gdou_chb_shop.model.bean.User;
+import com.z1shiki.gdou_chb_shop.model.impl.BaseModelImpl;
+import com.z1shiki.gdou_chb_shop.model.impl.UserModelImpl;
+import com.z1shiki.gdou_chb_shop.util.GsonUtils;
+
+import rx.Subscriber;
+import rx.Subscription;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Func1;
+import rx.schedulers.Schedulers;
+import rx.subscriptions.CompositeSubscription;
+
+/**
+ * Created by Z1shiki on 2016/11/16.
+ */
+
+public class LoginPresenter implements LoginContract.Presenter {
+
+    @NonNull
+    private final  LoginContract.View mLoginView;
+    private final UserModelImpl mUserModel;
+    private final  CompositeSubscription mSubscription;
+
+
+    //构建函数 Presenter和View相互保存对方实例
+    public LoginPresenter(@Nullable UserModelImpl user,@NonNull LoginContract.View loginView) {
+        mUserModel = user;
+        mLoginView = loginView;
+        //TODO: RxJava 异步调用的配置的初始化
+
+        mSubscription = new CompositeSubscription();
+        mLoginView.setPresenter(this);
+
+    }
+
+    @Override
+    public void subscribe() {
+    }
+
+    @Override
+    public void unsubscribe() {
+        mSubscription.clear();
+    }
+
+    @Override
+    public void login(User user) {
+        mLoginView.loginprogress(true);
+        Subscription subscription =
+                mUserModel
+                        .doLogin(user)
+                        .retry(5)
+                        .map(new Func1<Result, String>() {
+
+                            @Override
+                            public String call(Result result) {
+                                return new String(result.data);
+                            }
+                        } )
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribeOn(Schedulers.io())
+                        .subscribe(new Subscriber<String>() {
+                                       @Override
+                                       public void onCompleted() {
+                                           Log.d("Login", "succ");
+                                           mLoginView.jump2Activity(HomeActivity.class);
+                                       }
+
+                                       @Override
+                                       public void onError(Throwable e) {
+                                           Log.d("Login==>","error");
+                                           Log.e("Login Error", "登录错误信息", e);
+                                           mLoginView.showSnackbar();
+                                       }
+
+                                       @Override
+                                       public void onNext(String string) {
+                                           Log.d("Login", "onNext: " + string);
+                                           ResultBean resultBean = GsonUtils.getResultBeanByJson(string);
+                                           User user = GsonUtils.getBeanFromResultBean(resultBean, "user",User.class);
+                                           BaseModelImpl.user = user;
+                                           Log.d("user", GsonUtils.getJsonStr(user));
+                                       }
+                                   }
+                        );
+        mSubscription.add(subscription);
+    }
+}

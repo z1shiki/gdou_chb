@@ -1,4 +1,4 @@
-package gdou.gdou_chb.util.MVP;
+package com.z1shiki.gdou_chb_shop.util.MVP;
 
 import android.app.Fragment;
 import android.content.Intent;

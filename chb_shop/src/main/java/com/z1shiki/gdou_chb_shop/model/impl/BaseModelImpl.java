@@ -1,7 +1,8 @@
-package gdou.gdou_chb.model.impl;
+package com.z1shiki.gdou_chb_shop.model.impl;
 
-import gdou.gdou_chb.model.bean.Address;
-import gdou.gdou_chb.model.bean.User;
+
+import com.z1shiki.gdou_chb_shop.model.bean.Address;
+import com.z1shiki.gdou_chb_shop.model.bean.User;
 
 /**
  * Created by WT on 2016/12/1.

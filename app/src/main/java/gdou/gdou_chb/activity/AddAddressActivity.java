@@ -5,7 +5,6 @@ import android.support.annotation.Nullable;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.kymjs.rxvolley.rx.Result;
 
@@ -21,9 +20,11 @@ import gdou.gdou_chb.model.impl.BaseModelImpl;
 import gdou.gdou_chb.util.GsonUtils;
 import gdou.gdou_chb.util.Java.BaseActivity;
 import rx.Subscriber;
+import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Func1;
 import rx.schedulers.Schedulers;
+import rx.subscriptions.CompositeSubscription;
 
 /**
  * Created by WT on 2016/12/9.
@@ -41,6 +42,7 @@ public class AddAddressActivity extends BaseActivity {
     EditText input_userName;
 
     private AddressModel addressModel;
+    CompositeSubscription mSubscription;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -48,6 +50,7 @@ public class AddAddressActivity extends BaseActivity {
         setContentView(R.layout.activity_add_address);
 
         ButterKnife.bind(this);
+        mSubscription = new CompositeSubscription();
         initData();
 
     }
@@ -59,12 +62,13 @@ public class AddAddressActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        mSubscription.clear();
     }
 
     @OnClick(R.id.submit)
     public void onClick() {
-        addressModel.addAddress(setData())
-                .map(new Func1<Result, String>() {
+        Subscription subscription = addressModel.addAddress(setData())
+                        .map(new Func1<Result, String>() {
 
                                                     @Override
                                                     public String call(Result result) {
@@ -94,6 +98,7 @@ public class AddAddressActivity extends BaseActivity {
                                                                }
                                                            }
                                                 );
+        mSubscription.add(subscription);
     }
 
     private Address setData() {

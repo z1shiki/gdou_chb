@@ -1,4 +1,4 @@
-package gdou.gdou_chb.util.Java;
+package com.z1shiki.gdou_chb_shop.util.Java;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,6 +19,10 @@ public class BaseActivity extends AppCompatActivity {
 
     public void jump2Activity(Class cla) {
         startActivity(new Intent(this, cla));
+    }
+    public void DontLookBackAgain(Class cla){
+        startActivity(new Intent(this, cla));
+        this.finish();
     }
     @Override
     protected void onDestroy() {
