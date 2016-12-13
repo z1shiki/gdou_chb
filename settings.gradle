@@ -1,1 +1,1 @@
-include ':app', ':chb_shop'
+include ':app'

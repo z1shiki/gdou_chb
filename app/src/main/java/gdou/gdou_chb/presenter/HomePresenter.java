@@ -62,7 +62,7 @@ public class HomePresenter implements HomeContract.ShopPresenter {
 
     @Override
     public void unsubscribe() {
-
+        mSubscription.clear();
     }
 
     @Override

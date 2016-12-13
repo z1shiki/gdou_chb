@@ -10,9 +10,9 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -133,9 +133,7 @@ public class HomeFragment extends BaseFragment implements HomeContract.ShopView 
     @Override
     public void setLocation(String string) {
         Toolbar mtoolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
-        TextView mTitle = (TextView) getActivity().findViewById(R.id.toolbar_text);
-        mTitle.setText(string);
-        mtoolbar.setTitle((CharSequence) mTitle);
+        mtoolbar.setTitle(string);
     }
 
     @Override
@@ -153,15 +151,22 @@ public class HomeFragment extends BaseFragment implements HomeContract.ShopView 
 
     @Override
     public void choiceShop() {
-        Log.d("你的点击了"," 你点击了");
-
     }
 
     @Override
     public void showSnackbar() {
 
     }
-
-
+    //对NavigationIcon添加点击
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+//            Intent intent = new Intent(getActivity(), MapActivity.class);
+//            startActivity(intent);
+            mPresenter.getGPS();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }
 

@@ -44,6 +44,8 @@ public class HomeActivity extends BaseActivity {
         setContentView(R.layout.home_act);
         ButterKnife.bind(this);
         mToolbar.setTitle(null);
+        mToolbar.setNavigationIcon(R.drawable.ic_location);
+
         mHomeFragment =
                 (HomeFragment) getFragmentManager().findFragmentById(contentFrame);
         if (mHomeFragment == null) {
