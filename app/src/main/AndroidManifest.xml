@@ -29,8 +29,9 @@
         android:theme="@style/AppTheme">
 
         <meta-data android:name="com.amap.api.v2.apikey"
-                   android:value="193232f7fe77eb6cdfa68d16b50cebd7">
+                   android:value="810a9ff8fb2bd8db0171f5b412e8b349	">
         </meta-data>
+
         <activity android:name=".activity.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -54,11 +55,13 @@
         <activity android:name=".activity.UserCenterActivity"/>
         <activity android:name=".activity.OrderdetailActivity"/>
 
-        <service android:name="com.amap.api.location.APSService"/><!-- ATTENTION: This was auto-generated to add Google Play services to your project for
-     App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
-        <meta-data
-            android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version" />
+        <service android:name="com.amap.api.location.APSService"/>
+
+        <!--&lt;!&ndash; ATTENTION: This was auto-generated to add Google Play services to your project for-->
+     <!--App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. &ndash;&gt;-->
+        <!--<meta-data-->
+            <!--android:name="com.google.android.gms.version"-->
+            <!--android:value="@integer/google_play_services_version" />-->
 
     </application>
 

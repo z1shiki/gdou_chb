@@ -7,4 +7,5 @@ package gdou.gdou_chb.util.MVP;
 public interface BaseView<P> {
     void setPresenter(P presenter);
     void jump2Activity(Class cla);
+    void DontLookBackAgain(Class cla);
 }

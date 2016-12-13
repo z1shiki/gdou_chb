@@ -12,6 +12,7 @@ import com.kymjs.rxvolley.rx.Result;
 
 import java.util.List;
 
+import gdou.gdou_chb.App;
 import gdou.gdou_chb.contract.HomeContract;
 import gdou.gdou_chb.model.bean.ResultBean;
 import gdou.gdou_chb.model.bean.Shop;
@@ -45,11 +46,10 @@ public class HomePresenter implements HomeContract.ShopPresenter {
     private Context mContext;
     private ShopModelImpl mShopModel;
 
-    public HomePresenter(Context context, @Nullable HomeContract.ShopView homeView)
+    public HomePresenter(@Nullable HomeContract.ShopView homeView,ShopModelImpl model)
     {
         mHomeView = homeView;
-        mShopModel = new ShopModelImpl();
-        mContext = context;
+        mShopModel = model;
         mSubscription = new CompositeSubscription();
         mHomeView.setPresenter(this);
     }
@@ -67,9 +67,8 @@ public class HomePresenter implements HomeContract.ShopPresenter {
 
     @Override
     public void initAmap() {
-        //TODO:初始化参数
         //初始化定位
-        mLocationClient = new AMapLocationClient(mContext);
+        mLocationClient = new AMapLocationClient(App.getContext());
         //设置定位回调监听
         mLocationClient.setLocationListener(new AMapLocationListener() {
             @Override
@@ -77,15 +76,16 @@ public class HomePresenter implements HomeContract.ShopPresenter {
                 if (aMapLocation != null) {
                     if (aMapLocation.getErrorCode() == 0) {
                         //可在其中解析amapLocation获取相应内容。
-//                        TODO: 解析地址并打包与数据层交互
                         mLatitude = aMapLocation.getLatitude();//获取纬度
                         mLongitude = aMapLocation.getLongitude();//获取经度
                         mAddress = aMapLocation.getAddress();//获取地址
+                        Log.e("Amap", "onLocationChanged: "+mAddress.toString() );
                     }else {
                         //定位失败时，可通过ErrCode（错误码）信息来确定失败的原因，errInfo是错误信息，详见错误码表。
                         Log.e("AmapError","location Error, ErrCode:"
                                 + aMapLocation.getErrorCode() + ", errInfo:"
                                 + aMapLocation.getErrorInfo());
+                        mHomeView.showSnackbar(0);
                     }
                 }
             }
@@ -162,6 +162,7 @@ public class HomePresenter implements HomeContract.ShopPresenter {
                                        public void onError(Throwable e) {
                                            Log.e("Shop Error", "onError: ", e);
                                            Log.d("Shop","error");
+                                           mHomeView.showSnackbar(1);
                                        }
 
                                        @Override

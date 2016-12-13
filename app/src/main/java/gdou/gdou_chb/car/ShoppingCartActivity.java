@@ -42,6 +42,7 @@ import gdou.gdou_chb.model.impl.BaseModelImpl;
 import gdou.gdou_chb.model.impl.GoodModelImpl;
 import gdou.gdou_chb.model.impl.OrderModelImpl;
 import gdou.gdou_chb.util.GsonUtils;
+import gdou.gdou_chb.util.SnackbarUtil;
 import rx.Subscriber;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
@@ -307,6 +308,8 @@ public class ShoppingCartActivity extends AppCompatActivity implements View.OnCl
 
                                        @Override
                                        public void onError(Throwable e) {
+                                           SnackbarUtil.LongSnackbar(findViewById(R.id.bottom_sheet)
+                                                   , "读取商品失败",4).show();
                                            Log.e("Shopping", "onError: 错误",e );
                                        }
 

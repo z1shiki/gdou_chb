@@ -58,7 +58,6 @@ public class LoginPresenter implements LoginContract.Presenter {
         Subscription subscription =
                 mUserModel
                         .doLogin(user)
-                        .retry(5)
                         .map(new Func1<Result, String>() {
 
                             @Override
@@ -72,7 +71,7 @@ public class LoginPresenter implements LoginContract.Presenter {
                                        @Override
                                        public void onCompleted() {
                                            Log.d("Login", "succ");
-                                           mLoginView.jump2Activity(HomeActivity.class);
+                                           mLoginView.DontLookBackAgain(HomeActivity.class);
                                        }
 
                                        @Override
@@ -80,6 +79,7 @@ public class LoginPresenter implements LoginContract.Presenter {
                                            Log.d("Login==>","error");
                                            Log.e("Login Error", "登录错误信息", e);
                                            mLoginView.showSnackbar();
+                                           mLoginView.loginprogress(false);
                                        }
 
                                        @Override

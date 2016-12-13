@@ -19,7 +19,6 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 import rx.subscriptions.CompositeSubscription;
-import rx.subscriptions.Subscriptions;
 
 /**
  * Created by Z1shiki on 2016/12/5.
@@ -68,6 +67,7 @@ public class OrderPresenter implements HomeContract.OrderPresenter {
 
                                        @Override
                                        public void onError(Throwable e) {
+                                           mOrderView.showSnackbar(0);
                                            Log.d("orderslist","error");
                                            Log.e("orderList", "onError: 错误信息",e );
                                        }
@@ -107,6 +107,7 @@ public class OrderPresenter implements HomeContract.OrderPresenter {
 
                                @Override
                                public void onError(Throwable e) {
+                                   mOrderView.showSnackbar(1);
                                    Log.d("OrderDone","error");
                                    Log.e("OrderDone", "onError: 错误信息",e );
                                }
@@ -143,6 +144,7 @@ public class OrderPresenter implements HomeContract.OrderPresenter {
 
                                @Override
                                public void onError(Throwable e) {
+                                   mOrderView.showSnackbar(2);
                                    Log.d("OrderBack","error");
                                    Log.e("OrderBack", "onError: 错误信息",e );
                                }

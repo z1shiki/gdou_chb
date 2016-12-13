@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <Button
+        android:text="提交"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/submit"
+        android:background="@color/accent_material_light"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="83dp"
+        android:id="@+id/address_addressname"
+        android:hint="地址名称" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="phone"
+        android:ems="10"
+        android:layout_below="@+id/address_addressname"
+        android:layout_alignEnd="@+id/address_addressname"
+        android:layout_marginTop="44dp"
+        android:id="@+id/address_phone"
+        android:hint="手机号" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:layout_below="@+id/address_phone"
+        android:layout_alignEnd="@+id/address_phone"
+        android:layout_marginTop="37dp"
+        android:id="@+id/address_username"
+        android:hint="用户名" />
+</RelativeLayout>

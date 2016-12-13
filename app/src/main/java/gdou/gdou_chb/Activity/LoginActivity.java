@@ -31,6 +31,8 @@ public class LoginActivity extends BaseActivity {
         ButterKnife.bind(this);
         mToolbarText.setText("登录");
 
+
+
         LoginFragment mLoginFragment =
                 (LoginFragment) getFragmentManager().findFragmentById(R.id.contentFrame);
         if (mLoginFragment == null) {

@@ -5,15 +5,16 @@ import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 
 import com.roughike.bottombar.BottomBar;
+import com.roughike.bottombar.OnTabReselectListener;
 import com.roughike.bottombar.OnTabSelectListener;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import gdou.gdou_chb.R;
 import gdou.gdou_chb.model.impl.OrderModelImpl;
+import gdou.gdou_chb.model.impl.ShopModelImpl;
 import gdou.gdou_chb.presenter.HomePresenter;
 import gdou.gdou_chb.presenter.OrderPresenter;
 import gdou.gdou_chb.presenter.UsercenterPresenter;
@@ -52,7 +53,7 @@ public class HomeActivity extends BaseActivity {
             mHomeFragment = HomeFragment.newInstanceState();
             ActivityUtils.addFragmentToActivity(getFragmentManager(), mHomeFragment, contentFrame);
         }
-        new HomePresenter(this, mHomeFragment);
+        new HomePresenter(mHomeFragment,new ShopModelImpl());
 
 
         mBottomBar.setOnTabSelectListener(new OnTabSelectListener() {
@@ -63,19 +64,43 @@ public class HomeActivity extends BaseActivity {
                         if(mHomeFragment == null)
                             mHomeFragment= HomeFragment.newInstanceState();
                         ActivityUtils.replaceFragment(getFragmentManager(),mHomeFragment,R.id.contentFrame);
-                        new HomePresenter(getParent(),mHomeFragment);
-                        Log.i("sai", "Home ");
+                        new HomePresenter(mHomeFragment,new ShopModelImpl());
                         break;
                     case R.id.tab_order:
                         if(mOrderFragment == null)
                             mOrderFragment = OrderFragment.newInstanceState();
                         ActivityUtils.replaceFragment(getFragmentManager(),mOrderFragment,R.id.contentFrame);
                         new OrderPresenter(mOrderFragment,new OrderModelImpl());
-                        Log.i("sai", "order ");
 
                         break;
                     case R.id.tab_usercenter:
-                        Log.i("sai", "order ");
+                        if(mCenterFragment == null)
+                            mCenterFragment = UserCenterFragment.newInstanceState();
+                        ActivityUtils.replaceFragment(getFragmentManager(),mCenterFragment,R.id.contentFrame);
+                        new UsercenterPresenter(mCenterFragment);
+                        break;
+                }
+            }
+        });
+
+        mBottomBar.setOnTabReselectListener(new OnTabReselectListener() {
+            @Override
+            public void onTabReSelected(@IdRes int tabId) {
+                switch (tabId){
+                    case R.id.tab_home:
+                        if(mHomeFragment == null)
+                            mHomeFragment= HomeFragment.newInstanceState();
+                        ActivityUtils.replaceFragment(getFragmentManager(),mHomeFragment,R.id.contentFrame);
+                        new HomePresenter(mHomeFragment,new ShopModelImpl());
+                        break;
+                    case R.id.tab_order:
+                        if(mOrderFragment == null)
+                            mOrderFragment = OrderFragment.newInstanceState();
+                        ActivityUtils.replaceFragment(getFragmentManager(),mOrderFragment,R.id.contentFrame);
+                        new OrderPresenter(mOrderFragment,new OrderModelImpl());
+
+                        break;
+                    case R.id.tab_usercenter:
                         if(mCenterFragment == null)
                             mCenterFragment = UserCenterFragment.newInstanceState();
                         ActivityUtils.replaceFragment(getFragmentManager(),mCenterFragment,R.id.contentFrame);
