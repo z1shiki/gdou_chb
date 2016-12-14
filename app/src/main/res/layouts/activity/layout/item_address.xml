@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:background="@color/colorPrimaryDark"
+    android:layout_marginBottom="10dp"
+    android:paddingBottom="10dp"
+    android:padding="10dp"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:text="地址名称"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/address_item_address_name"
+        android:layout_weight="0.03"
+        android:textSize="18sp"
+        android:layout_gravity="center"
+        android:gravity="center|left"
+        android:typeface="sans" />
+
+    <TextView
+        android:text="收货人姓名"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/address_item_address_phone"
+        android:gravity="center|left"
+        android:textSize="14sp"
+        android:layout_below="@+id/address_item_address_name"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="19dp" />
+
+    <TextView
+        android:text="收货人地址"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/address_item_address_username"
+        android:textSize="14sp"
+        android:gravity="center|left"
+        android:layout_alignBaseline="@+id/address_item_address_phone"
+        android:layout_alignBottom="@+id/address_item_address_phone"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="148dp" />
+</RelativeLayout>
