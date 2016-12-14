@@ -8,8 +8,6 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
 
-
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -27,6 +25,8 @@ public class GsonUtils {
      * 将Json数据解析成相应的映射对象
      */
     public static <T> T parseJsonWithGson(String jsonData, Class<T> type) {
+        jsonData = removeAllBadCode(jsonData, "/imageware/");
+        Log.d("JsonData", "parseJsonWithGson: " + jsonData);
         T result = gson.fromJson(jsonData, type);
         return result;
     }
@@ -40,6 +40,16 @@ public class GsonUtils {
         return parseJsonWithGson(jsonStr, ResultBean.class);
     }
 
+    /**
+     * 清除指点的字符串
+     * @param jsonStr
+     * @param badCode
+     * @return
+     */
+    public static String removeAllBadCode(String jsonStr, String badCode) {
+        jsonStr = jsonStr.trim();
+        return jsonStr.replace(badCode, "");
+    }
     /**
      * 获取ResultBean中的实体
      * @param resultBean
@@ -89,6 +99,8 @@ public class GsonUtils {
      * 将Json数组解析成相应的映射对象列表
      */
     public static <T> List<T> parseJsonArrayWithGson(String jsonData, Class<T> type) {
+        jsonData = removeAllBadCode(jsonData, "/imageware/");
+        Log.d("JsonData", "parseJsonWithGson: " + jsonData);
         List<T> result = gson.fromJson(jsonData,  new TypeToken<ArrayList<T>>(){}.getType());
         return result;
     }

@@ -3,219 +3,155 @@ package gdou.gdou_chb.model.bean;
 import java.io.Serializable;
 
 /**
- * 商店
- *
- * @author Administrator
- * @version 1.0
- * @updated 22-十一月-2016 20:16:39
+ * Created by WT on 2016/11/29.
  */
-public class Shop implements Serializable {
 
-    /**
-     * 营业时间
-     */
-    private int openTime;
-    /**
-     * 配送费
-     */
-    private int distributionFee;
-    /**
-     * 是否营业
-     */
-    private boolean isOnline;
-    /**
-     * 评分
-     */
-    private int score;
-    /**
-     * 起送价
-     */
-    private int startingPrice;
-    /**
-     * 关闭时间，没有营业时间
-     */
-    private int stopTime;
-    /**
-     * 纬度
-     */
-    private double latitude;
-    /**
-     * 经度
-     */
-    private double longitude;
-    /**
-     * 商店名称
-     */
-    private String shopName;
-    /**
-     * 营业许可
-     */
-    private int license;
-    /**
-     * 商店图片
-     */
-    private String shopImg;
-    /**
-     * 当商店处于非营业状态时候，永远不会被搜索出来 当商店处于营业状态时候，并且处于当天的营业时间， 用户才能够下订单，不处于营业时间的商店也能够被搜索，
-     * 被后台管理强制处于非营业状态的商家无法自己改变状态
-     * 1.商店营业
-     * 2.商店关闭
-     * 3.商店被后台管理关闭
-     */
-    private int status;
+public class Shop  implements Serializable{
+	/**
+	 * 商店Id
+	 */
+	private long id;
 
-    public long getId() {
-        return Id;
-    }
+	/**
+	 * 起送价
+	 */
+	private int startingPrice;
+	/**
+	 * 配送费
+	 */
+	private int distributionFee;
+	/**
+	 * 纬度
+	 */
+	private double latitude;
+	/**
+	 * 经度
+	 */
+	private double loongitude;
+	/**
+	 * 商店名字
+	 */
+	private String shopName;
+	/**
+	 * 开店时间
+	 */
+	private String openTime;
+	/**
+	 * 关店时间
+	 */
+	private String stopTime;
 
-    public void setId(long id) {
-        Id = id;
-    }
+	private String shopImg;
 
-    private long Id;
+	private String createdDate;
 
     private long businessId;
 
-    /**
-     * Getter for property 'businessId'.
-     *
-     * @return Value for property 'businessId'.
-     */
     public long getBusinessId() {
         return businessId;
     }
 
-    /**
-     * Setter for property 'businessId'.
-     *
-     * @param businessId Value to set for property 'businessId'.
-     */
     public void setBusinessId(long businessId) {
         this.businessId = businessId;
     }
 
-    public int getLicense() {
-        return license;
-    }
+    public Shop(String shopName) {
+		this.shopName = shopName;
+	}
 
-    public void setLicense(int license) {
-        this.license = license;
-    }
+	public long getId() {
+		return id;
+	}
 
-    /**
-     * Getter for property 'shopImg'.
-     *
-     * @return Value for property 'shopImg'.
-     */
-    public String getShopImg() {
-        return shopImg;
-    }
+	public void setId(long id) {
+		this.id = id;
+	}
 
-    /**
-     * Setter for property 'shopImg'.
-     *
-     * @param shopImg Value to set for property 'shopImg'.
-     */
-    public void setShopImg(String shopImg) {
-        this.shopImg = shopImg;
-    }
+	public double getLatitude() {
+		return latitude;
+	}
 
-    public int getStatus() {
-        return status;
-    }
+	public void setLatitude(double latitude) {
+		this.latitude = latitude;
+	}
 
-    public void setStatus(int status) {
-        this.status = status;
-    }
+	public double getLoongitude() {
+		return loongitude;
+	}
 
-    public int getOpenTime() {
-        return openTime;
-    }
+	public void setLoongitude(double loongitude) {
+		this.loongitude = loongitude;
+	}
 
-    public void setOpenTime(int openTime) {
-        this.openTime = openTime;
-    }
+	public String getShopName() {
+		return shopName;
+	}
 
-    public int getDistributionFee() {
-        return distributionFee;
-    }
+	public void setShopName(String shopName) {
+		this.shopName = shopName;
+	}
 
-    public void setDistributionFee(int distributionFee) {
-        this.distributionFee = distributionFee;
-    }
+	public String getStopTime() {
+		return stopTime;
+	}
 
-    public boolean isOnline() {
-        return isOnline;
-    }
+	public void setStopTime(String stopTime) {
+		this.stopTime = stopTime;
+	}
 
-    public void setOnline(boolean isOnline) {
-        this.isOnline = isOnline;
-    }
+	public String getOpenTime() {
+		return openTime;
+	}
 
-    public int getScore() {
-        return score;
-    }
+	public void setOpenTime(String openTime) {
+		this.openTime = openTime;
+	}
 
-    public void setScore(int score) {
-        this.score = score;
-    }
+	public String getCreatedDate() {
+		return createdDate;
+	}
 
-    public int getStartingPrice() {
-        return startingPrice;
-    }
+	public void setCreatedDate(String createdDate) {
+		this.createdDate = createdDate;
+	}
 
-    public void setStartingPrice(int startingPrice) {
-        this.startingPrice = startingPrice;
-    }
+	public int getDistributionFee() {
+		return distributionFee;
+	}
 
-    public int getStopTime() {
-        return stopTime;
-    }
+	public void setDistributionFee(int distributionFee) {
+		this.distributionFee = distributionFee;
+	}
 
-    public void setStopTime(int stopTime) {
-        this.stopTime = stopTime;
-    }
+	public int getStartingPrice() {
+		return startingPrice;
+	}
 
-    public double getLatitude() {
-        return latitude;
-    }
+	public void setStartingPrice(int startingPrice) {
+		this.startingPrice = startingPrice;
+	}
 
-    public void setLatitude(double latitude) {
-        this.latitude = latitude;
-    }
+	public String getShopImg() {
+		return shopImg;
+	}
 
-    public double getLongitude() {
-        return longitude;
-    }
-
-    public void setLongitude(double longitude) {
-        this.longitude = longitude;
-    }
-
-    public String getShopName() {
-        return shopName;
-    }
-
-    public void setShopName(String shopName) {
-        this.shopName = shopName;
-    }
+	public void setShopImg(String shopImg) {
+		this.shopImg = shopImg;
+	}
 
     @Override
     public String toString() {
         return "Shop{" +
-                "openTime=" + openTime +
-                ", distributionFee=" + distributionFee +
-                ", isOnline=" + isOnline +
-                ", score=" + score +
+                "id=" + id +
                 ", startingPrice=" + startingPrice +
-                ", stopTime=" + stopTime +
+                ", distributionFee=" + distributionFee +
                 ", latitude=" + latitude +
-                ", longitude=" + longitude +
+                ", loongitude=" + loongitude +
                 ", shopName='" + shopName + '\'' +
-                ", license=" + license +
+                ", openTime=" + openTime +
+                ", stopTime=" + stopTime +
                 ", shopImg='" + shopImg + '\'' +
-                ", status=" + status +
-                ", Id=" + Id +
+                ", createdDate='" + createdDate + '\'' +
                 ", businessId=" + businessId +
                 '}';
     }

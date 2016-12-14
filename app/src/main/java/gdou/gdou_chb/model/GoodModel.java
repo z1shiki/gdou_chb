@@ -2,8 +2,6 @@ package gdou.gdou_chb.model;
 
 import com.kymjs.rxvolley.rx.Result;
 
-import gdou.gdou_chb.model.bean.Goods;
-import gdou.gdou_chb.model.bean.Shop;
 import rx.Observable;
 
 /**

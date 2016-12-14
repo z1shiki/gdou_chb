@@ -18,6 +18,12 @@ import static gdou.gdou_chb.R.id.contentFrame;
 
 public class AddressActivity extends BaseActivity{
     @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        jump2Activity(HomeActivity.class);
+    }
+
+    @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.address_act);

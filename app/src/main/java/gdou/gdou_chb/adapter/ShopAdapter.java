@@ -6,12 +6,16 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
 
 import java.util.List;
 
 import gdou.gdou_chb.R;
 import gdou.gdou_chb.model.bean.Shop;
+import gdou.gdou_chb.model.impl.BaseModelImpl;
 
 /**
  * Created by Administrator on 2016/12/1/0001.
@@ -27,7 +31,7 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.ViewHolder>{
 
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         public TextView shopName;
-        //public ImageView shopImg;
+        public ImageView shopImg;
         public TextView distributionFee;
         public TextView startingPrice;
         private MyItemClickListener mListener;
@@ -39,7 +43,7 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.ViewHolder>{
             this.mListener = mListener;
             itemView.setOnClickListener(this);
             shopName = (TextView) itemView.findViewById(R.id.shop_name);
-            //shopImg = (ImageView) itemView.findViewById(R.id.shop_img);
+            shopImg = (ImageView) itemView.findViewById(R.id.shop_img);
             startingPrice = (TextView) itemView.findViewById(R.id.startingprice);
             distributionFee = (TextView) itemView.findViewById(R.id.distributionfee);
 
@@ -100,8 +104,12 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.ViewHolder>{
         holder.shopName.setText(shop.getShopName());
         holder.startingPrice.setText(shop.getStartingPrice() + "");
         holder.distributionFee.setText(shop.getDistributionFee() + "");
-
-       // holder.shopImg.setImageResource(shop.getshopImg));
+        Glide
+                .with(mContext)
+                .load(BaseModelImpl.Service_URL + BaseModelImpl.IMAGE_URL + shop.getShopImg())
+                .placeholder(R.mipmap.type_one_sunny)
+                .override(80,80)
+                .into(holder.shopImg);
     }
 
     //返回项的数量
@@ -111,7 +119,7 @@ public class ShopAdapter extends RecyclerView.Adapter<ShopAdapter.ViewHolder>{
     }
 
     public interface MyItemClickListener {
-        public void onItemClick(View view,int postion);
+        void onItemClick(View view, int postion);
     }
 
 }

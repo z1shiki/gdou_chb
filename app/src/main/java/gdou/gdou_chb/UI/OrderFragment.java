@@ -8,12 +8,9 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import com.kymjs.rxvolley.rx.Result;
 
 import java.util.ArrayList;
 
@@ -23,11 +20,11 @@ import gdou.gdou_chb.R;
 import gdou.gdou_chb.activity.OrderdetailActivity;
 import gdou.gdou_chb.adapter.OrderAdapter;
 import gdou.gdou_chb.contract.HomeContract;
-
 import gdou.gdou_chb.model.bean.Orders;
-
 import gdou.gdou_chb.util.Java.BaseActivity;
 import gdou.gdou_chb.util.MVP.BaseFragment;
+import gdou.gdou_chb.util.SnackbarUtil;
+
 /**
  * Created by Z1shiki on 2016/11/16.
  */
@@ -131,6 +128,24 @@ RecyclerView rvOrder;
         return root;
     }
 
+
+    @Override
+    public void showSnackbar(int i) {
+        switch (i){
+            case 0:
+                SnackbarUtil.LongSnackbar(getActivity().findViewById(R.id.contentFrame)
+                        , "加载失败",4).show();
+                break;
+            case 1:
+                SnackbarUtil.LongSnackbar(getActivity().findViewById(R.id.contentFrame)
+                        , "完成订单失败",4).show();
+                break;
+            case 2:
+                SnackbarUtil.LongSnackbar(getActivity().findViewById(R.id.contentFrame)
+                        , "取消订单失败",4).show();
+                break;
+        }
+    }
 
     /**
      * 加载数据

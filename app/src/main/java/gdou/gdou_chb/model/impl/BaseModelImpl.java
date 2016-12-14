@@ -10,6 +10,10 @@ import gdou.gdou_chb.model.bean.User;
 public class BaseModelImpl {
 
     /**
+     * 图片获取
+     */
+    public static final String IMAGE_URL = "imageware/";
+    /**
      * 保存用户对象
      */
     public static User user;
@@ -69,4 +73,5 @@ public class BaseModelImpl {
      * VerifyCode_URL
      */
     public static final String getVerifycode_URL = "verifycode/"+"verifyCode/"+"phoneNumber";
+    public static String pay_Order_URL = "orders/pay";
 }

@@ -63,7 +63,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder>{
             public void onClick(View view) {
                 view.setEnabled(false);
                 if (view.getId() == R.id.confirm_receipt_btn || view.getId() == R.id.charge_back_btn) {
-                    myOnClickLinstener.btnClick(view.getId(), mOrderData.get(getPosition()).getId());
+                    myOnClickLinstener.btnClick(view.getId(), Long.valueOf(mOrderData.get(getPosition()).getId()));
                 } else {
                     myOnClickLinstener.ItemClick(GsonUtils.getJsonStr(mOrderData.get(getPosition())));
                 }

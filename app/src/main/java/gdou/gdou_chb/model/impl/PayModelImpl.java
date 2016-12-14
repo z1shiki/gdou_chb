@@ -18,7 +18,7 @@ public class PayModelImpl implements PayModel {
     public Observable<Result> placeOrder(Orders orders, String goodsList) {
         HttpParams params = new HttpParams();
         params.put("goodsList", goodsList);
-        params.put("addressId", orders.getAddressId());
+        params.put("addressId", orders.getAddressId() + "");
         params.put("totalPrice", orders.getTotalPrice() + "");
         params.put("userId", orders.getUserId() + "");
         params.put("shopUserId", orders.getShopUserId() + "");

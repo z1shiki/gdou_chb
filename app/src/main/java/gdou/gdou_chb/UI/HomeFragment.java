@@ -10,16 +10,15 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-
 import gdou.gdou_chb.R;
 import gdou.gdou_chb.adapter.ShopAdapter;
 import gdou.gdou_chb.car.ShoppingCartActivity;
@@ -28,6 +27,7 @@ import gdou.gdou_chb.model.bean.Shop;
 import gdou.gdou_chb.util.GsonUtils;
 import gdou.gdou_chb.util.Java.BaseActivity;
 import gdou.gdou_chb.util.MVP.BaseFragment;
+import gdou.gdou_chb.util.SnackbarUtil;
 
 
 /**
@@ -88,9 +88,7 @@ public class HomeFragment extends BaseFragment implements HomeContract.ShopView 
 
         Toolbar mToolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
         mToolbar.setTitle("");
-        mPresenter.initAmap();
         ((BaseActivity)getActivity()).setSupportActionBar(mToolbar);
-        mPresenter.getGPS();
 
         //初始化列表
         //shop = Shop.createShopList(20);
@@ -119,8 +117,8 @@ public class HomeFragment extends BaseFragment implements HomeContract.ShopView 
                if (null != shop) {
                    intent.putExtra("shopId", shop.getId());
                    intent.putExtra("businessId", shop.getBusinessId());
+                   startActivity(intent);
                }
-               startActivity(intent);
            }
        });
     }
@@ -137,9 +135,10 @@ public class HomeFragment extends BaseFragment implements HomeContract.ShopView 
     @Override
     public void setLocation(String string) {
         Toolbar mtoolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
-        TextView mTitle = (TextView) getActivity().findViewById(R.id.toolbar_text);
-        mTitle.setText(string);
-        mtoolbar.setTitle((CharSequence) mTitle);
+
+        if(string == null)
+            mtoolbar.setTitle("123");
+        mtoolbar.setTitle(string);
     }
 
     @Override
@@ -156,16 +155,42 @@ public class HomeFragment extends BaseFragment implements HomeContract.ShopView 
     }
 
     @Override
-    public void choiceShop() {
-        Log.d("你的点击了"," 你点击了");
+
+    public void ShowShop(String string) {
+//        Glide
+//                .with(getActivity())
+//                .load(string)
+//                .into();
 
     }
 
     @Override
-    public void showSnackbar() {
+    public void showSnackbar(int i) {
+        switch (i){
+            case 0:
+                SnackbarUtil.LongSnackbar(getActivity().findViewById(R.id.contentFrame)
+                        , "定位失败",4).show();
+                break;
+            case 1:
+                SnackbarUtil.LongSnackbar(getActivity().findViewById(R.id.contentFrame)
+                        , "读取商店失败",4).show();
+                break;
+        }
 
     }
 
 
+    //对NavigationIcon添加点击
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+//            Intent intent = new Intent(getActivity(), MapActivity.class);
+//            startActivity(intent);
+            mPresenter.initAmap();
+            mPresenter.getGPS();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }
 

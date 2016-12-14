@@ -4,8 +4,6 @@ import com.kymjs.rxvolley.client.HttpParams;
 import com.kymjs.rxvolley.rx.Result;
 
 import gdou.gdou_chb.model.GoodModel;
-import gdou.gdou_chb.model.bean.Goods;
-import gdou.gdou_chb.model.bean.Shop;
 import gdou.gdou_chb.util.RxVolleyUtils;
 import rx.Observable;
 

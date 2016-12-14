@@ -84,7 +84,7 @@ public class OrderdetailActivity extends BaseActivity {
 
         initViewData();
         ordermodel = new OrderModelImpl();
-        ordermodel.getOrderDetail(orders.getId())
+        ordermodel.getOrderDetail(Long.valueOf(orders.getId()))
                 .map(new Func1<Result, String>() {
                                                     @Override
                                                     public String call(Result result) {

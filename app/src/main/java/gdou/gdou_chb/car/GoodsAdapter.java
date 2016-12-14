@@ -1,5 +1,6 @@
 package gdou.gdou_chb.car;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,13 +10,17 @@ import android.view.animation.AnimationSet;
 import android.view.animation.RotateAnimation;
 import android.view.animation.TranslateAnimation;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
 
 import gdou.gdou_chb.R;
+import gdou.gdou_chb.model.impl.BaseModelImpl;
 import se.emilsjolander.stickylistheaders.StickyListHeadersAdapter;
 
 
@@ -25,6 +30,7 @@ public class GoodsAdapter extends BaseAdapter implements StickyListHeadersAdapte
     private ShoppingCartActivity mContext;
     private NumberFormat nf;
     private LayoutInflater mInflater;
+    private ImageView mImageView;
 
     public GoodsAdapter(ArrayList<GoodsItem> dataList, ShoppingCartActivity mContext) {
         this.dataList = dataList;
@@ -95,6 +101,7 @@ public class GoodsAdapter extends BaseAdapter implements StickyListHeadersAdapte
             ratingBar = (RatingBar) itemView.findViewById(R.id.ratingBar);
             tvMinus.setOnClickListener(this);
             tvAdd.setOnClickListener(this);
+            mImageView = (ImageView) itemView.findViewById(R.id.img);
         }
 
         public void bindData(GoodsItem item){
@@ -104,6 +111,16 @@ public class GoodsAdapter extends BaseAdapter implements StickyListHeadersAdapte
             item.count = mContext.getSelectedItemCountById(item.id);
             tvCount.setText(String.valueOf(item.count));
             price.setText(nf.format(item.price));
+
+            Log.i("Glide", "bindData: "+item.shopimg);
+
+            Glide
+                    .with(mContext)
+                    .load(BaseModelImpl.Service_URL+BaseModelImpl.IMAGE_URL+item.shopimg)
+                    .placeholder(R.mipmap.type_one_sunny)
+                    .override(50,50)
+                    .into(mImageView);
+
             if(item.count<1){
                 tvCount.setVisibility(View.GONE);
                 tvMinus.setVisibility(View.GONE);

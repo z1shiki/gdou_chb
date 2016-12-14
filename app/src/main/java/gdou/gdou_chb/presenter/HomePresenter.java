@@ -52,6 +52,7 @@ public class HomePresenter implements HomeContract.ShopPresenter {
         mShopModel = model;
         mSubscription = new CompositeSubscription();
         mHomeView.setPresenter(this);
+        mContext = mHomeView.getActivity();
     }
 
 
@@ -156,6 +157,7 @@ public class HomePresenter implements HomeContract.ShopPresenter {
                                        @Override
                                        public void onCompleted() {
                                            Log.d("Shop", "succ");
+
                                        }
 
                                        @Override

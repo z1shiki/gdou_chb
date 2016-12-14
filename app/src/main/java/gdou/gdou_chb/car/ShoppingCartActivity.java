@@ -67,7 +67,7 @@ public class ShoppingCartActivity extends AppCompatActivity implements View.OnCl
     private SparseIntArray groupSelect;
 
     private GoodModelImpl mGoodModel;
-    private Long mShopId = 0l;          //默认为第一个用户
+    private Long mShopId = 0L;          //默认为第一个用户
 
     private GoodsAdapter myAdapter;
     private SelectAdapter selectAdapter;
@@ -137,7 +137,7 @@ public class ShoppingCartActivity extends AppCompatActivity implements View.OnCl
                         //转换
                         for (Goods goods : goodsList) {
 
-                            dataList.add(new GoodsItem((int) goods.getId(), goods.getPrice(),goods.getName(), 0, null));
+                            dataList.add(new GoodsItem((int) goods.getId(), goods.getPrice(),goods.getName(), 0, null,goods.getGoodImg()));
                         }
                         Log.d("Goods->List", GsonUtils.getJsonStr(goodsList));
                     }
@@ -263,9 +263,6 @@ public class ShoppingCartActivity extends AppCompatActivity implements View.OnCl
                 break;
             case R.id.tvSubmit:
                 Toast.makeText(ShoppingCartActivity.this, "结算", Toast.LENGTH_SHORT).show();
-//                TODO： selectedLists是(一个商品ID，与GoodItem的键值对
-//                 TODO：商品数量是item.count )作为封装成order类传入HomeActivity.Fragment
-//                  TODO：
                 sumbitcar();
                 break;
             default:
@@ -291,41 +288,6 @@ public class ShoppingCartActivity extends AppCompatActivity implements View.OnCl
             toPayView(order, goodsVoList);
         }
 
-//        order.setShopId(mShopId);
-//        OrderModelImpl mOrderModel = new OrderModelImpl();
-//                mOrderModel
-//                        .placeOrder(order, GsonUtils.getJsonStr(goodsVoList))
-//                        .map(new Func1<Result, String>() {
-//
-//                            @Override
-//                            public String call(Result result) {
-//                                return new String(result.data);
-//                            }
-//                        })
-//                        .observeOn(AndroidSchedulers.mainThread())
-//                        .subscribeOn(Schedulers.io())
-//                        .subscribe(new Subscriber<String>() {
-//                                       @Override
-//                                       public void onCompleted() {
-//
-//                                       }
-//
-//                                       @Override
-//                                       public void onError(Throwable e) {
-//                                           Log.e("Shopping", "onError: 错误",e );
-//                                       }
-//
-//                                       @Override
-//                                       public void onNext(String string) {
-//                                           ResultBean resultBean = GsonUtils.getResultBeanByJson(string);
-//                                           //解析成对应的对象
-//                                           if (resultBean.isServiceResult()) {
-//                                               toHomePage();
-//                                           }
-//                                       }
-//                                   }
-//                        );
-//        mSubscription.add(subscription);
     }
 
     /**
