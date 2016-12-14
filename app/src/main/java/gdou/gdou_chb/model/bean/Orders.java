@@ -1,137 +1,246 @@
 package gdou.gdou_chb.model.bean;
 
 import java.io.Serializable;
-import java.util.List;
 
 /**
  * 订单
- * Created by WT on 2016/11/29.
+ * @author Administrator
+ * @version 1.0
+ * @updated 22-十一月-2016 20:16:38
  */
-
 public class Orders implements Serializable{
-    /**
-     * 用户Id
-     */
-    private long userId;
-    /**
-     * 商店Id
-     */
-    private long shopId;
-    /**
-     * 地址Id
-     */
-    private long addressId;
-    /**
-     * 商品数量
-     */
-    private long Number;
-    /**
-     * 订单ID
-     */
-    private long id;
 
-    /**
-     * 订单总价
-     */
-    private long totalPrice;
+	/**
+	 * 订单ID
+	 */
+	private Integer id;
 
-    /**
-     * 订单状态
-     */
-    private int status;
-    /**
-     * 点单地址
-     */
-    private String address;
-    /**
-     * 点单用户名
-     */
-    private String name;
+	/**
+	 * 点单创建时间
+	 */
+	private String createdDate;
 
-    public long getId() {
-        return id;
-    }
+	/**
+	 * 有多少种商品
+	 */
+	private int number;
+	/**
+	 * 1、已下单未支付      已下单
+	 * 2、已支付未接单      已支付
+	 * 3、已接单未配送      已接单
+	 * 4、已配送未送达      正在配送
+	 * 5、已送达未评价      待评价
+	 * 6、已评价（完成）
+	 * 7、订单取消
+	 * 8、申请退单但是审核失败
+	 */
+	private int status;
+	
+	/**
+	 * 订单总价
+	 */
+	private float totalPrice;
+	
+	/**
+	 * 操作的用户
+	 */
+	private long userId;
 
-    public void setId(long id) {
-        this.id = id;
-    }
+	/**
+	 * 商店用户Id(商家Id)
+	 */
+	private long shopUserId;
+	
+	/**
+	 * 订单支付方式
+	 * 1.在线支付
+	 * 2.线下支付
+	 */
+	private int payType;
+	
+	/**
+	 * 订单是否已经处理
+	 */
+	private boolean watch;
 
-    public long getTotalPrice() {
-        return totalPrice;
-    }
+	/**
+	 * 收货地址
+	 */
+	private String address;
+	/**
+	 * 收货人姓名
+	 */
+	private String name;
+	/**
+	 * 收货人手机
+	 */
+	private String phone;
 
-    public void setTotalPrice(long totalPrice) {
-        this.totalPrice = totalPrice;
-    }
+	private int shopId;
 
-    public long getUserId() {
-        return userId;
-    }
+	private  int addressId;
+	
+	public int getPayType() {
+		return payType;
+	}
 
-    public void setUserId(long userId) {
-        this.userId = userId;
-    }
+	public void setPayType(int payType) {
+		this.payType = payType;
+	}
 
-    public long getShopId() {
-        return shopId;
-    }
+	public long getShopUserId() {
+		return shopUserId;
+	}
 
-    public void setShopId(long shopId) {
-        this.shopId = shopId;
-    }
+	public void setShopUserId(long shopUserId) {
+		this.shopUserId = shopUserId;
+	}
 
-    public long getNumber() {
-        return Number;
-    }
+	public void setUserId(long userId) {
+		this.userId = userId;
+	}
 
-    public void setNumber(long number) {
-        Number = number;
-    }
 
-    public long getAddressId() {
-        return addressId;
-    }
+	
+	public int getNumber() {
+		return number;
+	}
 
-    public void setAddressId(long addressId) {
-        this.addressId = addressId;
-    }
+	public void setNumber(int number) {
+		this.number = number;
+	}
 
-    public int getStatus() {
-        return status;
-    }
+	public int getStatus() {
+		return status;
+	}
 
-    public void setStatus(int status) {
-        this.status = status;
-    }
+	public void setStatus(int status) {
+		this.status = status;
+	}
 
-    public String getAddress() {
-        return address;
-    }
+	public float getTotalPrice() {
+		return totalPrice;
+	}
+	
+	public long getUserId() {
+		return userId;
+	}
 
-    public void setAddress(String address) {
-        this.address = address;
-    }
+	public void setTotalPrice(float totalPrice) {
+		this.totalPrice = totalPrice;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public boolean isWatch() {
+		return watch;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public void setWatch(boolean watch) {
+		this.watch = watch;
+	}
 
-    @Override
-    public String toString() {
-        return "Orders{" +
-                "userId=" + userId +
-                ", shopId=" + shopId +
-                ", addressId=" + addressId +
-                ", Number=" + Number +
-                ", id=" + id +
-                ", totalPrice=" + totalPrice +
-                ", status=" + status +
-                ", address='" + address + '\'' +
-                ", name='" + name + '\'' +
-                '}';
-    }
+	/**
+	 * Getter for property 'address'.
+	 *
+	 * @return Value for property 'address'.
+	 */
+	public String getAddress() {
+		return address;
+	}
+
+	/**
+	 * Setter for property 'address'.
+	 *
+	 * @param address Value to set for property 'address'.
+	 */
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	/**
+	 * Getter for property 'name'.
+	 *
+	 * @return Value for property 'name'.
+	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * Setter for property 'name'.
+	 *
+	 * @param name Value to set for property 'name'.
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	/**
+	 * Getter for property 'phone'.
+	 *
+	 * @return Value for property 'phone'.
+	 */
+	public String getPhone() {
+		return phone;
+	}
+
+	/**
+	 * Setter for property 'phone'.
+	 *
+	 * @param phone Value to set for property 'phone'.
+	 */
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getCreatedDate() {
+		return createdDate;
+	}
+
+	public void setCreatedDate(String createdDate) {
+		this.createdDate = createdDate;
+	}
+
+	public int getAddressId() {
+		return addressId;
+	}
+
+	public void setAddressId(int addressId) {
+		this.addressId = addressId;
+	}
+
+	public int getShopId() {
+		return shopId;
+	}
+
+	public void setShopId(int shopId) {
+		this.shopId = shopId;
+	}
+
+	@Override
+	public String toString() {
+		return "Orders{" +
+				"id=" + id +
+				", createdDate='" + createdDate + '\'' +
+				", number=" + number +
+				", status=" + status +
+				", totalPrice=" + totalPrice +
+				", userId=" + userId +
+				", shopUserId=" + shopUserId +
+				", payType=" + payType +
+				", watch=" + watch +
+				", address='" + address + '\'' +
+				", name='" + name + '\'' +
+				", phone='" + phone + '\'' +
+				", shopId=" + shopId +
+				", addressId=" + addressId +
+				'}';
+	}
 }

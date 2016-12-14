@@ -34,15 +34,14 @@ import java.util.List;
 
 import gdou.gdou_chb.R;
 import gdou.gdou_chb.activity.HomeActivity;
+import gdou.gdou_chb.activity.PayActivity;
 import gdou.gdou_chb.model.bean.Goods;
 import gdou.gdou_chb.model.bean.GoodsVo;
 import gdou.gdou_chb.model.bean.Orders;
 import gdou.gdou_chb.model.bean.ResultBean;
 import gdou.gdou_chb.model.impl.BaseModelImpl;
 import gdou.gdou_chb.model.impl.GoodModelImpl;
-import gdou.gdou_chb.model.impl.OrderModelImpl;
 import gdou.gdou_chb.util.GsonUtils;
-import gdou.gdou_chb.util.SnackbarUtil;
 import rx.Subscriber;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
@@ -50,6 +49,7 @@ import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 import rx.subscriptions.CompositeSubscription;
 import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
+
 
 public class ShoppingCartActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -75,6 +75,9 @@ public class ShoppingCartActivity extends AppCompatActivity implements View.OnCl
 
     private NumberFormat nf;
     private Handler mHanlder;
+    private long mBusinessId;
+    private double cost;    //总价
+    private int count;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,7 +100,9 @@ public class ShoppingCartActivity extends AppCompatActivity implements View.OnCl
 
     private void initData() {
         mShopId = getIntent().getLongExtra("shopId", 0L);
+        mBusinessId = getIntent().getLongExtra("businessId", 0L);
         Log.d("ShopId", "initData: " + mShopId);
+        Log.d("mBusinessId", "initData: " + mBusinessId);
 
         mGoodModel = new GoodModelImpl();
         Subscription subscription = mGoodModel.findByGoodsId(mShopId)
@@ -183,7 +188,6 @@ public class ShoppingCartActivity extends AppCompatActivity implements View.OnCl
     }
 
     //动画方法
-
     public void playAnimation(int[] start_location) {
         ImageView img = new ImageView(this);
         img.setImageResource(R.drawable.button_add);
@@ -211,7 +215,6 @@ public class ShoppingCartActivity extends AppCompatActivity implements View.OnCl
 
     private void addViewToAnimLayout(final ViewGroup vg, final View view,
                                      int[] location) {
-
         int x = location[0];
         int y = location[1];
         int[] loc = new int[2];
@@ -270,8 +273,9 @@ public class ShoppingCartActivity extends AppCompatActivity implements View.OnCl
         }
     }
 
-    private void sumbitcar() {List<GoodsVo> goodsVoList = new ArrayList<>();
+    private void sumbitcar() {
 
+        List<GoodsVo> goodsVoList = new ArrayList<>();
         for (int i = 0; i < selectedList.size(); i++) {
             int j = selectedList.keyAt(i);
             int id = selectedList.get(j).id;
@@ -283,47 +287,59 @@ public class ShoppingCartActivity extends AppCompatActivity implements View.OnCl
             //TODO用户没有登陆
             //Toast.makeText(ShoppingCartActivity.class, "请去登陆", Toast.LENGTH_LONG).show();
             order.setUserId(BaseModelImpl.user.getId());
+            order.setShopUserId(mBusinessId);
+            toPayView(order, goodsVoList);
         }
 
-        order.setShopId(mShopId);
-        OrderModelImpl mOrderModel = new OrderModelImpl();
-        Subscription subscription =
-                mOrderModel
-                        .placeOrder(order, GsonUtils.getJsonStr(goodsVoList))
-                        .map(new Func1<Result, String>() {
-
-                            @Override
-                            public String call(Result result) {
-                                return new String(result.data);
-                            }
-                        })
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribeOn(Schedulers.io())
-                        .subscribe(new Subscriber<String>() {
-                                       @Override
-                                       public void onCompleted() {
-
-
-                                       }
-
-                                       @Override
-                                       public void onError(Throwable e) {
-                                           SnackbarUtil.LongSnackbar(findViewById(R.id.bottom_sheet)
-                                                   , "读取商品失败",4).show();
-                                           Log.e("Shopping", "onError: 错误",e );
-                                       }
-
-                                       @Override
-                                       public void onNext(String string) {
-                                           ResultBean resultBean = GsonUtils.getResultBeanByJson(string);
-                                           //解析成对应的对象
-                                           if (resultBean.isServiceResult()) {
-                                               toHomePage();
-                                           }
-                                       }
-                                   }
-                        );
+//        order.setShopId(mShopId);
+//        OrderModelImpl mOrderModel = new OrderModelImpl();
+//                mOrderModel
+//                        .placeOrder(order, GsonUtils.getJsonStr(goodsVoList))
+//                        .map(new Func1<Result, String>() {
+//
+//                            @Override
+//                            public String call(Result result) {
+//                                return new String(result.data);
+//                            }
+//                        })
+//                        .observeOn(AndroidSchedulers.mainThread())
+//                        .subscribeOn(Schedulers.io())
+//                        .subscribe(new Subscriber<String>() {
+//                                       @Override
+//                                       public void onCompleted() {
+//
+//                                       }
+//
+//                                       @Override
+//                                       public void onError(Throwable e) {
+//                                           Log.e("Shopping", "onError: 错误",e );
+//                                       }
+//
+//                                       @Override
+//                                       public void onNext(String string) {
+//                                           ResultBean resultBean = GsonUtils.getResultBeanByJson(string);
+//                                           //解析成对应的对象
+//                                           if (resultBean.isServiceResult()) {
+//                                               toHomePage();
+//                                           }
+//                                       }
+//                                   }
+//                        );
 //        mSubscription.add(subscription);
+    }
+
+    /**
+     * 跳转到支付页面
+     * @param order
+     * @param goodsVoList
+     */
+    private void toPayView(Orders order, List<GoodsVo> goodsVoList) {
+        Intent intent = new Intent(this, PayActivity.class);
+        intent.putExtra("goodsList", GsonUtils.getJsonStr(goodsVoList));
+        intent.putExtra("orders", GsonUtils.getJsonStr(order));
+        intent.putExtra("conut", count);
+        intent.putExtra("cost", cost);
+        startActivity(intent);
     }
 
     private void toHomePage() {
@@ -375,8 +391,8 @@ public class ShoppingCartActivity extends AppCompatActivity implements View.OnCl
     //刷新布局 总价、购买数量等
     private void update(boolean refreshGoodList) {
         int size = selectedList.size();
-        int count = 0;
-        double cost = 0;
+        count = 0;
+        cost = 0;
         for (int i = 0; i < size; i++) {
             GoodsItem item = selectedList.valueAt(i);
             count += item.count;
@@ -420,7 +436,6 @@ public class ShoppingCartActivity extends AppCompatActivity implements View.OnCl
         selectedList.clear();
         groupSelect.clear();
         update(true);
-
     }
 
     //根据商品id获取当前商品的采购数量
